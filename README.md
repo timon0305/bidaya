@@ -16,9 +16,9 @@ This checks for code issues, warnings, and infos. All issues must be resolved.
 ```bash
 flutter test
 ```
-All tests must pass. Currently we have **80 unit tests** across **6 ViewModels**.
+All tests must pass. Currently we have **202 unit tests** across **10 test files**.
 
-**Test Coverage:** Coverage is improving but still below the 70% target. The project has comprehensive tests for all ViewModels. See [docs/TESTING.md](docs/TESTING.md) for the testing roadmap.
+**Test Coverage:** Comprehensive coverage of all ViewModels, Services, Utilities, and Models. See [docs/TESTING.md](docs/TESTING.md) for details.
 
 ### 3. Get Dependencies
 ```bash
