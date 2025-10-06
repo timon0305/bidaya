@@ -24,12 +24,14 @@ class _ReportingViewState extends State<ReportingView>
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      systemNavigationBarIconBrightness: Brightness.dark,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarColor: AppColors.white,
-      systemNavigationBarColor: AppColors.white,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        systemNavigationBarIconBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: AppColors.white,
+        systemNavigationBarColor: AppColors.white,
+      ),
+    );
 
     return Scaffold(
       appBar: customAppBar(title: "Reporting"),
@@ -45,7 +47,7 @@ class _ReportingViewState extends State<ReportingView>
               child: customTextFieldPrefixIcon(
                 controller: searchController,
                 readOnly: false,
-                hintClr: AppColors.grey.withOpacity(0.3),
+                hintClr: AppColors.grey.withValues(alpha: 0.3),
                 borderClr: Colors.transparent,
                 height: 56,
                 width: 382,
@@ -69,7 +71,7 @@ class _ReportingViewState extends State<ReportingView>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     customTextFieldSuffixIcon(
-                      controller:dateController,
+                      controller: dateController,
                       readOnly: true,
                       height: 55,
                       width: 186,
@@ -83,8 +85,7 @@ class _ReportingViewState extends State<ReportingView>
                       borderRadius: 12,
                       obscureText: false,
                       onShow: () {
-                        selectDateBottomSheet(context,dateController);
-
+                        selectDateBottomSheet(context, dateController);
                       },
                       context: context,
                     ),
@@ -98,10 +99,10 @@ class _ReportingViewState extends State<ReportingView>
                       contentPadding: 12,
                       iconPath: AppImages.dropArrow,
                       icon: AppImages.dropArrow,
-                      items: ["Senior Classes", "Junior Class","All Classes"],
-                      value:  selectedGender,
+                      items: ["Senior Classes", "Junior Class", "All Classes"],
+                      value: selectedGender,
                       onChanged: (val) {
-                        selectedGender = val??"";
+                        selectedGender = val ?? "";
                       },
                     ),
                   ],
@@ -118,16 +119,46 @@ class _ReportingViewState extends State<ReportingView>
                 children: [
                   Column(
                     children: [
-                      reportingCard(context,"Tyra Shelburne", "Senior Class",true),
-                      reportingCard(context,"Clinton Mcclure", "Junior Class",true),
-                      reportingCard(context,"Daryl Kulikowski", "Senior Class",true),
+                      reportingCard(
+                        context,
+                        "Tyra Shelburne",
+                        "Senior Class",
+                        true,
+                      ),
+                      reportingCard(
+                        context,
+                        "Clinton Mcclure",
+                        "Junior Class",
+                        true,
+                      ),
+                      reportingCard(
+                        context,
+                        "Daryl Kulikowski",
+                        "Senior Class",
+                        true,
+                      ),
                     ],
                   ),
                   Column(
                     children: [
-                      reportingCard(context,"Maggie Franklin", "Senior Class",false),
-                      reportingCard(context,"Desa Calic", "Junior Class",false),
-                      reportingCard(context,"Ashliegh Khalid", "All Classes",false),
+                      reportingCard(
+                        context,
+                        "Maggie Franklin",
+                        "Senior Class",
+                        false,
+                      ),
+                      reportingCard(
+                        context,
+                        "Desa Calic",
+                        "Junior Class",
+                        false,
+                      ),
+                      reportingCard(
+                        context,
+                        "Ashliegh Khalid",
+                        "All Classes",
+                        false,
+                      ),
                     ],
                   ),
                 ],
@@ -139,5 +170,3 @@ class _ReportingViewState extends State<ReportingView>
     );
   }
 }
-
-

@@ -1,6 +1,4 @@
-import 'package:http/http.dart' as http;
 import 'package:quizzo/export.dart';
-import 'package:http_parser/http_parser.dart';
 
 import '../../models/logged_user_model.dart';
 
@@ -33,7 +31,8 @@ class AuthViewModel extends ChangeNotifier {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController dobController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
-  final TextEditingController confirmPasswordTextController = TextEditingController();
+  final TextEditingController confirmPasswordTextController =
+      TextEditingController();
 
   String otpControllers = "";
   bool showPassword = true;
@@ -58,9 +57,15 @@ class AuthViewModel extends ChangeNotifier {
   void _animateToStep(int step, {bool forward = true}) {
     currentStep = step;
     if (forward) {
-      controller.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+      controller.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
     } else {
-      controller.previousPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+      controller.previousPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
     }
     notifyListeners();
   }
@@ -91,7 +96,6 @@ class AuthViewModel extends ChangeNotifier {
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
     if (image != null) {
-
       nurseryLogo = File(image.path);
       notifyListeners();
     }
@@ -118,7 +122,11 @@ class AuthViewModel extends ChangeNotifier {
       await Future.delayed(const Duration(seconds: 2));
       nextStep();
     } on ValidationException catch (e) {
-      snackBar(title: "Error", subTitle: e.message.toString(), bgColor: AppColors.redShade);
+      snackBar(
+        title: "Error",
+        subTitle: e.message.toString(),
+        bgColor: AppColors.redShade,
+      );
     } catch (e) {
       isinfoContinueLoader = false;
       notifyListeners();
@@ -131,14 +139,20 @@ class AuthViewModel extends ChangeNotifier {
   Future<void> setPassword() async {
     try {
       AuthValidationService.validatePassword(passwordTextController.text);
-      AuthValidationService.validatePassword(confirmPasswordTextController.text);
+      AuthValidationService.validatePassword(
+        confirmPasswordTextController.text,
+      );
       AuthValidationService.validatePasswordMatch(
         passwordTextController.text,
         confirmPasswordTextController.text,
       );
       checkDuplicatePhone(phoneController.text);
     } on ValidationException catch (e) {
-      snackBar(title: "Error", subTitle: e.message.toString(), bgColor: AppColors.redShade);
+      snackBar(
+        title: "Error",
+        subTitle: e.message.toString(),
+        bgColor: AppColors.redShade,
+      );
     }
   }
 
@@ -156,7 +170,11 @@ class AuthViewModel extends ChangeNotifier {
         otp: otpControllers,
       );
     } on ValidationException catch (e) {
-      snackBar(title: "Error", subTitle: e.message.toString(), bgColor: AppColors.redShade);
+      snackBar(
+        title: "Error",
+        subTitle: e.message.toString(),
+        bgColor: AppColors.redShade,
+      );
     }
   }
 
@@ -173,10 +191,18 @@ class AuthViewModel extends ChangeNotifier {
       if (res?.status == 200) {
         final isDuplicate = res!.data['duplicate'] ?? false;
         if (isDuplicate) {
-          snackBar(title: "Error", subTitle: "Phone number already exists", bgColor: AppColors.redShade);
+          snackBar(
+            title: "Error",
+            subTitle: "Phone number already exists",
+            bgColor: AppColors.redShade,
+          );
           return true;
         } else {
-          snackBar(title: "Success", subTitle: "Now verify your phone number", bgColor: AppColors.green);
+          snackBar(
+            title: "Success",
+            subTitle: "Now verify your phone number",
+            bgColor: AppColors.green,
+          );
           nextStep();
           return false;
         }
@@ -201,20 +227,32 @@ class AuthViewModel extends ChangeNotifier {
         final data = res!.data;
         final success = data['success'] ?? false;
         if (!success) {
-          snackBar(title: "OTP Error", subTitle: data['message'] ?? "Unknown error", bgColor: AppColors.redShade);
+          snackBar(
+            title: "OTP Error",
+            subTitle: data['message'] ?? "Unknown error",
+            bgColor: AppColors.redShade,
+          );
           return false;
         }
         final providerResponse = data['response'];
         if (providerResponse is String) {
           final decoded = jsonDecode(providerResponse);
           if (decoded['type'] == 'error') {
-            snackBar(title: "OTP Error", subTitle: decoded['error']?['msg'] ?? "SMS sending failed", bgColor: AppColors.redShade);
+            snackBar(
+              title: "OTP Error",
+              subTitle: decoded['error']?['msg'] ?? "SMS sending failed",
+              bgColor: AppColors.redShade,
+            );
             return false;
           }
         }
         return true;
       }
-      snackBar(title: "Error", subTitle: res?.data?['error'] ?? "Failed to send OTP", bgColor: AppColors.redShade);
+      snackBar(
+        title: "Error",
+        subTitle: res?.data?['error'] ?? "Failed to send OTP",
+        bgColor: AppColors.redShade,
+      );
       return false;
     } catch (e) {
       Get.snackbar("Error", e.toString());
@@ -224,7 +262,10 @@ class AuthViewModel extends ChangeNotifier {
 
   bool isCreatingUser = false;
 
-  Future<bool> createUser(BuildContext context, Map<String, dynamic> userData) async {
+  Future<bool> createUser(
+    BuildContext context,
+    Map<String, dynamic> userData,
+  ) async {
     try {
       isCreatingUser = true;
       notifyListeners();
@@ -233,25 +274,37 @@ class AuthViewModel extends ChangeNotifier {
         body: userData,
       );
       if (res?.status == 200) {
-        snackBar(title: "Success", subTitle: "Account created successfully", bgColor: AppColors.green);
-       if(context.mounted) {
-         customMessagePopup(
-          context,
-          icon: AppImages.successProfile,
-          title: "Successful!",
-          subTitle: "Please wait a moment, we are preparing for you...",
-          buttonTitle: "Go to Home",
-          onButtonPressed: () {
-            Get.toNamed(AppRoutes.login);
-          },
+        snackBar(
+          title: "Success",
+          subTitle: "Account created successfully",
+          bgColor: AppColors.green,
         );
-       }
+        if (context.mounted) {
+          customMessagePopup(
+            context,
+            icon: AppImages.successProfile,
+            title: "Successful!",
+            subTitle: "Please wait a moment, we are preparing for you...",
+            buttonTitle: "Go to Home",
+            onButtonPressed: () {
+              Get.toNamed(AppRoutes.login);
+            },
+          );
+        }
         return true;
       }
-      snackBar(title: "Error", subTitle: res?.data?['error'] ?? "Signup failed", bgColor: AppColors.redShade);
+      snackBar(
+        title: "Error",
+        subTitle: res?.data?['error'] ?? "Signup failed",
+        bgColor: AppColors.redShade,
+      );
       return false;
     } catch (e) {
-      snackBar(title: "Error", subTitle: e.toString(), bgColor: AppColors.redShade);
+      snackBar(
+        title: "Error",
+        subTitle: e.toString(),
+        bgColor: AppColors.redShade,
+      );
       return false;
     } finally {
       isCreatingUser = false;
@@ -271,14 +324,17 @@ class AuthViewModel extends ChangeNotifier {
   }) async {
     final otpSent = await sendOtp(phone, otp);
     if (!otpSent) return;
-    if(accountType=="Parent") {
+    if (accountType == "Parent") {
       final userData = {
         "name": name,
         "phone": phone,
         "password": password,
-        "role": role == "Teacher" ? "teacher" : role == "Parent"
-            ? "parent"
-            : role,
+        "role":
+            role == "Teacher"
+                ? "teacher"
+                : role == "Parent"
+                ? "parent"
+                : role,
         "gender": gender,
         "dateOfBirth": dob,
       };
@@ -287,13 +343,10 @@ class AuthViewModel extends ChangeNotifier {
         final created = await createUser(context, userData);
         if (created) Get.offAllNamed(AppRoutes.host);
       }
-    }
-    else if(accountType=="Teacher"){}
-    else{
+    } else if (accountType == "Teacher") {
+    } else {
       createNurseryAdmin(
-        adminData: {
-
-        },
+        adminData: {},
         nurseryData: {},
         logoFile: File(""),
         subscriptionInfo: {},
@@ -322,14 +375,14 @@ class AuthViewModel extends ChangeNotifier {
     return success;
   }
 
-
-
   // ================= LOGIN =================
   bool showLoginPassword = true;
   String userRole = "Admin";
   bool isRememberMe = true;
-  final TextEditingController loginPhoneTextController = TextEditingController();
-  final TextEditingController loginPasswordTextController = TextEditingController();
+  final TextEditingController loginPhoneTextController =
+      TextEditingController();
+  final TextEditingController loginPasswordTextController =
+      TextEditingController();
 
   void showHideLoginPasswordVisibility() {
     showLoginPassword = !showLoginPassword;
@@ -367,10 +420,18 @@ class AuthViewModel extends ChangeNotifier {
         );
         Get.offAllNamed(AppRoutes.host);
       } else {
-        snackBar(title: "Error", subTitle: data['message'] ?? "Sign in failed", bgColor: AppColors.redShade);
+        snackBar(
+          title: "Error",
+          subTitle: data['message'] ?? "Sign in failed",
+          bgColor: AppColors.redShade,
+        );
       }
     } catch (e) {
-      snackBar(title: "Error", subTitle: "Login Error: $e", bgColor: AppColors.redShade);
+      snackBar(
+        title: "Error",
+        subTitle: "Login Error: $e",
+        bgColor: AppColors.redShade,
+      );
       debugPrint("Login Error: $e");
     } finally {
       isLoginLoading = false;
@@ -387,8 +448,10 @@ class AuthViewModel extends ChangeNotifier {
   // ================= FORGOT PASSWORD =================
   String sendOtpControllers = "";
   final TextEditingController phoneNumberController = TextEditingController();
-  final TextEditingController newPasswordTextController = TextEditingController();
-  final TextEditingController newConfirmPasswordTextController = TextEditingController();
+  final TextEditingController newPasswordTextController =
+      TextEditingController();
+  final TextEditingController newConfirmPasswordTextController =
+      TextEditingController();
 
   bool showNewPassword = true;
   bool showNewConfirmPassword = true;
@@ -415,19 +478,35 @@ class AuthViewModel extends ChangeNotifier {
         query: {"phone": phoneNumber},
       );
       if (response == null) {
-        snackBar(title: "Error", subTitle: "No response from server", bgColor: AppColors.redShade);
+        snackBar(
+          title: "Error",
+          subTitle: "No response from server",
+          bgColor: AppColors.redShade,
+        );
         return;
       }
       final data = response.data ?? {};
       email = response.data["email"];
       if (response.status == 200) {
-        snackBar(title: "Success", subTitle: data['message'] ?? "OTP sent successfully", bgColor: AppColors.green);
+        snackBar(
+          title: "Success",
+          subTitle: data['message'] ?? "OTP sent successfully",
+          bgColor: AppColors.green,
+        );
         Get.to(() => OtpView(phoneNumber: phoneNumber));
       } else {
-        snackBar(title: "Error", subTitle: data['message'] ?? "Failed to send reset email", bgColor: AppColors.redShade);
+        snackBar(
+          title: "Error",
+          subTitle: data['message'] ?? "Failed to send reset email",
+          bgColor: AppColors.redShade,
+        );
       }
     } catch (e) {
-      snackBar(title: "Error", subTitle: "Forgot Password Error: $e", bgColor: AppColors.redShade);
+      snackBar(
+        title: "Error",
+        subTitle: "Forgot Password Error: $e",
+        bgColor: AppColors.redShade,
+      );
     } finally {
       isVerifyPhoneLoader = false;
       notifyListeners();
@@ -444,24 +523,40 @@ class AuthViewModel extends ChangeNotifier {
         final data = res!.data;
         final success = data['success'] ?? false;
         if (!success) {
-          snackBar(title: "OTP Error", subTitle: data['message'] ?? "Unknown error", bgColor: AppColors.redShade);
+          snackBar(
+            title: "OTP Error",
+            subTitle: data['message'] ?? "Unknown error",
+            bgColor: AppColors.redShade,
+          );
           return false;
         }
         final providerResponse = data['response'];
         if (providerResponse is String) {
           final decoded = jsonDecode(providerResponse);
           if (decoded['type'] == 'error') {
-            snackBar(title: "OTP Error", subTitle: decoded['error']?['msg'] ?? "SMS sending failed", bgColor: AppColors.redShade);
+            snackBar(
+              title: "OTP Error",
+              subTitle: decoded['error']?['msg'] ?? "SMS sending failed",
+              bgColor: AppColors.redShade,
+            );
             return false;
           }
         }
         Get.to(AppRoutes.setPassword);
         return true;
       }
-      snackBar(title: "Error", subTitle: res?.data?['error'] ?? "Failed to send OTP", bgColor: AppColors.redShade);
+      snackBar(
+        title: "Error",
+        subTitle: res?.data?['error'] ?? "Failed to send OTP",
+        bgColor: AppColors.redShade,
+      );
       return false;
     } catch (e) {
-      snackBar(title: "Error", subTitle: e.toString(), bgColor: AppColors.redShade);
+      snackBar(
+        title: "Error",
+        subTitle: e.toString(),
+        bgColor: AppColors.redShade,
+      );
       return false;
     }
   }
@@ -473,18 +568,34 @@ class AuthViewModel extends ChangeNotifier {
         body: {"email": email, "password": password},
       );
       if (response == null) {
-        snackBar(title: "Error", subTitle: "No response from server", bgColor: AppColors.redShade);
+        snackBar(
+          title: "Error",
+          subTitle: "No response from server",
+          bgColor: AppColors.redShade,
+        );
         return;
       }
       final data = response.data ?? {};
       if (response.status == 200) {
-        snackBar(title: "Success", subTitle: data['message'] ?? "Password updated successfully", bgColor: AppColors.green);
+        snackBar(
+          title: "Success",
+          subTitle: data['message'] ?? "Password updated successfully",
+          bgColor: AppColors.green,
+        );
         Get.offAllNamed(AppRoutes.login);
       } else {
-        snackBar(title: "Error", subTitle: data['message'] ?? "Failed to update password", bgColor: AppColors.redShade);
+        snackBar(
+          title: "Error",
+          subTitle: data['message'] ?? "Failed to update password",
+          bgColor: AppColors.redShade,
+        );
       }
     } catch (e) {
-      snackBar(title: "Error", subTitle: "Set Password Error: $e", bgColor: AppColors.redShade);
+      snackBar(
+        title: "Error",
+        subTitle: "Set Password Error: $e",
+        bgColor: AppColors.redShade,
+      );
       debugPrint("Set Password Error: $e");
     }
   }

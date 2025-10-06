@@ -24,7 +24,8 @@ class _AiChatScreenState extends State<AiChatScreen> {
       time: DateTime.now().subtract(const Duration(minutes: 3)),
     ),
     ChatMessage(
-      text: "I have a question about the return policy for a product I purchased.",
+      text:
+          "I have a question about the return policy for a product I purchased.",
       isUser: true,
       time: DateTime.now(),
     ),
@@ -71,47 +72,92 @@ class _AiChatScreenState extends State<AiChatScreen> {
       alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
       child: Column(
         crossAxisAlignment:
-        isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+            isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
-          !isUser?
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-
-                Padding(
-                  padding: EdgeInsets.only(top: 4.h),
-                  child: CircleAvatar(
-                    radius: 18,
-                    backgroundColor: AppColors.blue,
-                    child: SizedBox(
-                      height: 30.h,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100.r),
-                        child: Icon(
-                          Icons.person,
-                          color: AppColors.white,
+          !isUser
+              ? Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 4.h),
+                    child: CircleAvatar(
+                      radius: 18,
+                      backgroundColor: AppColors.blue,
+                      child: SizedBox(
+                        height: 30.h,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(100.r),
+                          child: Icon(Icons.person, color: AppColors.white),
                         ),
                       ),
                     ),
                   ),
-                ),
-              Column(
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      customText(
+                        textAlign: TextAlign.center,
+                        text: " Bido",
+                        color: AppColors.blackShade,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                      ),
+                      Container(
+                        constraints: BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width * 0.7,
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15.r),
+                            topRight: Radius.circular(0.r),
+                            bottomLeft: Radius.circular(15.r),
+                            bottomRight: Radius.circular(15.r),
+                          ),
+                          color:
+                              isUser
+                                  ? AppColors.freshBlue
+                                  : AppColors.purple.withValues(alpha: 0.08),
+                        ),
+                        child: customText(
+                          text: message.text,
+                          fontWeight: FontWeight.w600,
+                          color: isUser ? Colors.white : Colors.black,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: customText(
+                          textAlign: TextAlign.center,
+                          text: formattedTime,
+                          color: AppColors.placeholder,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              )
+              : Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  customText(
-                    textAlign: TextAlign.center,
-                    text: " Bido",
-                    color: AppColors.blackShade,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                  ),
                   Container(
                     constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width * 0.7,
+                      maxWidth: MediaQuery.of(context).size.width * 0.75,
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                    margin: EdgeInsets.symmetric(vertical: 4.h),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 8.w,
+                      vertical: 12.h,
+                    ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(15.r),
@@ -119,70 +165,30 @@ class _AiChatScreenState extends State<AiChatScreen> {
                         bottomLeft: Radius.circular(15.r),
                         bottomRight: Radius.circular(15.r),
                       ),
-                      color: isUser ? AppColors.freshBlue : AppColors.purple.withOpacity(0.08),
-
+                      color:
+                          isUser
+                              ? AppColors.freshBlue
+                              : AppColors.purple.withValues(alpha: 0.08),
                     ),
                     child: customText(
-                     text:  message.text,
-                        fontWeight: FontWeight.w600,
-                        color: isUser ? Colors.white : Colors.black,
-                        fontSize: 16,
+                      text: message.text,
+                      fontWeight: FontWeight.w600,
+                      color: isUser ? Colors.white : Colors.black,
+                      fontSize: 16,
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
+                    padding: EdgeInsets.only(left: 8.w),
                     child: customText(
                       textAlign: TextAlign.center,
                       text: formattedTime,
                       color: AppColors.placeholder,
                       fontSize: 11,
                       fontWeight: FontWeight.w700,
-
                     ),
-                  )
+                  ),
                 ],
               ),
-            ],
-          ): Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                constraints: BoxConstraints(
-                  maxWidth: MediaQuery.of(context).size.width * 0.75,
-                ),
-                  margin:  EdgeInsets.symmetric(vertical: 4.h),
-                  padding:  EdgeInsets.symmetric(horizontal: 8.w, vertical: 12.h),
-                  decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15.r),
-                  topRight: Radius.circular(0.r),
-                  bottomLeft: Radius.circular(15.r) ,
-                  bottomRight: Radius.circular(15.r),
-                  ),
-                  color: isUser ? AppColors.freshBlue : AppColors.purple.withOpacity(0.08),
-
-                  ),
-                  child: customText(
-                  text:  message.text,
-                  fontWeight: FontWeight.w600,
-                  color: isUser ? Colors.white : Colors.black,
-                  fontSize: 16,
-                  ),
-                  ),
-              Padding(
-                padding:  EdgeInsets.only(left: 8.w),
-                child: customText(
-                  textAlign: TextAlign.center,
-                  text: formattedTime,
-                  color: AppColors.placeholder,
-                  fontSize: 11,
-                  fontWeight: FontWeight.w700,
-
-                ),
-              )
-            ],
-          ),
         ],
       ),
     );
@@ -202,10 +208,7 @@ class _AiChatScreenState extends State<AiChatScreen> {
                 height: 30.h,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(100.r),
-                  child: Icon(
-                    Icons.person,
-                    color: AppColors.white,
-                  ),
+                  child: Icon(Icons.person, color: AppColors.white),
                 ),
               ),
             ),
@@ -223,10 +226,10 @@ class _AiChatScreenState extends State<AiChatScreen> {
               ),
 
               Container(
-                padding:  EdgeInsets.symmetric(vertical: 8.h,horizontal: 6.w),
-                margin:  EdgeInsets.symmetric(vertical: 4.h,horizontal: 4.w),
+                padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 6.w),
+                margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
                 decoration: BoxDecoration(
-                  color: AppColors.freshBlue.withOpacity(0.08),
+                  color: AppColors.freshBlue.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Row(
@@ -256,12 +259,14 @@ class _AiChatScreenState extends State<AiChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      systemNavigationBarIconBrightness: Brightness.dark,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarColor: AppColors.white,
-      systemNavigationBarColor: AppColors.white,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        systemNavigationBarIconBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: AppColors.white,
+        systemNavigationBarColor: AppColors.white,
+      ),
+    );
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: true,
@@ -270,54 +275,60 @@ class _AiChatScreenState extends State<AiChatScreen> {
       body: SafeArea(
         child: Column(
           children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16.r),
+              child: Stack(
+                children: [
+                  Image.asset(
+                    AppImages.gradient,
+                    height: 83.h,
+                    width: 432.w,
+                    fit: BoxFit.cover,
+                  ),
 
-        ClipRRect(
-        borderRadius: BorderRadius.circular(16.r),
-        child: Stack(
-          children: [
-            Image.asset(
-              AppImages.gradient,
-              height: 83.h,
-              width: 432.w,
-              fit: BoxFit.cover,
-            ),
+                  // Center title
+                  Positioned(
+                    top: 24.h,
+                    left: 55.w,
 
-            // Center title
+                    child: Center(
+                      child: customText(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 24,
+                        color: AppColors.white,
+                        text: "Biddo AI Assistant",
+                      ),
+                    ),
+                  ),
 
-            Positioned(
-              top: 24.h,
-              left: 55.w,
+                  // Back icon left
+                  Positioned(
+                    left: 16.w,
+                    top: 0,
+                    bottom: 0,
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                      size: 24.sp,
+                    ),
+                  ),
 
-
-              child: Center(
-                child: customText(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 24,
-                  color: AppColors.white,
-                  text: "Biddo AI Assistant",
-                ),
+                  // Delete icon right
+                  Positioned(
+                    right: 16.w,
+                    top: 0,
+                    bottom: 0,
+                    child: SvgPicture.asset(
+                      AppImages.delete,
+                      fit: BoxFit.contain,
+                      height: 24.h,
+                      width: 24.w,
+                    ),
+                  ),
+                ],
               ),
             ),
-
-            // Back icon left
-            Positioned(
-              left: 16.w,
-              top: 0,
-              bottom: 0,
-              child: Icon(Icons.arrow_back, color: Colors.white, size: 24.sp),
-            ),
-
-            // Delete icon right
-            Positioned(
-              right: 16.w,
-              top: 0,
-              bottom: 0,
-              child: SvgPicture.asset(AppImages.delete,fit: BoxFit.contain,height: 24.h,width: 24.w,),
-            ),
-          ],
-        ),
-      ),
-        Expanded(
+            Expanded(
               child: ListView.builder(
                 padding: const EdgeInsets.all(16),
                 itemCount: _messages.length + (_isTyping ? 1 : 0),
@@ -333,7 +344,6 @@ class _AiChatScreenState extends State<AiChatScreen> {
           ],
         ),
       ),
-
     );
   }
 
@@ -347,26 +357,35 @@ class _AiChatScreenState extends State<AiChatScreen> {
               controller: _controller,
               decoration: InputDecoration(
                 hintText: 'Reply ...',
-                hintStyle: TextStyle(color: AppColors.placeholder,fontFamily:GoogleFonts.nunito().fontFamily, ),
+                hintStyle: TextStyle(
+                  color: AppColors.placeholder,
+                  fontFamily: GoogleFonts.nunito().fontFamily,
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(25),
                   borderSide: BorderSide.none,
                 ),
                 filled: true,
                 fillColor: AppColors.white,
-                contentPadding:
-                const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
+                ),
               ),
             ),
           ),
-         horizontalSpacer(8),
+          horizontalSpacer(8),
           GestureDetector(
             onTap: _sendMessage,
             child: CircleAvatar(
               radius: 15,
               backgroundColor: AppColors.freshBlue,
               child: Center(
-                child:   Icon(Icons.arrow_forward_ios, color: Colors.white,size: 18,),
+                child: Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.white,
+                  size: 18,
+                ),
               ),
             ),
           ),
@@ -381,9 +400,5 @@ class ChatMessage {
   final bool isUser;
   final DateTime time;
 
-  ChatMessage({
-    required this.text,
-    required this.isUser,
-    required this.time,
-  });
+  ChatMessage({required this.text, required this.isUser, required this.time});
 }

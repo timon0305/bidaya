@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'dart:math' as math;
 import 'package:quizzo/export.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class InvoiceSlipPainter extends CustomPainter {
   final Color borderColor;
@@ -18,30 +15,34 @@ class InvoiceSlipPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final fillPaint = Paint()
-      ..color = backgroundColor
-      ..style = PaintingStyle.fill;
+    final fillPaint =
+        Paint()
+          ..color = backgroundColor
+          ..style = PaintingStyle.fill;
 
-    final borderPaint = Paint()
-      ..color = borderColor
-      ..strokeWidth = 1.5
-    ..style = PaintingStyle.stroke
-      ..strokeJoin = StrokeJoin.round
-      ..strokeCap = StrokeCap.round
-      ..strokeMiterLimit = 2 ;// 👈 Border andar hi rahega
+    final borderPaint =
+        Paint()
+          ..color = borderColor
+          ..strokeWidth = 1.5
+          ..style = PaintingStyle.stroke
+          ..strokeJoin = StrokeJoin.round
+          ..strokeCap = StrokeCap.round
+          ..strokeMiterLimit = 2; // 👈 Border andar hi rahega
 
-    final dottedPaint = Paint()
-      ..color = AppColors.lightestGreyShade
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.5;
+    final dottedPaint =
+        Paint()
+          ..color = AppColors.lightestGreyShade
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1.5;
 
     final path = _createSlipPath(size);
 
     // Shadow
     if (hasShadow) {
-      final shadowPaint = Paint()
-        ..color = Colors.black.withOpacity(0.15)
-        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 4);
+      final shadowPaint =
+          Paint()
+            ..color = Colors.black.withValues(alpha: 0.15)
+            ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 4);
       canvas.drawPath(path.shift(const Offset(0, 3)), shadowPaint);
     }
 
@@ -113,10 +114,7 @@ class InvoiceSlipPainter extends CustomPainter {
     path.lineTo(0, radius);
 
     // Top-left corner
-    path.arcToPoint(
-      Offset(radius, 0),
-      radius: Radius.circular(radius),
-    );
+    path.arcToPoint(Offset(radius, 0), radius: Radius.circular(radius));
 
     path.close();
     return path;

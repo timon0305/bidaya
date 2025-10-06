@@ -1,11 +1,14 @@
 import 'package:quizzo/export.dart';
-Widget kidInfoCard(
-    {required BuildContext context,required TextEditingController nameController,
-      required TextEditingController phoneController,
-      required String selectedGender,
-      required TextEditingController dobController}) {
+
+Widget kidInfoCard({
+  required BuildContext context,
+  required TextEditingController nameController,
+  required TextEditingController phoneController,
+  required String selectedGender,
+  required TextEditingController dobController,
+}) {
   return Padding(
-    padding:  EdgeInsets.symmetric(horizontal: 20.w),
+    padding: EdgeInsets.symmetric(horizontal: 20.w),
     child: SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -14,7 +17,7 @@ Widget kidInfoCard(
             height: 230.h,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: AppColors.purple.withOpacity(0.04),
+              color: AppColors.purple.withValues(alpha: 0.04),
               borderRadius: BorderRadius.circular(16.r),
               border: Border.all(color: AppColors.purple),
             ),
@@ -25,11 +28,11 @@ Widget kidInfoCard(
                 SvgPicture.asset(AppImages.imagePlaceholder),
                 verticalSpacer(8),
                 customText(
-                    text: "Child Photo (optional)",
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18,
-                    color: AppColors.blue
-                )
+                  text: "Child Photo (optional)",
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18,
+                  color: AppColors.blue,
+                ),
               ],
             ),
           ),
@@ -38,7 +41,12 @@ Widget kidInfoCard(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              customText(text: "Name *", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+              customText(
+                text: "Name *",
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: Colors.black,
+              ),
               verticalSpacer(8),
               customTextField(
                 controller: nameController,
@@ -54,7 +62,12 @@ Widget kidInfoCard(
                 context: context,
               ),
               verticalSpacer(20),
-              customText(text: "Nationality *", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+              customText(
+                text: "Nationality *",
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: Colors.black,
+              ),
               verticalSpacer(8),
               customTextField(
                 controller: phoneController,
@@ -66,13 +79,16 @@ Widget kidInfoCard(
                 borderRadius: 12,
                 obscureText: false,
                 isShow: false,
-                onShow: () {
-
-                },
+                onShow: () {},
                 context: context,
               ),
               verticalSpacer(20),
-              customText(text: "Date of Birth *", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+              customText(
+                text: "Date of Birth *",
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: Colors.black,
+              ),
               verticalSpacer(8),
               customTextFieldSuffixIcon(
                 controller: dobController,
@@ -86,12 +102,17 @@ Widget kidInfoCard(
                 borderRadius: 0,
                 obscureText: false,
                 onShow: () {
-                  selectDateBottomSheet(context,dobController);
+                  selectDateBottomSheet(context, dobController);
                 },
                 context: context,
               ),
               verticalSpacer(20),
-              customText(text: "Gender *", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+              customText(
+                text: "Gender *",
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: Colors.black,
+              ),
               verticalSpacer(8),
               customDropdownField(
                 context: context,
@@ -105,12 +126,16 @@ Widget kidInfoCard(
                 items: ["Male", "Female"],
                 value: selectedGender.isEmpty ? null : selectedGender,
                 onChanged: (val) {
-
-                  selectedGender = val??"";
-
+                  selectedGender = val ?? "";
                 },
-              ),verticalSpacer(20),
-              customText(text: "Religion *", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+              ),
+              verticalSpacer(20),
+              customText(
+                text: "Religion *",
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: Colors.black,
+              ),
               verticalSpacer(8),
               customDropdownField(
                 context: context,
@@ -122,12 +147,10 @@ Widget kidInfoCard(
 
                 iconPath: AppImages.dropdownArrow,
                 icon: AppImages.dropdownArrow,
-                items: ["Islam", "Christian","Athiest"],
+                items: ["Islam", "Christian", "Athiest"],
                 value: selectedGender.isEmpty ? null : selectedGender,
                 onChanged: (val) {
-
-                  selectedGender = val??"";
-
+                  selectedGender = val ?? "";
                 },
               ),
               verticalSpacer(20),
@@ -135,7 +158,7 @@ Widget kidInfoCard(
                 height: 128.h,
                 width: 382.w,
                 decoration: BoxDecoration(
-                  color: AppColors.purple.withOpacity(0.05),
+                  color: AppColors.purple.withValues(alpha: 0.05),
                   borderRadius: BorderRadius.circular(16.r),
                   border: Border.all(color: AppColors.purple),
                 ),
@@ -146,16 +169,14 @@ Widget kidInfoCard(
                     SvgPicture.asset(AppImages.imagePlaceholder),
                     verticalSpacer(8),
                     customText(
-                        text: "Upload Documents (optional)",
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18,
-                        color: AppColors.purple
-                    )
+                      text: "Upload Documents (optional)",
+                      fontWeight: FontWeight.w500,
+                      fontSize: 18,
+                      color: AppColors.purple,
+                    ),
                   ],
                 ),
               ),
-
-
             ],
           ),
         ],

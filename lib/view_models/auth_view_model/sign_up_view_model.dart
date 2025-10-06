@@ -1,6 +1,5 @@
 import 'package:quizzo/export.dart';
 
-
 class SignupViewModel extends ChangeNotifier {
   final PageController controller = PageController();
   int currentStep = 0;
@@ -33,8 +32,7 @@ class SignupViewModel extends ChangeNotifier {
     "Doctor Visits",
     "Art",
   ];
-  String ? selectedCity, selectedCountry;
-
+  String? selectedCity, selectedCountry;
 
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -51,7 +49,6 @@ class SignupViewModel extends ChangeNotifier {
   bool showConfirmPassword = true;
   bool isCreatingUser = false;
 
-
   Future<void> proceedBasicInfo(BuildContext context) async {
     try {
       isInfoContinueLoader = true;
@@ -65,13 +62,13 @@ class SignupViewModel extends ChangeNotifier {
       await Future.delayed(const Duration(seconds: 1));
       nextStep();
     } catch (e) {
-
-      snackBar(title:  "Error", subTitle: e.toString(),bgColor: Colors.red);
+      snackBar(title: "Error", subTitle: e.toString(), bgColor: Colors.red);
     } finally {
       isInfoContinueLoader = false;
       notifyListeners();
     }
   }
+
   Future<void> proceedNurseryInfo(BuildContext context) async {
     try {
       isNurseryLoading = true;
@@ -82,15 +79,12 @@ class SignupViewModel extends ChangeNotifier {
       AuthValidationService.validateCity(selectedGender);
       AuthValidationService.validateCountry(selectedGender);
       AuthValidationService.validatePhone(nurseryPhoneController.text);
-      AuthValidationService.isValidEmail( nurseryEmailController.text);
-
-
+      AuthValidationService.isValidEmail(nurseryEmailController.text);
 
       await Future.delayed(const Duration(seconds: 1));
       nextStep();
     } catch (e) {
-
-      snackBar(title:  "Error", subTitle: e.toString(),bgColor: Colors.red);
+      snackBar(title: "Error", subTitle: e.toString(), bgColor: Colors.red);
     } finally {
       isNurseryLoading = false;
       notifyListeners();
@@ -101,12 +95,15 @@ class SignupViewModel extends ChangeNotifier {
     try {
       AuthValidationService.validatePassword(passwordController.text);
       AuthValidationService.validatePassword(confirmPasswordController.text);
-      AuthValidationService.validatePasswordMatch(passwordController.text, confirmPasswordController.text);
+      AuthValidationService.validatePasswordMatch(
+        passwordController.text,
+        confirmPasswordController.text,
+      );
 
       await checkDuplicatePhone(phoneController.text);
       nextStep();
     } catch (e) {
-      snackBar(title:  "Error", subTitle: e.toString(),bgColor: Colors.red);
+      snackBar(title: "Error", subTitle: e.toString(), bgColor: Colors.red);
     }
   }
 
@@ -122,17 +119,22 @@ class SignupViewModel extends ChangeNotifier {
         final isDuplicate = res!.data['duplicate'] ?? false;
         await sendOtp("2${phoneController.text}", AppConstant.otp);
         if (isDuplicate) {
-          snackBar(title: "Error", subTitle: "Phone number already exists", bgColor: AppColors.redShade);
+          snackBar(
+            title: "Error",
+            subTitle: "Phone number already exists",
+            bgColor: AppColors.redShade,
+          );
           return true;
         }
         nextStep();
-
       }
       return true;
     } catch (e) {
-      snackBar(title: "Error", subTitle: e.toString(), bgColor: AppColors.redShade);
-      print(e.toString());
-      print("Errrrrrrrrrrrrrrrrrrrrr");
+      snackBar(
+        title: "Error",
+        subTitle: e.toString(),
+        bgColor: AppColors.redShade,
+      );
       isCheckPhone = false;
       notifyListeners();
       return true;
@@ -142,12 +144,8 @@ class SignupViewModel extends ChangeNotifier {
     }
   }
 
-
-
   void updateAccountType(String type) {
     accountType = type;
-    print("step");
-    print(currentStep);
     nextStep();
   }
 
@@ -155,16 +153,16 @@ class SignupViewModel extends ChangeNotifier {
     selectedGender = gender;
     notifyListeners();
   }
+
   void updateOtp(String otp) {
     otpControllers = otp;
-    print(otpControllers);
-    print(otpControllers);
-    print("otpControllers");
     notifyListeners();
   }
 
   void selectNurseryFeature(String category, bool isSelected) {
-    isSelected ? selectedCategories.add(category) : selectedCategories.remove(category);
+    isSelected
+        ? selectedCategories.add(category)
+        : selectedCategories.remove(category);
     notifyListeners();
   }
 
@@ -208,13 +206,8 @@ class SignupViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> createAccount({
-    required BuildContext context,
-
-  }) async {
+  Future<void> createAccount({required BuildContext context}) async {
     try {
-
-
       if (accountType == "Parent") {
         final userData = {
           "name": nameController.text,
@@ -259,13 +252,14 @@ class SignupViewModel extends ChangeNotifier {
             bgColor: AppColors.redShade,
           );
         }
-      }
-      else if (accountType == "Teacher") {
-    /*    {"email":"teacher_01031536540@temp.bidayanursery.com",
+      } else if (accountType == "Teacher") {
+        /*    {"email":"teacher_01031536540@temp.bidayanursery.com",
     "password":"Aqsa@12345",
     "userData":{"name":"Aqsa Nazir","gender":"female","phone":"01031536540","birthdate":"2008-03-05"},"phone":"01031536540"}
-  */    final  userData = {
-          "email": "teacher_${phoneController.text.trim().toLowerCase()}@temp.bidayanursery.com",
+  */
+        final userData = {
+          "email":
+              "teacher_${phoneController.text.trim().toLowerCase()}@temp.bidayanursery.com",
           "password": passwordController.text,
           "userData": {
             "name": nameController.text,
@@ -275,8 +269,6 @@ class SignupViewModel extends ChangeNotifier {
           },
           "phone": phoneController.text,
         };
-      print("Teacher Map");
-      print(userData);
 
         isCreatingUser = true;
         notifyListeners();
@@ -299,10 +291,8 @@ class SignupViewModel extends ChangeNotifier {
             bgColor: AppColors.redShade,
           );
         }
-      }
-      else  {
-
-       /* final created = await createNurseryAdmin(
+      } else {
+        /* final created = await createNurseryAdmin(
           adminData: {
             "name": name,
             "email": "admin_${phone}@temp.bidayanursery.com",
@@ -329,16 +319,18 @@ class SignupViewModel extends ChangeNotifier {
           },
           logoFile: File("assets/images/shy.png"),
         );*/
-
       }
     } catch (e) {
-      snackBar(title: "Error", subTitle: e.toString(), bgColor: AppColors.redShade);
+      snackBar(
+        title: "Error",
+        subTitle: e.toString(),
+        bgColor: AppColors.redShade,
+      );
     } finally {
       isCreatingUser = false;
       notifyListeners();
     }
   }
-
 
   Future<bool> sendOtp(String phone, String otp) async {
     try {
@@ -350,30 +342,43 @@ class SignupViewModel extends ChangeNotifier {
         final data = res!.data;
         final success = data['success'] ?? false;
         if (!success) {
-          snackBar(title: "OTP Error", subTitle: data['message'] + phone?? "Unknown error", bgColor: AppColors.redShade);
+          snackBar(
+            title: "OTP Error",
+            subTitle: data['message'] + phone ?? "Unknown error",
+            bgColor: AppColors.redShade,
+          );
           return false;
         }
         final providerResponse = data['response'];
         if (providerResponse is String) {
           final decoded = jsonDecode(providerResponse);
           if (decoded['type'] == 'error') {
-            snackBar(title: "OTP Error", subTitle: decoded['error']?['msg'] +phone?? "SMS sending failed", bgColor: AppColors.redShade);
+            snackBar(
+              title: "OTP Error",
+              subTitle:
+                  decoded['error']?['msg'] + phone ?? "SMS sending failed",
+              bgColor: AppColors.redShade,
+            );
             return false;
           }
         }
         return true;
       }
-      snackBar(title: "Error", subTitle: res?.data?['error'] ?? "Failed to send OTP", bgColor: AppColors.redShade);
+      snackBar(
+        title: "Error",
+        subTitle: res?.data?['error'] ?? "Failed to send OTP",
+        bgColor: AppColors.redShade,
+      );
       return false;
     } catch (e) {
-      print("error");
-      print(e.toString());
-      snackBar(title: "Error", subTitle: e.toString(), bgColor: AppColors.redShade);
+      snackBar(
+        title: "Error",
+        subTitle: e.toString(),
+        bgColor: AppColors.redShade,
+      );
       return false;
     }
   }
-
-
 
   void clear() {
     nameController.clear();
@@ -402,7 +407,7 @@ class SignupViewModel extends ChangeNotifier {
     isNurseryLoading = false;
     isCheckPhone = false;
 
- //   controller.jumpToPage(0);
+    //   controller.jumpToPage(0);
 
     notifyListeners();
   }

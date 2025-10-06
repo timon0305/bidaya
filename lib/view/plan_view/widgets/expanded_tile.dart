@@ -1,9 +1,6 @@
-
 import 'package:quizzo/export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 
 class CustomExpansionTile extends StatefulWidget {
   final String label;
@@ -13,7 +10,8 @@ class CustomExpansionTile extends StatefulWidget {
   const CustomExpansionTile({
     required this.label,
     required this.children,
-    Key? key, required this.index,
+    Key? key,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -30,7 +28,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
       duration: const Duration(milliseconds: 300),
       decoration: BoxDecoration(
         border: Border.all(color: AppColors.lightestGreyShade, width: 1),
-        borderRadius:  BorderRadius.circular(12.r),
+        borderRadius: BorderRadius.circular(12.r),
 
         color: AppColors.white,
       ),
@@ -41,14 +39,19 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
 
           child: ExpansionTile(
             tilePadding: EdgeInsets.zero,
-            backgroundColor:AppColors.white,
+            backgroundColor: AppColors.white,
             initiallyExpanded: false,
             iconColor: AppColors.blackShade,
             collapsedIconColor: AppColors.blackShade,
             trailing: Padding(
-                padding:  EdgeInsets.only(right: 15.w),
-                child: SvgPicture.asset(AppImages.dropArrow,height: 14.h,width: 14.w,fit: BoxFit.scaleDown)
-            ) ,
+              padding: EdgeInsets.only(right: 15.w),
+              child: SvgPicture.asset(
+                AppImages.dropArrow,
+                height: 14.h,
+                width: 14.w,
+                fit: BoxFit.scaleDown,
+              ),
+            ),
             leading: ReorderableDragStartListener(
               index: int.parse(widget.index),
               child: Padding(
@@ -59,8 +62,11 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
             childrenPadding: EdgeInsets.zero,
             enabled: true,
             title: customText(
-                text: widget.label, fontWeight: FontWeight.w700,
-                fontSize: 14, color: AppColors.blackShade),
+              text: widget.label,
+              fontWeight: FontWeight.w700,
+              fontSize: 14,
+              color: AppColors.blackShade,
+            ),
             children: widget.children,
             onExpansionChanged: (expanded) {
               setState(() {

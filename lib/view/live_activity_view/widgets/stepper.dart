@@ -1,13 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizzo/export.dart';
 
 class VerticalDottedStepper extends StatelessWidget {
   final List<StepperItem> items;
   final double lineWidth;
   final Color lineColor;
-
-
 
   const VerticalDottedStepper({
     super.key,
@@ -31,10 +27,8 @@ class VerticalDottedStepper extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               Column(
                 children: [
-
                   if (isFirst)
                     CustomPaint(
                       size: Size(lineWidth, 24.h),
@@ -44,30 +38,37 @@ class VerticalDottedStepper extends StatelessWidget {
                   ClipPath(
                     clipper: ZigZagClipper(),
                     child: Container(
-                      padding:
-                      EdgeInsets.symmetric(horizontal: 8.w, vertical: 7.h),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 8.w,
+                        vertical: 7.h,
+                      ),
                       color: items[index].color,
                       child: Padding(
                         padding: EdgeInsets.only(left: 6.w),
-                        child: customText( text: item.time, fontWeight: FontWeight.w700, fontSize: 12, color: AppColors.white, ), ),
-
-                    ),
-                  ),
-                    Expanded(
-                      child: Container(
-                        width: lineWidth,
-                        decoration: BoxDecoration(
-                          color: lineColor,
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppColors.forestGrey,
-
-                              offset: const Offset(-2, 0),
-                            )
-                          ],
+                        child: customText(
+                          text: item.time,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 12,
+                          color: AppColors.white,
                         ),
                       ),
                     ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      width: lineWidth,
+                      decoration: BoxDecoration(
+                        color: lineColor,
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.forestGrey,
+
+                            offset: const Offset(-2, 0),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
 
                   if (isLast)
                     CustomPaint(
@@ -78,7 +79,7 @@ class VerticalDottedStepper extends StatelessWidget {
               ),
 
               SizedBox(width: 6.w),
-              
+
               Expanded(
                 child: Column(
                   children: [
@@ -86,54 +87,69 @@ class VerticalDottedStepper extends StatelessWidget {
                       padding: EdgeInsets.all(8.w),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(8.r),
-                            topRight: Radius.circular(8.r),
-                            bottomLeft: Radius.circular(8.r),
-                            ),
-                        color: AppColors.purple.withOpacity(0.08),
+                          bottomRight: Radius.circular(8.r),
+                          topRight: Radius.circular(8.r),
+                          bottomLeft: Radius.circular(8.r),
+                        ),
+                        color: AppColors.purple.withValues(alpha: 0.08),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                        customText( text: item.title,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 16, color: AppColors.blackShade, ),
+                          customText(
+                            text: item.title,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16,
+                            color: AppColors.blackShade,
+                          ),
 
                           SizedBox(height: 8.h),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(14.r),
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Image.asset(
-                              AppImages.kid,
-                              height: 180.h,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                            ),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(14.r),
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Image.asset(
+                                  AppImages.kid,
+                                  height: 180.h,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                ),
 
-                            Container(
-                              height: 180.h,
-                              width: double.infinity,
-                              color: item.isNew?AppColors.white.withOpacity(0.1):AppColors.blackShade.withOpacity(0.8),
+                                Container(
+                                  height: 180.h,
+                                  width: double.infinity,
+                                  color:
+                                      item.isNew
+                                          ? AppColors.white.withValues(
+                                            alpha: 0.1,
+                                          )
+                                          : AppColors.blackShade.withValues(
+                                            alpha: 0.8,
+                                          ),
+                                ),
+                                item.isNew
+                                    ? SizedBox.shrink()
+                                    : Icon(
+                                      Icons.visibility,
+                                      color: Colors.white,
+                                      size: 32.sp,
+                                    ),
+                              ],
                             ),
-                            item.isNew? SizedBox.shrink():Icon(
-                              Icons.visibility,
-                              color: Colors.white,
-                              size: 32.sp,
-                            ),
-                          ],
-                        ),
-                      )
-                        ]
+                          ),
+                        ],
                       ),
                     ),
                     Align(
                       alignment: Alignment.bottomRight,
-                      child: customText( text: "By Desai   ",
+                      child: customText(
+                        text: "By Desai   ",
                         textAlign: TextAlign.right,
                         fontWeight: FontWeight.w700,
-                        fontSize: 9, color: AppColors.sand, ),
+                        fontSize: 9,
+                        color: AppColors.sand,
+                      ),
                     ),
                   ],
                 ),
@@ -160,18 +176,20 @@ class DottedLinePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..strokeWidth = size.width
-      ..strokeCap = StrokeCap.round
-      ..style = PaintingStyle.stroke;
+    final paint =
+        Paint()
+          ..color = color
+          ..strokeWidth = size.width
+          ..strokeCap = StrokeCap.round
+          ..style = PaintingStyle.stroke;
 
     double y = 0;
     while (y < size.height) {
       canvas.drawLine(
-          Offset(size.width / 2, y),
-          Offset(size.width / 2, y + dotLength),
-          paint);
+        Offset(size.width / 2, y),
+        Offset(size.width / 2, y + dotLength),
+        paint,
+      );
       y += dotLength + dotSpacing;
     }
   }

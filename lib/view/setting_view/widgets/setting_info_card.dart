@@ -1,17 +1,25 @@
 import 'package:quizzo/export.dart';
-Widget settingInfoCard(
-    {required BuildContext context,required TextEditingController nameController,
-      required TextEditingController phoneController,
-      required String selectedGender,
-      required TextEditingController dobController}) {
+
+Widget settingInfoCard({
+  required BuildContext context,
+  required TextEditingController nameController,
+  required TextEditingController phoneController,
+  required String selectedGender,
+  required TextEditingController dobController,
+}) {
   return Padding(
-    padding:  EdgeInsets.symmetric(horizontal: 20.w),
+    padding: EdgeInsets.symmetric(horizontal: 20.w),
     child: SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          customText(text: "Name *", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+          customText(
+            text: "Name *",
+            fontWeight: FontWeight.w700,
+            fontSize: 16,
+            color: Colors.black,
+          ),
           verticalSpacer(8),
           customTextField(
             controller: nameController,
@@ -27,7 +35,12 @@ Widget settingInfoCard(
             context: context,
           ),
           verticalSpacer(20),
-          customText(text: "Nationality *", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+          customText(
+            text: "Nationality *",
+            fontWeight: FontWeight.w700,
+            fontSize: 16,
+            color: Colors.black,
+          ),
           verticalSpacer(8),
           customTextField(
             controller: phoneController,
@@ -39,13 +52,16 @@ Widget settingInfoCard(
             borderRadius: 12,
             obscureText: false,
             isShow: false,
-            onShow: () {
-
-            },
+            onShow: () {},
             context: context,
           ),
           verticalSpacer(20),
-          customText(text: "Date of Birth *", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+          customText(
+            text: "Date of Birth *",
+            fontWeight: FontWeight.w700,
+            fontSize: 16,
+            color: Colors.black,
+          ),
           verticalSpacer(8),
           customTextFieldSuffixIcon(
             controller: dobController,
@@ -59,12 +75,17 @@ Widget settingInfoCard(
             borderRadius: 0,
             obscureText: false,
             onShow: () {
-              selectDateBottomSheet(context,dobController);
+              selectDateBottomSheet(context, dobController);
             },
             context: context,
           ),
           verticalSpacer(20),
-          customText(text: "Gender *", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+          customText(
+            text: "Gender *",
+            fontWeight: FontWeight.w700,
+            fontSize: 16,
+            color: Colors.black,
+          ),
           verticalSpacer(8),
           customDropdownField(
             context: context,
@@ -77,12 +98,16 @@ Widget settingInfoCard(
             items: ["Male", "Female"],
             value: selectedGender.isEmpty ? null : selectedGender,
             onChanged: (val) {
-
-              selectedGender = val??"";
-
+              selectedGender = val ?? "";
             },
-          ),verticalSpacer(20),
-          customText(text: "Religion *", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+          ),
+          verticalSpacer(20),
+          customText(
+            text: "Religion *",
+            fontWeight: FontWeight.w700,
+            fontSize: 16,
+            color: Colors.black,
+          ),
           verticalSpacer(8),
           customDropdownField(
             context: context,
@@ -92,12 +117,10 @@ Widget settingInfoCard(
             fillColor: AppColors.white,
             iconPath: AppImages.dropdownArrow,
             icon: AppImages.dropdownArrow,
-            items: ["Islam", "Christian","Athiest"],
+            items: ["Islam", "Christian", "Athiest"],
             value: selectedGender.isEmpty ? null : selectedGender,
             onChanged: (val) {
-
-              selectedGender = val??"";
-
+              selectedGender = val ?? "";
             },
           ),
           verticalSpacer(20),
@@ -105,7 +128,7 @@ Widget settingInfoCard(
             height: 128.h,
             width: 382.w,
             decoration: BoxDecoration(
-              color: AppColors.purple.withOpacity(0.05),
+              color: AppColors.purple.withValues(alpha: 0.05),
               borderRadius: BorderRadius.circular(16.r),
               border: Border.all(color: AppColors.purple),
             ),
@@ -116,16 +139,14 @@ Widget settingInfoCard(
                 SvgPicture.asset(AppImages.imagePlaceholder),
                 verticalSpacer(8),
                 customText(
-                    text: "Upload Documents (optional)",
-                    fontWeight: FontWeight.w500,
-                    fontSize: 18,
-                    color: AppColors.purple
-                )
+                  text: "Upload Documents (optional)",
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18,
+                  color: AppColors.purple,
+                ),
               ],
             ),
           ),
-
-
         ],
       ),
     ),

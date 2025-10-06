@@ -1,5 +1,5 @@
-///---->Package Exports
 library;
+
 export 'dart:math';
 export 'package:flutter/material.dart';
 export 'package:shared_preferences/shared_preferences.dart';
@@ -23,11 +23,6 @@ export 'package:get/get.dart' hide FormData, MultipartFile, Response;
 export 'dart:io' hide HeaderValue;
 export 'package:table_calendar/table_calendar.dart';
 export 'service/validation_service/validation_service.dart';
-
-
-
-
-
 
 ///---->Local Imports
 

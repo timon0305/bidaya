@@ -1,4 +1,5 @@
 import 'package:quizzo/export.dart';
+
 class KidsView extends StatefulWidget {
   const KidsView({super.key});
 
@@ -6,25 +7,26 @@ class KidsView extends StatefulWidget {
   State<KidsView> createState() => _KidsViewState();
 }
 
-class _KidsViewState extends State<KidsView>  {
+class _KidsViewState extends State<KidsView> {
   String? selectedGender;
   String? selectedClass;
-
 
   TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      systemNavigationBarIconBrightness: Brightness.dark,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarColor: AppColors.white,
-      systemNavigationBarColor: AppColors.white,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        systemNavigationBarIconBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: AppColors.white,
+        systemNavigationBarColor: AppColors.white,
+      ),
+    );
     return Scaffold(
       appBar: customAppBar(title: "Kids"),
       backgroundColor: AppColors.white,
-      body:  Padding(
+      body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 0.h),
         child: SingleChildScrollView(
           child: Column(
@@ -32,7 +34,7 @@ class _KidsViewState extends State<KidsView>  {
               customTextFieldPrefixIcon(
                 controller: searchController,
                 readOnly: false,
-                hintClr: AppColors.grey.withOpacity(0.3),
+                hintClr: AppColors.grey.withValues(alpha: 0.3),
                 borderClr: Colors.transparent,
                 height: 56,
                 width: 432,
@@ -87,7 +89,10 @@ class _KidsViewState extends State<KidsView>  {
               ),
               verticalSpacer(12),
               customDivider(
-                  height: 1.5, width: 432, color: AppColors.lightestGreyShade),
+                height: 1.5,
+                width: 432,
+                color: AppColors.lightestGreyShade,
+              ),
               verticalSpacer(20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -95,27 +100,32 @@ class _KidsViewState extends State<KidsView>  {
                   Row(
                     children: [
                       customText(
-                          text: "  Kids",
-                          fontWeight: FontWeight.w700,
-                          fontSize: 18,
-                          color: AppColors.blackShade),
+                        text: "  Kids",
+                        fontWeight: FontWeight.w700,
+                        fontSize: 18,
+                        color: AppColors.blackShade,
+                      ),
 
                       horizontalSpacer(4),
                       customText(
-                          text: "(3)",
-                          fontWeight: FontWeight.w700,
-                          fontSize: 18,
-                          color: AppColors.freshBlue),
+                        text: "(3)",
+                        fontWeight: FontWeight.w700,
+                        fontSize: 18,
+                        color: AppColors.freshBlue,
+                      ),
                     ],
                   ),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Get.toNamed(AppRoutes.addKids);
                     },
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 6.w,vertical: 4.h),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 6.w,
+                        vertical: 4.h,
+                      ),
                       decoration: BoxDecoration(
-                        borderRadius:  BorderRadius.circular(8.r),
+                        borderRadius: BorderRadius.circular(8.r),
 
                         color: AppColors.purple,
                       ),
@@ -123,20 +133,20 @@ class _KidsViewState extends State<KidsView>  {
                         children: [
                           SvgPicture.asset(AppImages.addUser),
                           customText(
-                              text: " Add User ",
-                              fontWeight: FontWeight.w700,
-                              fontSize: 18,
-                              color: AppColors.white),
+                            text: " Add User ",
+                            fontWeight: FontWeight.w700,
+                            fontSize: 18,
+                            color: AppColors.white,
+                          ),
                         ],
                       ),
                     ),
                   ),
-
                 ],
               ),
-              kidsCard(context,"Tyra Shelburne", "Senior Class"),
-              kidsCard(context,"Clinton Mcclure", "Junior Class"),
-              kidsCard(context,"Daryl Kulikowski", "Senior Class"),
+              kidsCard(context, "Tyra Shelburne", "Senior Class"),
+              kidsCard(context, "Clinton Mcclure", "Junior Class"),
+              kidsCard(context, "Daryl Kulikowski", "Senior Class"),
               verticalSpacer(20),
             ],
           ),

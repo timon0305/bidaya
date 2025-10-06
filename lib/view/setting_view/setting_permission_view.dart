@@ -1,5 +1,5 @@
 import 'package:quizzo/export.dart';
-import 'package:quizzo/view/setting_view/setting_assign_permission_view.dart';
+
 class SettingPermissionView extends StatefulWidget {
   const SettingPermissionView({super.key});
 
@@ -13,12 +13,14 @@ class _SettingPermissionViewState extends State<SettingPermissionView> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      systemNavigationBarIconBrightness: Brightness.dark,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarColor: AppColors.white,
-      systemNavigationBarColor: AppColors.white,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        systemNavigationBarIconBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: AppColors.white,
+        systemNavigationBarColor: AppColors.white,
+      ),
+    );
     return Scaffold(
       appBar: customAppBar(title: "Teacher Permissions"),
       backgroundColor: AppColors.white,
@@ -30,7 +32,7 @@ class _SettingPermissionViewState extends State<SettingPermissionView> {
               customTextFieldPrefixIcon(
                 controller: searchController,
                 readOnly: false,
-                hintClr: AppColors.grey.withOpacity(0.3),
+                hintClr: AppColors.grey.withValues(alpha: 0.3),
                 borderClr: Colors.transparent,
                 height: 56,
                 width: 432,
@@ -51,35 +53,39 @@ class _SettingPermissionViewState extends State<SettingPermissionView> {
                 hintText: "Male",
                 width: 400,
                 borderRadius: 16,
-                fillColor:  AppColors.bg,
+                fillColor: AppColors.bg,
                 icon: AppImages.dropArrow,
                 iconPath: AppImages.dropArrow,
                 borderColor: Colors.transparent,
-                items: ["All Classes", "Junior","Senior"],
-                value:  selectedGender,
+                items: ["All Classes", "Junior", "Senior"],
+                value: selectedGender,
                 onChanged: (val) {
-                  selectedGender = val??"";
+                  selectedGender = val ?? "";
                 },
               ),
               verticalSpacer(12),
-              customDivider(height: 1.5,
-                  width: 432,
-                  color: AppColors.lightestGreyShade),
+              customDivider(
+                height: 1.5,
+                width: 432,
+                color: AppColors.lightestGreyShade,
+              ),
               verticalSpacer(20),
               Row(
                 children: [
                   customText(
-                      text: "  Staff",
-                      fontWeight: FontWeight.w700,
-                      fontSize: 18,
-                      color: AppColors.blackShade),
+                    text: "  Staff",
+                    fontWeight: FontWeight.w700,
+                    fontSize: 18,
+                    color: AppColors.blackShade,
+                  ),
 
                   horizontalSpacer(4),
                   customText(
-                      text: "(3)",
-                      fontWeight: FontWeight.w700,
-                      fontSize: 18,
-                      color: AppColors.freshBlue),
+                    text: "(3)",
+                    fontWeight: FontWeight.w700,
+                    fontSize: 18,
+                    color: AppColors.freshBlue,
+                  ),
                 ],
               ),
               userInfCard("Tyra Shelburne", "Senior Class"),
@@ -96,18 +102,15 @@ class _SettingPermissionViewState extends State<SettingPermissionView> {
 
 Widget userInfCard(String title, String subtitle) {
   return GestureDetector(
-    onTap: (){
-      Get.to(()=>TeacherPermissionsScreen());
+    onTap: () {
+      Get.to(() => TeacherPermissionsScreen());
     },
     child: Card(
       color: AppColors.white,
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.r),
-        side: BorderSide(
-          color: AppColors.bg.withOpacity(0.9),
-          width: 1,
-        ),
+        side: BorderSide(color: AppColors.bg.withValues(alpha: 0.9), width: 1),
       ),
       child: ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 8.w),
@@ -116,9 +119,8 @@ Widget userInfCard(String title, String subtitle) {
           width: 60.w,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            image: DecorationImage(image: AssetImage(AppImages.avatarPng),)
+            image: DecorationImage(image: AssetImage(AppImages.avatarPng)),
           ),
-
         ),
         horizontalTitleGap: 5,
         title: customText(
@@ -133,14 +135,22 @@ Widget userInfCard(String title, String subtitle) {
           color: AppColors.placeholder,
           fontSize: 14,
         ),
-        trailing:Container(
-            height: 28.h,
-            width: 28.w,
-            decoration: BoxDecoration(
-              color: AppColors.lightestGreyShade,
-              borderRadius: BorderRadius.circular(6.r)
+        trailing: Container(
+          height: 28.h,
+          width: 28.w,
+          decoration: BoxDecoration(
+            color: AppColors.lightestGreyShade,
+            borderRadius: BorderRadius.circular(6.r),
+          ),
+          child: Center(
+            child: SvgPicture.asset(
+              AppImages.fillSetting,
+              width: 23.w,
+              height: 23.h,
+              fit: BoxFit.cover,
             ),
-            child: Center(child: SvgPicture.asset(AppImages.fillSetting,width: 23.w,height: 23.h,fit: BoxFit.cover,))),
+          ),
+        ),
       ),
     ),
   );

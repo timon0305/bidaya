@@ -1,4 +1,5 @@
 import 'package:quizzo/export.dart';
+
 class SettingInfoView extends StatefulWidget {
   const SettingInfoView({super.key});
 
@@ -7,11 +8,11 @@ class SettingInfoView extends StatefulWidget {
 }
 
 class _SettingInfoViewState extends State<SettingInfoView> {
-  TextEditingController nameController=TextEditingController();
-  TextEditingController addressController=TextEditingController();
-  TextEditingController phoneController=TextEditingController();
-  TextEditingController dobController=TextEditingController();
-  String?selectedGender;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController dobController = TextEditingController();
+  String? selectedGender;
   @override
   void initState() {
     super.initState();
@@ -21,7 +22,8 @@ class _SettingInfoViewState extends State<SettingInfoView> {
     phoneController = TextEditingController(text: "+1-300-555-0399");
     dobController = TextEditingController(text: "27/12/1995");
     addressController = TextEditingController(
-        text: "West Arabella, 2150 Ave. - Next to Sphinx Hotel.");
+      text: "West Arabella, 2150 Ave. - Next to Sphinx Hotel.",
+    );
     selectedGender = "Female"; // Default selected
   }
 
@@ -34,19 +36,20 @@ class _SettingInfoViewState extends State<SettingInfoView> {
     addressController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      systemNavigationBarIconBrightness: Brightness.dark,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarColor: AppColors.white,
-      systemNavigationBarColor: AppColors.white,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        systemNavigationBarIconBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: AppColors.white,
+        systemNavigationBarColor: AppColors.white,
+      ),
+    );
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: customAppBar(
-        title: 'Personal Info',
-      ),
+      appBar: customAppBar(title: 'Personal Info'),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 20.h),
         child: SingleChildScrollView(
@@ -70,43 +73,60 @@ class _SettingInfoViewState extends State<SettingInfoView> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  customButtonWithPrefixIcon(context: context,
-                      text: "Upload Picture",
-                      widget:  SvgPicture.asset(AppImages.imagePlaceholder,
-                          width:17.w,
-                          height: 17.h,
-                          fit:BoxFit.cover
-
-                      ),
-                      fontSize: 16,
-                      height: 43,
-                      width: 183,
-                      borderColor: Colors.transparent,
-                      bgColor: AppColors.freshBlue.withOpacity(0.09),
-                      fontColor: AppColors.purple,
-                      overlayColor: AppColors.white.withOpacity(0.5),
-                      borderRadius: 100,
-                      isCircular: true,
-                      fontWeight: FontWeight.w500),
-                  customButtonWithPrefixIcon(context: context,
-                      text: "Change Avatar",
-                      widget: Icon(Icons.favorite,color: AppColors.purple,size: 18,),
-                      fontSize: 16,
-                      height: 43,
-                      width: 183,
-                      borderColor: Colors.transparent,
-                      bgColor: AppColors.freshBlue.withOpacity(0.09),
-                      fontColor: AppColors.purple,
-                      overlayColor: AppColors.white.withOpacity(0.5),
-                      borderRadius: 100,
-                      isCircular: true,
-                      fontWeight: FontWeight.w500),
+                  customButtonWithPrefixIcon(
+                    context: context,
+                    text: "Upload Picture",
+                    widget: SvgPicture.asset(
+                      AppImages.imagePlaceholder,
+                      width: 17.w,
+                      height: 17.h,
+                      fit: BoxFit.cover,
+                    ),
+                    fontSize: 16,
+                    height: 43,
+                    width: 183,
+                    borderColor: Colors.transparent,
+                    bgColor: AppColors.freshBlue.withValues(alpha: 0.09),
+                    fontColor: AppColors.purple,
+                    overlayColor: AppColors.white.withValues(alpha: 0.5),
+                    borderRadius: 100,
+                    isCircular: true,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  customButtonWithPrefixIcon(
+                    context: context,
+                    text: "Change Avatar",
+                    widget: Icon(
+                      Icons.favorite,
+                      color: AppColors.purple,
+                      size: 18,
+                    ),
+                    fontSize: 16,
+                    height: 43,
+                    width: 183,
+                    borderColor: Colors.transparent,
+                    bgColor: AppColors.freshBlue.withValues(alpha: 0.09),
+                    fontColor: AppColors.purple,
+                    overlayColor: AppColors.white.withValues(alpha: 0.5),
+                    borderRadius: 100,
+                    isCircular: true,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ],
               ),
               verticalSpacer(20),
-              customDivider(height: 1, width: 390, color: AppColors.lightestGreyShade),
+              customDivider(
+                height: 1,
+                width: 390,
+                color: AppColors.lightestGreyShade,
+              ),
               verticalSpacer(20),
-              customText(text: "Full Name", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+              customText(
+                text: "Full Name",
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: Colors.black,
+              ),
               verticalSpacer(8),
               customTextField(
                 controller: nameController,
@@ -122,7 +142,12 @@ class _SettingInfoViewState extends State<SettingInfoView> {
                 context: context,
               ),
               verticalSpacer(20),
-              customText(text: "Phone Number *", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+              customText(
+                text: "Phone Number *",
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: Colors.black,
+              ),
               verticalSpacer(8),
               customTextField(
                 controller: phoneController,
@@ -134,13 +159,16 @@ class _SettingInfoViewState extends State<SettingInfoView> {
                 borderRadius: 12,
                 obscureText: false,
                 isShow: false,
-                onShow: () {
-
-                },
+                onShow: () {},
                 context: context,
               ),
               verticalSpacer(20),
-              customText(text: "Date of Birth *", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+              customText(
+                text: "Date of Birth *",
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: Colors.black,
+              ),
               verticalSpacer(8),
               customTextFieldSuffixIcon(
                 controller: dobController,
@@ -156,12 +184,17 @@ class _SettingInfoViewState extends State<SettingInfoView> {
                 borderRadius: 0,
                 obscureText: false,
                 onShow: () {
-                  selectDateBottomSheet(context,dobController);
+                  selectDateBottomSheet(context, dobController);
                 },
                 context: context,
               ),
               verticalSpacer(20),
-              customText(text: "Gender *", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+              customText(
+                text: "Gender *",
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: Colors.black,
+              ),
               verticalSpacer(8),
               customDropdownField(
                 context: context,
@@ -172,14 +205,18 @@ class _SettingInfoViewState extends State<SettingInfoView> {
                 icon: AppImages.dropdownArrow,
                 iconPath: AppImages.dropdownArrow,
                 items: ["Male", "Female"],
-                value:  selectedGender,
+                value: selectedGender,
                 onChanged: (val) {
-
-                  selectedGender = val??"";
-
+                  selectedGender = val ?? "";
                 },
-              ),verticalSpacer(20),
-              customText(text: "Address", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+              ),
+              verticalSpacer(20),
+              customText(
+                text: "Address",
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: Colors.black,
+              ),
               verticalSpacer(8),
               customTextField(
                 controller: addressController,
@@ -192,21 +229,15 @@ class _SettingInfoViewState extends State<SettingInfoView> {
                 borderRadius: 12,
                 obscureText: false,
                 isShow: false,
-                onShow: () {
-
-                },
+                onShow: () {},
                 context: context,
               ),
-
-
-
-
             ],
           ),
         ),
       ),
       bottomNavigationBar: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 8.w,vertical: 12.h),
+        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 12.h),
         child: customButton(
           context: context,
           text: "Save Settings",

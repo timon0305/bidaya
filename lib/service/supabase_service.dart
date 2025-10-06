@@ -9,13 +9,13 @@ class SupaBaseService {
 
   static Future<FunctionResponse?> generalEdgeFunction({
     required String functionName,
-     Map<String,dynamic>? body,
-     Map<String, String>? query,
+    Map<String, dynamic>? body,
+    Map<String, String>? query,
   }) async {
     final res = await _client.functions.invoke(
       functionName,
       body: body,
-      queryParameters: query
+      queryParameters: query,
     );
     return res;
   }
@@ -37,37 +37,30 @@ class SupaBaseService {
 
       final request = http.MultipartRequest("POST", url);
 
-
       fields.forEach((key, value) {
         request.fields[key] = value is String ? value : jsonEncode(value);
       });
 
-
-      request.files.add(await http.MultipartFile.fromPath(
-        fileFieldName,
-        filePath,
-        contentType: MediaType("image", mimeType),
-      ));
-
+      request.files.add(
+        await http.MultipartFile.fromPath(
+          fileFieldName,
+          filePath,
+          contentType: MediaType("image", mimeType),
+        ),
+      );
 
       request.headers['Authorization'] = "Bearer $accessToken";
       request.headers['Accept'] = "application/json";
 
       final response = await request.send();
-      final responseBody = await response.stream.bytesToString();
 
       if (response.statusCode == 200) {
-        print("✅ $functionName success: $responseBody");
         return true;
       } else {
-        print("❌ $functionName error ${response.statusCode}: $responseBody");
         return false;
       }
     } catch (e) {
-      print("Exception: $e");
       return false;
     }
   }
-
-
 }

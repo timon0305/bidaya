@@ -1,8 +1,9 @@
 import 'package:quizzo/export.dart';
 
 import '../ai_chat_bot_view/ai_chat_view.dart';
+
 class MessageView extends StatefulWidget {
- final  String userName;
+  final String userName;
   const MessageView({super.key, required this.userName});
 
   @override
@@ -27,7 +28,8 @@ class _MessageViewState extends State<MessageView> {
       time: DateTime.now().subtract(const Duration(minutes: 3)),
     ),
     ChatMessage(
-      text: "I have a question about the return policy for a product I purchased.",
+      text:
+          "I have a question about the return policy for a product I purchased.",
       isUser: true,
       time: DateTime.now(),
     ),
@@ -74,121 +76,126 @@ class _MessageViewState extends State<MessageView> {
       alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
       child: Column(
         crossAxisAlignment:
-        isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+            isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
-          !isUser?
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-
-              Padding(
-                padding: EdgeInsets.only(top: 4.h),
-                child: CircleAvatar(
-                  radius: 18,
-                  backgroundColor: AppColors.blue,
-                  child: SizedBox(
-                    height: 30.h,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(100.r),
-                      child: Icon(
-                        Icons.person,
-                        color: AppColors.white,
+          !isUser
+              ? Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 4.h),
+                    child: CircleAvatar(
+                      radius: 18,
+                      backgroundColor: AppColors.blue,
+                      child: SizedBox(
+                        height: 30.h,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(100.r),
+                          child: Icon(Icons.person, color: AppColors.white),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    customText(
-                      textAlign: TextAlign.center,
-                      text: " "+widget.userName,
-                      color: AppColors.blackShade,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        customText(
+                          textAlign: TextAlign.center,
+                          text: " " + widget.userName,
+                          color: AppColors.blackShade,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        Container(
+                          constraints: BoxConstraints(
+                            maxWidth: MediaQuery.of(context).size.width * 0.7,
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 10,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(15.r),
+                              topRight: Radius.circular(0.r),
+                              bottomLeft: Radius.circular(15.r),
+                              bottomRight: Radius.circular(15.r),
+                            ),
+                            color:
+                                isUser
+                                    ? AppColors.freshBlue
+                                    : AppColors.purple.withValues(alpha: 0.08),
+                          ),
+                          child: customText(
+                            text: message.text,
+                            fontWeight: FontWeight.w600,
+                            color: isUser ? Colors.white : Colors.black,
+                            fontSize: 16,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: customText(
+                            textAlign: TextAlign.center,
+                            text: formattedTime,
+                            color: AppColors.placeholder,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              )
+              : Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width * 0.75,
+                    ),
+                    margin: EdgeInsets.symmetric(vertical: 4.h),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 8.w,
+                      vertical: 12.h,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15.r),
+                        topRight: Radius.circular(0.r),
+                        bottomLeft: Radius.circular(15.r),
+                        bottomRight: Radius.circular(15.r),
+                      ),
+                      color:
+                          isUser
+                              ? AppColors.freshBlue
+                              : AppColors.purple.withValues(alpha: 0.08),
+                    ),
+                    child: customText(
+                      text: message.text,
+                      fontWeight: FontWeight.w600,
+                      color: isUser ? Colors.white : Colors.black,
                       fontSize: 16,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 8.w),
+                    child: customText(
+                      textAlign: TextAlign.center,
+                      text: formattedTime,
+                      color: AppColors.placeholder,
+                      fontSize: 11,
                       fontWeight: FontWeight.w700,
                     ),
-                    Container(
-                      constraints: BoxConstraints(
-                        maxWidth: MediaQuery.of(context).size.width * 0.7,
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15.r),
-                          topRight: Radius.circular(0.r),
-                          bottomLeft: Radius.circular(15.r),
-                          bottomRight: Radius.circular(15.r),
-                        ),
-                        color: isUser ? AppColors.freshBlue : AppColors.purple.withOpacity(0.08),
-
-                      ),
-                      child: customText(
-                        text:  message.text,
-                        fontWeight: FontWeight.w600,
-                        color: isUser ? Colors.white : Colors.black,
-                        fontSize: 16,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: customText(
-                        textAlign: TextAlign.center,
-                        text: formattedTime,
-                        color: AppColors.placeholder,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w700,
-
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ): Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                constraints: BoxConstraints(
-                  maxWidth: MediaQuery.of(context).size.width * 0.75,
-                ),
-                margin:  EdgeInsets.symmetric(vertical: 4.h),
-                padding:  EdgeInsets.symmetric(horizontal: 8.w, vertical: 12.h),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15.r),
-                    topRight: Radius.circular(0.r),
-                    bottomLeft: Radius.circular(15.r) ,
-                    bottomRight: Radius.circular(15.r),
                   ),
-                  color: isUser ? AppColors.freshBlue : AppColors.purple.withOpacity(0.08),
-
-                ),
-                child: customText(
-                  text:  message.text,
-                  fontWeight: FontWeight.w600,
-                  color: isUser ? Colors.white : Colors.black,
-                  fontSize: 16,
-                ),
+                ],
               ),
-              Padding(
-                padding:  EdgeInsets.only(left: 8.w),
-                child: customText(
-                  textAlign: TextAlign.center,
-                  text: formattedTime,
-                  color: AppColors.placeholder,
-                  fontSize: 11,
-                  fontWeight: FontWeight.w700,
-
-                ),
-              )
-            ],
-          ),
         ],
       ),
     );
@@ -208,10 +215,7 @@ class _MessageViewState extends State<MessageView> {
                 height: 30.h,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(100.r),
-                  child: Icon(
-                    Icons.person,
-                    color: AppColors.white,
-                  ),
+                  child: Icon(Icons.person, color: AppColors.white),
                 ),
               ),
             ),
@@ -229,10 +233,10 @@ class _MessageViewState extends State<MessageView> {
               ),
 
               Container(
-                padding:  EdgeInsets.symmetric(vertical: 8.h,horizontal: 6.w),
-                margin:  EdgeInsets.symmetric(vertical: 4.h,horizontal: 4.w),
+                padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 6.w),
+                margin: EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
                 decoration: BoxDecoration(
-                  color: AppColors.freshBlue.withOpacity(0.08),
+                  color: AppColors.freshBlue.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Row(
@@ -263,12 +267,14 @@ class _MessageViewState extends State<MessageView> {
   @override
   Widget build(BuildContext context) {
     final auth = context.watch<AuthViewModel>();
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      systemNavigationBarIconBrightness: Brightness.dark,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarColor: AppColors.white,
-      systemNavigationBarColor: AppColors.white,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        systemNavigationBarIconBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: AppColors.white,
+        systemNavigationBarColor: AppColors.white,
+      ),
+    );
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: true,
@@ -276,60 +282,75 @@ class _MessageViewState extends State<MessageView> {
       appBar: AppBar(
         excludeHeaderSemantics: false,
         surfaceTintColor: Colors.transparent,
-        backgroundColor: AppColors.white,elevation: 0,
+        backgroundColor: AppColors.white,
+        elevation: 0,
         leadingWidth: 400.w,
         leading: Row(
           children: [
             horizontalSpacer(10),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Get.back();
               },
-              child: Icon(
-                  Icons.arrow_back
-              ),
+              child: Icon(Icons.arrow_back),
             ),
             horizontalSpacer(10),
-            customText(text: widget.userName, fontWeight: FontWeight.w700, fontSize: 24, color: AppColors.blackShade),
+            customText(
+              text: widget.userName,
+              fontWeight: FontWeight.w700,
+              fontSize: 24,
+              color: AppColors.blackShade,
+            ),
             Spacer(),
             PopupMenuButton<int>(
-          color: AppColors.white,
-          offset: Offset(100.w, 35.h),
-          elevation: 1,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.r),
-          ),
-          onSelected: (int value) {
-            if (value == 1) {
-              auth.userRole=="Parent"?
-              viewDetailCardParent(context):viewDetailCardStaffAdmin(context);
-
-            } if (value == 4) {
-
-            }
-          },
-          itemBuilder: (context) => [
-            popupItem0(1, "View Details",popupIcon: "",isDivider: true,icon: Icons.remove_red_eye_outlined,isIcon: true),
-            popupItem0(4, "Delete",popupIcon: AppImages.delete,isDivider: false,isIcon: true),
-          ],
-          child: Container(
-            height: 32.h,
-            width: 32.w,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-    border: Border.all(
-    color: AppColors.blackShade,
-    width: 1,
-    ),
-
-
+              color: AppColors.white,
+              offset: Offset(100.w, 35.h),
+              elevation: 1,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              onSelected: (int value) {
+                if (value == 1) {
+                  auth.userRole == "Parent"
+                      ? viewDetailCardParent(context)
+                      : viewDetailCardStaffAdmin(context);
+                }
+                if (value == 4) {}
+              },
+              itemBuilder:
+                  (context) => [
+                    popupItem0(
+                      1,
+                      "View Details",
+                      popupIcon: "",
+                      isDivider: true,
+                      icon: Icons.remove_red_eye_outlined,
+                      isIcon: true,
+                    ),
+                    popupItem0(
+                      4,
+                      "Delete",
+                      popupIcon: AppImages.delete,
+                      isDivider: false,
+                      isIcon: true,
+                    ),
+                  ],
+              child: Container(
+                height: 32.h,
+                width: 32.w,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: AppColors.blackShade, width: 1),
+                ),
+                child: Icon(
+                  Icons.more_horiz_rounded,
+                  color: AppColors.blackShade,
+                  size: 18,
+                ),
+              ),
             ),
-            child: Icon(Icons.more_horiz_rounded,
-                color: AppColors.blackShade, size: 18),
-          ),
+          ],
         ),
-        ],
-      )
       ),
       body: SafeArea(
         child: Column(
@@ -346,12 +367,15 @@ class _MessageViewState extends State<MessageView> {
                 },
               ),
             ),
-            customDivider(height: 1, width: 432, color: AppColors.lightestGreyShade),
+            customDivider(
+              height: 1,
+              width: 432,
+              color: AppColors.lightestGreyShade,
+            ),
             _buildInputField(),
           ],
         ),
       ),
-
     );
   }
 
@@ -365,22 +389,32 @@ class _MessageViewState extends State<MessageView> {
               controller: _controller,
               decoration: InputDecoration(
                 hintText: 'Reply ...',
-                hintStyle: TextStyle(color: AppColors.placeholder,fontFamily:GoogleFonts.nunito().fontFamily, ),
+                hintStyle: TextStyle(
+                  color: AppColors.placeholder,
+                  fontFamily: GoogleFonts.nunito().fontFamily,
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(25),
                   borderSide: BorderSide.none,
                 ),
                 filled: true,
                 fillColor: AppColors.white,
-                contentPadding:
-                const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
+                ),
               ),
             ),
           ),
           horizontalSpacer(8),
           Row(
             children: [
-              SvgPicture.asset(AppImages.imagePlaceholder,color: AppColors.placeholder,height: 24.h,width: 24.w,),
+              SvgPicture.asset(
+                AppImages.imagePlaceholder,
+                color: AppColors.placeholder,
+                height: 24.h,
+                width: 24.w,
+              ),
               horizontalSpacer(12),
               GestureDetector(
                 onTap: _sendMessage,
@@ -388,7 +422,11 @@ class _MessageViewState extends State<MessageView> {
                   radius: 14,
                   backgroundColor: AppColors.freshBlue,
                   child: Center(
-                    child:   Icon(Icons.arrow_forward_ios, color: Colors.white,size: 18,),
+                    child: Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.white,
+                      size: 18,
+                    ),
                   ),
                 ),
               ),
