@@ -14,12 +14,10 @@ Widget customTabBar(TabController controller, List<String> tabTitles) {
       splashBorderRadius: BorderRadius.circular(6.r),
       labelPadding: EdgeInsets.symmetric(horizontal: 0.w),
       splashFactory: NoSplash.splashFactory,
-      overlayColor: MaterialStateProperty.resolveWith<Color?>((
-        Set<MaterialState> states,
+      overlayColor: WidgetStateProperty.resolveWith<Color?>((
+        Set<WidgetState> states,
       ) {
-        return states.contains(MaterialState.focused)
-            ? null
-            : Colors.transparent;
+        return states.contains(WidgetState.focused) ? null : Colors.transparent;
       }),
       indicator: RoundedRectangleTabIndicator(
         color: AppColors.purple,
