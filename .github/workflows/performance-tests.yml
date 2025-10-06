@@ -1,0 +1,75 @@
+name: Performance Tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  performance:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          flutter-version: '3.32.8'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run performance benchmarks
+        run: |
+          if [ -d "test/benchmarks" ]; then
+            flutter test test/benchmarks --reporter=json > performance_results.json
+          else
+            echo "No benchmark tests found in test/benchmarks"
+            exit 0
+          fi
+
+      - name: Analyze build size
+        run: |
+          flutter build apk --release --analyze-size > build_size.txt || true
+          if [ -f build_size.txt ]; then
+            cat build_size.txt
+          fi
+
+      - name: Check app startup time
+        run: |
+          if [ -f "test/performance/startup_test.dart" ]; then
+            flutter test test/performance/startup_test.dart
+          else
+            echo "No startup performance test found"
+          fi
+
+      - name: Upload performance results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-results
+          path: |
+            performance_results.json
+            build_size.txt
+
+      - name: Comment PR with performance results
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let comment = '## Performance Test Results\n\n';
+
+            if (fs.existsSync('build_size.txt')) {
+              const buildSize = fs.readFileSync('build_size.txt', 'utf8');
+              comment += '### Build Size\n```\n' + buildSize + '\n```\n';
+            }
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });

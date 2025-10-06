@@ -1,0 +1,73 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    - cron: '0 0 * * 1'  # Weekly on Mondays
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          flutter-version: '3.32.8'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run vulnerability scan
+        run: |
+          dart pub global activate pana
+          dart pub global run pana --no-warning --json > security_report.json || true
+
+      - name: Check for hardcoded secrets
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+
+      - name: Dependency vulnerability check
+        run: |
+          flutter pub outdated --json > outdated.json || true
+          if grep -q "security" outdated.json; then
+            echo "Security vulnerabilities found in dependencies!"
+            cat outdated.json
+            exit 1
+          fi
+
+      - name: Check for common security issues
+        run: |
+          echo "Checking for hardcoded API keys..."
+          grep -r "api_key\|apiKey\|API_KEY" lib/ --exclude-dir=build || true
+
+          echo "Checking for hardcoded passwords..."
+          grep -r "password\s*=\s*['\"]" lib/ --exclude-dir=build || true
+
+          echo "Checking for http:// URLs (should use https://)..."
+          grep -r "http://" lib/ --exclude-dir=build || true
+
+      - name: SAST with Semgrep
+        uses: returntocorp/semgrep-action@v1
+        with:
+          config: >-
+            p/security-audit
+            p/secrets
+            p/owasp-top-ten
+
+      - name: Upload security scan results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-scan-results
+          path: |
+            security_report.json
+            outdated.json
