@@ -1,9 +1,7 @@
-
-
 import 'package:quizzo/export.dart';
 
 class RegisterAllProviders {
-  static get allProvidersList => [
+  static List<ChangeNotifierProvider<ChangeNotifier>> get allProvidersList => [
     ChangeNotifierProvider(create: (_) => AuthViewModel()),
     ChangeNotifierProvider(create: (_) => DashboardViewModel()),
     ChangeNotifierProvider(create: (_) => SettingViewModel()),
