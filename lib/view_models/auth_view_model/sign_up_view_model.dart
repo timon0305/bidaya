@@ -417,8 +417,9 @@ class SignupViewModel extends ChangeNotifier {
     controller.dispose();
     nameController.dispose();
     nurseryNameController.dispose();
-    nurseryNameController.dispose();
+    nurseryEmailController.dispose();
     nurseryAddressController.dispose();
+    nurseryPhoneController.dispose();
     phoneController.dispose();
     dobController.dispose();
     passwordController.dispose();
