@@ -1,34 +1,45 @@
 import 'package:quizzo/export.dart';
-Future<void>  selectDateBottomSheet(BuildContext context,TextEditingController dateController){
-  return    showModalBottomSheet<void>(
-      isScrollControlled: true,
-      shape: ContinuousRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(50.r),topRight: Radius.circular(50.r)),side: const BorderSide(color: Colors.transparent)),
-      context: context,
-      builder: (BuildContext context) {
-        return Padding(
-                padding: EdgeInsets.only(
-                    bottom: Get.mediaQuery.viewInsets.bottom
-                ),
-                child: Container(
-                  height:403.h,
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.only( top: 20.h),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(topLeft: Radius.circular(18.r),topRight: Radius.circular(18.r)),
-                      color: Colors.white
-                  ),
-                  child:    CalendarScreen(controller: dateController),
 
-                ),
-              );
-      });
+Future<void> selectDateBottomSheet(
+  BuildContext context,
+  TextEditingController dateController,
+) {
+  return showModalBottomSheet<void>(
+    isScrollControlled: true,
+    shape: ContinuousRectangleBorder(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(50.r),
+        topRight: Radius.circular(50.r),
+      ),
+      side: const BorderSide(color: Colors.transparent),
+    ),
+    context: context,
+    builder: (BuildContext context) {
+      return Padding(
+        padding: EdgeInsets.only(bottom: Get.mediaQuery.viewInsets.bottom),
+        child: Container(
+          height: 403.h,
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.only(top: 20.h),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(18.r),
+              topRight: Radius.circular(18.r),
+            ),
+            color: Colors.white,
+          ),
+          child: CalendarScreen(controller: dateController),
+        ),
+      );
+    },
+  );
 }
-@ immutable
-class CalendarScreen extends StatefulWidget {
 
+@immutable
+class CalendarScreen extends StatefulWidget {
   TextEditingController? controller;
 
-  CalendarScreen({Key? key, required this.controller}) : super(key: key);
+  CalendarScreen({super.key, required this.controller});
   @override
   _CalendarScreenState createState() => _CalendarScreenState();
 }
@@ -40,28 +51,21 @@ class _CalendarScreenState extends State<CalendarScreen> {
     setState(() {
       _selectedDay = selectedDay;
       widget.controller!.text = DateFormat('yyyy-MM-dd').format(_selectedDay);
-
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return
-      ClipRRect(
-        borderRadius: BorderRadius.circular(16),
-    child: Container(
-      margin: EdgeInsets.symmetric(horizontal: 12.w,vertical: 16.h),
-      padding: EdgeInsets.zero,
-    decoration: BoxDecoration(
-    border: Border.all(
-    color: AppColors.lightestGreyShade,
-    width: 1,
-    ),
-    borderRadius: BorderRadius.circular(16),
-    ),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(16),
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
+        padding: EdgeInsets.zero,
+        decoration: BoxDecoration(
+          border: Border.all(color: AppColors.lightestGreyShade, width: 1),
+          borderRadius: BorderRadius.circular(16),
+        ),
         child: TableCalendar(
-
           locale: 'en_US',
           rowHeight: 35.h,
           daysOfWeekHeight: 35.h,
@@ -71,9 +75,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
             leftChevronPadding: EdgeInsets.only(left: 25.w),
             rightChevronPadding: EdgeInsets.only(right: 25.w),
             titleTextStyle: TextStyle(
-                fontSize: 24.sp,
-                fontWeight: FontWeight.w900,
-                color: AppColors.blackShade,
+              fontSize: 24.sp,
+              fontWeight: FontWeight.w900,
+              color: AppColors.blackShade,
               fontFamily: GoogleFonts.nunito().fontFamily,
             ),
             leftChevronIcon: Center(
@@ -90,7 +94,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     height: 32.h,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: AppColors.greyWhiteShade
+                      color: AppColors.greyWhiteShade,
                     ),
                     child: const Icon(
                       Icons.chevron_left,
@@ -113,8 +117,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     width: 32.w,
                     height: 32.h,
                     decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColors.greyWhiteShade
+                      shape: BoxShape.circle,
+                      color: AppColors.greyWhiteShade,
                     ),
                     child: const Icon(
                       Icons.chevron_right,
@@ -126,18 +130,16 @@ class _CalendarScreenState extends State<CalendarScreen> {
             ),
           ),
           daysOfWeekStyle: DaysOfWeekStyle(
-            decoration:   BoxDecoration(
-              color: AppColors.white,
-            ),
+            decoration: BoxDecoration(color: AppColors.white),
             weekdayStyle: TextStyle(
-                color: AppColors.sand,
-                fontWeight: FontWeight.w600,
-                fontSize: 14.sp,
-                fontFamily: GoogleFonts.nunito().fontFamily,
+              color: AppColors.sand,
+              fontWeight: FontWeight.w600,
+              fontSize: 14.sp,
+              fontFamily: GoogleFonts.nunito().fontFamily,
             ),
             weekendStyle: TextStyle(
-                color: AppColors.sand,
-                fontWeight: FontWeight.w600,
+              color: AppColors.sand,
+              fontWeight: FontWeight.w600,
               fontSize: 14.sp,
               fontFamily: GoogleFonts.nunito().fontFamily,
             ),
@@ -145,33 +147,26 @@ class _CalendarScreenState extends State<CalendarScreen> {
           calendarStyle: CalendarStyle(
             defaultDecoration: BoxDecoration(
               color: AppColors.white,
-              border: Border.all(width: 0,color: Colors.white),
-        ),
+              border: Border.all(width: 0, color: Colors.white),
+            ),
 
-            tableBorder:TableBorder.all(
-               color: AppColors.white
-              ),
-            todayDecoration: const BoxDecoration(
-            ),
+            tableBorder: TableBorder.all(color: AppColors.white),
+            todayDecoration: const BoxDecoration(),
             selectedDecoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: AppColors.blueShade
+              shape: BoxShape.circle,
+              color: AppColors.blueShade,
             ),
-            todayTextStyle:  TextStyle(
+            todayTextStyle: TextStyle(
               color: AppColors.blue,
               fontWeight: FontWeight.w600,
               fontSize: 16.sp,
               fontFamily: GoogleFonts.nunito().fontFamily,
             ),
             // borderRadius: BorderRadius.circular(12), ),
-            tablePadding: EdgeInsets.symmetric(
-                horizontal: 20.w, vertical: 8.h),
-            cellPadding: EdgeInsets.symmetric(
-                horizontal: 2.w, vertical: 2.h),
-            cellMargin: EdgeInsets.symmetric(
-                horizontal: 2.w, vertical: 2.h),
-            cellAlignment: Alignment.center
-
+            tablePadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
+            cellPadding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
+            cellMargin: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
+            cellAlignment: Alignment.center,
           ),
           availableGestures: AvailableGestures.all,
           selectedDayPredicate: (day) => isSameDay(day, _selectedDay),
@@ -180,13 +175,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
           lastDay: DateTime.utc(2030, 3, 14),
           onDaySelected: _onDaySelected,
         ),
-      )
-      );
-
-
+      ),
+    );
   }
 }
-
 
 /*
 Future<void>  selectTimeBottomSheet(BuildContext context,TextEditingController timeController){

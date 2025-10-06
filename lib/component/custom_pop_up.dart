@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 
 import 'package:quizzo/export.dart';
@@ -184,16 +183,15 @@ Future<String?> alertDialogForLogout(BuildContext context) async {
   );
 }*/
 
-
-Future<String?> customMessagePopup(BuildContext context,
-{
+Future<String?> customMessagePopup(
+  BuildContext context, {
   required String icon,
   required String title,
   required String subTitle,
   required String buttonTitle,
-   VoidCallback ?onButtonPressed
+  VoidCallback? onButtonPressed,
 }) async {
-  return  showDialog<String>(
+  return showDialog<String>(
     context: context,
     barrierColor: Colors.transparent,
     builder: (BuildContext context) {
@@ -202,7 +200,9 @@ Future<String?> customMessagePopup(BuildContext context,
           Positioned.fill(
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-              child: Container(color: Colors.black.withOpacity(0.5), ), // required
+              child: Container(
+                color: Colors.black.withValues(alpha: 0.5),
+              ), // required
             ),
           ),
           AlertDialog(
@@ -213,7 +213,12 @@ Future<String?> customMessagePopup(BuildContext context,
             title: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                SvgPicture.asset(icon,width: 186.w,height: 180.h,fit: BoxFit.contain,),
+                SvgPicture.asset(
+                  icon,
+                  width: 186.w,
+                  height: 180.h,
+                  fit: BoxFit.contain,
+                ),
                 customText(
                   textAlign: TextAlign.center,
                   text: title,
@@ -234,31 +239,28 @@ Future<String?> customMessagePopup(BuildContext context,
               ),
             ),
             actions: [
-              onButtonPressed != null?
-              customButton(
-                context: context,
-                text: buttonTitle,
-                fontSize: 16,
-                height: 58,
-                width: 276,
-                borderColor: Colors.transparent,
-                bgColor: AppColors.blue,
-                fontColor: Colors.white,
-                borderRadius: 100,
-                isCircular: true,
-                fontWeight: FontWeight.w600,
-                onPressed: onButtonPressed,
-              ):Center(
-      child: SpinKitCircle(
-      color: AppColors.purple,
-      size: 55,
-      ),
-      ),
+              onButtonPressed != null
+                  ? customButton(
+                    context: context,
+                    text: buttonTitle,
+                    fontSize: 16,
+                    height: 58,
+                    width: 276,
+                    borderColor: Colors.transparent,
+                    bgColor: AppColors.blue,
+                    fontColor: Colors.white,
+                    borderRadius: 100,
+                    isCircular: true,
+                    fontWeight: FontWeight.w600,
+                    onPressed: onButtonPressed,
+                  )
+                  : Center(
+                    child: SpinKitCircle(color: AppColors.purple, size: 55),
+                  ),
             ],
           ),
         ],
       );
     },
   );
-
 }

@@ -119,10 +119,12 @@ Widget attendanceUserCard(String title, String subtitle) {
                   child: Center(
                     child: SvgPicture.asset(
                       AppImages.tick,
-                      color:
-                          status == "present"
-                              ? AppColors.white
-                              : AppColors.blackShade,
+                      colorFilter: ColorFilter.mode(
+                        status == "present"
+                            ? AppColors.white
+                            : AppColors.blackShade,
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ),
                 ),
@@ -151,10 +153,12 @@ Widget attendanceUserCard(String title, String subtitle) {
                   child: Center(
                     child: SvgPicture.asset(
                       AppImages.cross,
-                      color:
-                          status == "absent"
-                              ? AppColors.white
-                              : AppColors.blackShade,
+                      colorFilter: ColorFilter.mode(
+                        status == "absent"
+                            ? AppColors.white
+                            : AppColors.blackShade,
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ),
                 ),

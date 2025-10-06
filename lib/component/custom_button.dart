@@ -1,5 +1,3 @@
-
-
 import 'package:quizzo/export.dart';
 
 Widget customButton({
@@ -39,7 +37,7 @@ Widget customButton({
               height: height.h,
               padding: EdgeInsets.zero,
               decoration: BoxDecoration(
-                color: overlayColor ?? Colors.white.withOpacity(0.15),
+                color: overlayColor ?? Colors.white.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(borderRadius.r),
               ),
             ),
@@ -56,21 +54,22 @@ Widget customButton({
             ),
           ),
           child: Center(
-            child: isLoading
-                ? SizedBox(
-              height: 22,
-              width: 22,
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-                color: fontColor,
-              ),
-            )
-                : customText(
-              fontWeight: fontWeight,
-              fontSize: fontSize,
-              color: fontColor,
-              text: text,
-            ),
+            child:
+                isLoading
+                    ? SizedBox(
+                      height: 22,
+                      width: 22,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: fontColor,
+                      ),
+                    )
+                    : customText(
+                      fontWeight: fontWeight,
+                      fontSize: fontSize,
+                      color: fontColor,
+                      text: text,
+                    ),
           ),
         ),
       ],
@@ -87,7 +86,7 @@ Widget customButtonWithPrefixIcon({
   required double height,
   required Color borderColor,
   required Color bgColor,
-   Color ? overlayColor,
+  Color? overlayColor,
   required Color fontColor,
   required double borderRadius,
   required bool isCircular,
@@ -96,7 +95,7 @@ Widget customButtonWithPrefixIcon({
 }) {
   return Container(
     width: width?.w,
-    height: height.h+5,
+    height: height.h + 5,
     padding: EdgeInsets.zero,
     decoration: BoxDecoration(
       color: bgColor,
@@ -109,18 +108,18 @@ Widget customButtonWithPrefixIcon({
           left: 0,
           right: 0,
           bottom: 6.h,
-           child: IgnorePointer(
-    child: Container(
-    width: width?.w,
-      height: height.h,
-      padding: EdgeInsets.zero,
-      decoration: BoxDecoration(
-        color:overlayColor?? Colors.white.withOpacity(0.15),
-        borderRadius: BorderRadius.circular(borderRadius.r),
-      ),
-    ),
-  ),
-    ),
+          child: IgnorePointer(
+            child: Container(
+              width: width?.w,
+              height: height.h,
+              padding: EdgeInsets.zero,
+              decoration: BoxDecoration(
+                color: overlayColor ?? Colors.white.withValues(alpha: 0.15),
+                borderRadius: BorderRadius.circular(borderRadius.r),
+              ),
+            ),
+          ),
+        ),
         MaterialButton(
           height: height,
           onPressed: onPressed,
@@ -163,7 +162,7 @@ Widget simpleCustomButton({
   required double height,
   required Color borderColor,
   required Color bgColor,
-  Color ? overlayColor,
+  Color? overlayColor,
   required Color fontColor,
   required double borderRadius,
   required bool isCircular,
@@ -171,7 +170,7 @@ Widget simpleCustomButton({
 }) {
   return Container(
     width: width?.w,
-    height: height.h+5,
+    height: height.h + 5,
     padding: EdgeInsets.zero,
     decoration: BoxDecoration(
       color: bgColor,
@@ -179,7 +178,7 @@ Widget simpleCustomButton({
       borderRadius: BorderRadius.circular(borderRadius.r),
     ),
     child: MaterialButton(
-      height: height+5,
+      height: height + 5,
       onPressed: onPressed,
       padding: EdgeInsets.zero,
       highlightColor: Colors.transparent,
@@ -199,4 +198,3 @@ Widget simpleCustomButton({
     ),
   );
 }
-

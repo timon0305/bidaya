@@ -1,14 +1,12 @@
 import 'package:quizzo/export.dart';
+
 Widget customTabBar(TabController controller, List<String> tabTitles) {
   return Container(
     height: 60.h,
     width: double.infinity,
     decoration: BoxDecoration(
       border: Border(
-        bottom: BorderSide(
-          color: AppColors.lightestGreyShade,
-          width: 1.5.w
-        ),
+        bottom: BorderSide(color: AppColors.lightestGreyShade, width: 1.5.w),
       ),
     ),
     child: TabBar(
@@ -16,13 +14,13 @@ Widget customTabBar(TabController controller, List<String> tabTitles) {
       splashBorderRadius: BorderRadius.circular(6.r),
       labelPadding: EdgeInsets.symmetric(horizontal: 0.w),
       splashFactory: NoSplash.splashFactory,
-      overlayColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
-          return states.contains(MaterialState.focused)
-              ? null
-              : Colors.transparent;
-        },
-      ),
+      overlayColor: MaterialStateProperty.resolveWith<Color?>((
+        Set<MaterialState> states,
+      ) {
+        return states.contains(MaterialState.focused)
+            ? null
+            : Colors.transparent;
+      }),
       indicator: RoundedRectangleTabIndicator(
         color: AppColors.purple,
         weight: 6.w,
@@ -30,7 +28,7 @@ Widget customTabBar(TabController controller, List<String> tabTitles) {
       dividerColor: Colors.transparent,
       labelColor: AppColors.purple,
       indicatorSize: TabBarIndicatorSize.tab,
-      unselectedLabelColor: AppColors.sand.withOpacity(0.8),
+      unselectedLabelColor: AppColors.sand.withValues(alpha: 0.8),
       labelStyle: TextStyle(
         fontSize: 18.sp,
         fontWeight: FontWeight.w600,
@@ -41,4 +39,3 @@ Widget customTabBar(TabController controller, List<String> tabTitles) {
     ),
   );
 }
-

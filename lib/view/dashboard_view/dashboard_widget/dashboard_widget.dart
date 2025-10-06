@@ -1,22 +1,20 @@
-
 import 'package:quizzo/export.dart';
 
-
-
 Widget dashboardHeader(
-    BuildContext context, {
-      required String name,
-      required String subtitle,
-      String? avatar,
-      required double avatarSize,
-      required VoidCallback? onAvatarTap,
-      required bool showOnlineDot,
-    }) {
+  BuildContext context, {
+  required String name,
+  required String subtitle,
+  String? avatar,
+  required double avatarSize,
+  required VoidCallback? onAvatarTap,
+  required bool showOnlineDot,
+}) {
   ImageProvider? image;
   if (avatar != null && avatar.isNotEmpty) {
-    image = avatar.startsWith('http')
-        ? NetworkImage(avatar)
-        : AssetImage(avatar) as ImageProvider;
+    image =
+        avatar.startsWith('http')
+            ? NetworkImage(avatar)
+            : AssetImage(avatar) as ImageProvider;
   }
 
   return Row(
@@ -70,8 +68,8 @@ Widget dashboardHeader(
               ),
               child: ClipOval(
                 child: Image(
-                  height: avatarSize.h-4.h,
-                  width: avatarSize.w-4.w,
+                  height: avatarSize.h - 4.h,
+                  width: avatarSize.w - 4.w,
                   image: image ?? AssetImage(AppImages.avatarPng),
                   fit: BoxFit.cover,
                 ),
@@ -127,22 +125,26 @@ Widget dashboardTopSection(BuildContext context, AuthViewModel auth) {
             progress: 0.5,
             total: "58/64",
             color: AppColors.blueShade,
-            onButtonPressed: (){
+            onButtonPressed: () {
               Get.toNamed(AppRoutes.attendance);
-            }
+            },
           ),
           if (auth.userRole == "Admin") ...[
             verticalSpacer(4),
-            Divider(height: 1.w, thickness: 1.w, color: AppColors.lightestGreyShade),
+            Divider(
+              height: 1.w,
+              thickness: 1.w,
+              color: AppColors.lightestGreyShade,
+            ),
             progressCard(
               context: context,
               title: "Staff Attendance",
               progress: 0.9,
               total: "7/8",
               color: AppColors.blueShade,
-                onButtonPressed: (){
-                  Get.toNamed(AppRoutes.attendance);
-                }
+              onButtonPressed: () {
+                Get.toNamed(AppRoutes.attendance);
+              },
             ),
           ],
         ],
@@ -181,10 +183,10 @@ Widget dashboardTopSection(BuildContext context, AuthViewModel auth) {
 }
 
 Widget bidiyaFeatureCards(
-    BuildContext context,
-    AuthViewModel auth,
-    DashboardViewModel dashboardVM,
-    ) {
+  BuildContext context,
+  AuthViewModel auth,
+  DashboardViewModel dashboardVM,
+) {
   if (auth.userRole == "Admin") {
     return Wrap(
       spacing: 2.w,
@@ -192,16 +194,18 @@ Widget bidiyaFeatureCards(
       children: [
         ...dashboardVM.adminList
             .sublist(0, dashboardVM.adminList.length - 1)
-            .map((item) => SizedBox(
-          width: 130.w,
-          height: 170.h,
-          child: menuCard(
-            title: item["title"],
-            image: item["image"],
-            color: item["color"],
-            onTap: () => Get.toNamed(item["route"]),
-          ),
-        )),
+            .map(
+              (item) => SizedBox(
+                width: 130.w,
+                height: 170.h,
+                child: menuCard(
+                  title: item["title"],
+                  image: item["image"],
+                  color: item["color"],
+                  onTap: () => Get.toNamed(item["route"]),
+                ),
+              ),
+            ),
         SizedBox(
           width: 260.w,
           height: 170.h,
@@ -214,8 +218,7 @@ Widget bidiyaFeatureCards(
         ),
       ],
     );
-  }
-  else if (auth.userRole == "Staff") {
+  } else if (auth.userRole == "Staff") {
     return buildGrid(dashboardVM.staffList);
   } else if (auth.userRole == "Parent") {
     return buildGrid(dashboardVM.parentList);
@@ -231,14 +234,17 @@ Widget buildGrid(List<Map<String, dynamic>> items) {
     shrinkWrap: true,
     padding: EdgeInsets.zero,
     childAspectRatio: 120 / 149,
-    children: items
-        .map((item) => menuCard(
-      title: item["title"],
-      image: item["image"],
-      color: item["color"],
-      onTap: () => Get.toNamed(item["route"]),
-    ))
-        .toList(),
+    children:
+        items
+            .map(
+              (item) => menuCard(
+                title: item["title"],
+                image: item["image"],
+                color: item["color"],
+                onTap: () => Get.toNamed(item["route"]),
+              ),
+            )
+            .toList(),
   );
 }
 
@@ -248,10 +254,10 @@ Widget progressCard({
   required double progress,
   required String total,
   required Color color,
-  VoidCallback ?onButtonPressed
+  VoidCallback? onButtonPressed,
 }) {
   return Padding(
-    padding:  EdgeInsets.symmetric(horizontal: 12.w,vertical: 8.h),
+    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -302,7 +308,6 @@ Widget progressCard({
   );
 }
 
-
 Widget menuCard({
   required String title,
   required String image,
@@ -313,41 +318,46 @@ Widget menuCard({
     elevation: 7,
     surfaceTintColor: AppColors.forestGrey,
     color: AppColors.white,
-    shadowColor: AppColors.purple.withOpacity(0.3),
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(16.r),
-    ),
+    shadowColor: AppColors.purple.withValues(alpha: 0.3),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
     child: InkWell(
       borderRadius: BorderRadius.circular(16.r),
-      splashColor: (color ?? Colors.purple).withOpacity(0.2),
+      splashColor: (color ?? Colors.purple).withValues(alpha: 0.2),
       onTap: onTap,
       child: Container(
-
         height: 149.h,
-          padding: EdgeInsets.symmetric(vertical: 6.h),
+        padding: EdgeInsets.symmetric(vertical: 6.h),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 6.w,vertical: 6.h),
+              padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 6.h),
               child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16.r),
-                  child:  Image.asset(image,height: 105.h,fit: BoxFit.cover,width: double.infinity),
-                  ),
+                borderRadius: BorderRadius.circular(16.r),
+                child: Image.asset(
+                  image,
+                  height: 105.h,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                ),
+              ),
             ),
             verticalSpacer(4),
             customText(
-                text: title,
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-                color: AppColors.blackShade)
+              text: title,
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+              color: AppColors.blackShade,
+            ),
           ],
         ),
       ),
     ),
   );
-}Widget menuCardFullWidth({
+}
+
+Widget menuCardFullWidth({
   required String title,
   required String image,
   required VoidCallback onTap,
@@ -357,40 +367,43 @@ Widget menuCard({
     elevation: 7,
     surfaceTintColor: AppColors.forestGrey,
     color: AppColors.white,
-    shadowColor: AppColors.purple.withOpacity(0.3),
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(16.r),
-    ),
+    shadowColor: AppColors.purple.withValues(alpha: 0.3),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
     child: InkWell(
       borderRadius: BorderRadius.circular(16.r),
-      splashColor: (color ?? Colors.purple).withOpacity(0.2),
+      splashColor: (color ?? Colors.purple).withValues(alpha: 0.2),
       onTap: onTap,
       child: Container(
-
         height: 149.h,
         padding: EdgeInsets.symmetric(vertical: 6.h),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 6.w,vertical: 6.h),
+              padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 6.h),
               child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16.r),
-                  child: Image.asset(image,height: 105.h,fit: BoxFit.cover,width: double.infinity,)),
+                borderRadius: BorderRadius.circular(16.r),
+                child: Image.asset(
+                  image,
+                  height: 105.h,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                ),
+              ),
             ),
             verticalSpacer(4),
             customText(
-                text: title,
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-                color: AppColors.blackShade)
+              text: title,
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+              color: AppColors.blackShade,
+            ),
           ],
         ),
       ),
     ),
   );
 }
-
 
 Widget kidCard({
   required Color borderClr,
@@ -422,7 +435,7 @@ Widget kidCard({
           height: 85.h,
           width: 85.w,
           padding: EdgeInsets.zero,
-          margin:  EdgeInsets.symmetric(horizontal: 8.w,vertical: 0.h),
+          margin: EdgeInsets.symmetric(horizontal: 8.w, vertical: 0.h),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: Colors.white,
@@ -435,12 +448,9 @@ Widget kidCard({
             ],
           ),
           child: Padding(
-            padding:  EdgeInsets.symmetric(horizontal: 3.w,vertical: 3.h),
+            padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 3.h),
             child: ClipOval(
-              child: Image.asset(
-                AppImages.avatarPng,
-                fit: BoxFit.cover,
-              ),
+              child: Image.asset(AppImages.avatarPng, fit: BoxFit.cover),
             ),
           ),
         ),
@@ -470,9 +480,10 @@ Widget kidCard({
                       text: " $attendance",
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
-                      color: attendance == "Present"
-                          ? AppColors.green
-                          : AppColors.red,
+                      color:
+                          attendance == "Present"
+                              ? AppColors.green
+                              : AppColors.red,
                     ),
                   ],
                 ),
@@ -508,57 +519,44 @@ Widget kidCard({
                       color: AppColors.placeholder,
                     ),
                   ],
-                )
+                ),
               ],
             ),
           ),
         ),
         Padding(
           padding: EdgeInsets.only(right: 8.w),
-          child: Icon(
-            Icons.arrow_forward_ios,
-            color: AppColors.sand,
-            size: 16,
-          ),
+          child: Icon(Icons.arrow_forward_ios, color: AppColors.sand, size: 16),
         ),
       ],
     ),
   );
 }
+
 Widget walletCard({
   required Color borderClr,
   required BuildContext context,
-  required String payment,required String dueDate
-}){
-  return    Container(
+  required String payment,
+  required String dueDate,
+}) {
+  return Container(
     width: 390.w,
-    padding:  EdgeInsets.symmetric(horizontal: 12.w,vertical: 12.h),
+    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(16.r),
       border: Border(
-          left: BorderSide(
-              color: borderClr,
-              width: 1.w
-          ),
-          right: BorderSide(
-              color: borderClr,
-              width: 1.w
-          ),
-          top: BorderSide(
-              color: borderClr,
-              width: 1.w
-          ),
-          bottom: BorderSide(
-              color: borderClr,
-              width: 4.w
-          )
+        left: BorderSide(color: borderClr, width: 1.w),
+        right: BorderSide(color: borderClr, width: 1.w),
+        top: BorderSide(color: borderClr, width: 1.w),
+        bottom: BorderSide(color: borderClr, width: 4.w),
       ),
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-       SvgPicture.asset(AppImages.wallet),horizontalSpacer(20),
+        SvgPicture.asset(AppImages.wallet),
+        horizontalSpacer(20),
         Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -566,38 +564,40 @@ Widget walletCard({
             Row(
               children: [
                 customText(
-                    text: "Payment Due:",
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
-                    color: AppColors.blackShade),
+                  text: "Payment Due:",
+                  fontWeight: FontWeight.w600,
+                  fontSize: 16,
+                  color: AppColors.blackShade,
+                ),
                 customText(
-                    text: " $payment",
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                    color: AppColors.blueShade),
+                  text: " $payment",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  color: AppColors.blueShade,
+                ),
               ],
             ),
             Row(
               children: [
                 customText(
-                    text: "Due: ",
-                    fontWeight: FontWeight.w700,
-                    fontSize: 11,
-                    color: AppColors.blackShade),
+                  text: "Due: ",
+                  fontWeight: FontWeight.w700,
+                  fontSize: 11,
+                  color: AppColors.blackShade,
+                ),
                 customText(
-                    text: "16/07/2025:",
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                    color: AppColors.blackShade),
+                  text: "16/07/2025:",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  color: AppColors.blackShade,
+                ),
               ],
             ),
-
           ],
         ),
         Spacer(),
-        Icon(Icons.arrow_forward_ios,color: AppColors.sand,size: 16,),
+        Icon(Icons.arrow_forward_ios, color: AppColors.sand, size: 16),
       ],
     ),
   );
 }
-

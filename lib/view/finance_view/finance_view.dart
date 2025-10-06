@@ -266,7 +266,7 @@ class _FinanceSlipViewState extends State<FinanceSlipView>
                           customTextFieldPrefixIcon(
                             controller: searchController,
                             readOnly: false,
-                            hintClr: AppColors.grey.withOpacity(0.3),
+                            hintClr: AppColors.grey.withValues(alpha: 0.3),
                             borderClr: Colors.transparent,
                             height: 58,
                             width: double.infinity,

@@ -1,6 +1,4 @@
 import 'package:quizzo/export.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomExpansionTile extends StatefulWidget {
   final String label;
@@ -10,17 +8,15 @@ class CustomExpansionTile extends StatefulWidget {
   const CustomExpansionTile({
     required this.label,
     required this.children,
-    Key? key,
+    super.key,
     required this.index,
-  }) : super(key: key);
+  });
 
   @override
-  _CustomExpansionTileState createState() => _CustomExpansionTileState();
+  State<CustomExpansionTile> createState() => CustomExpansionTileState();
 }
 
-class _CustomExpansionTileState extends State<CustomExpansionTile> {
-  bool _isExpanded = false;
-
+class CustomExpansionTileState extends State<CustomExpansionTile> {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
@@ -29,14 +25,12 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
       decoration: BoxDecoration(
         border: Border.all(color: AppColors.lightestGreyShade, width: 1),
         borderRadius: BorderRadius.circular(12.r),
-
         color: AppColors.white,
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12.r),
         child: Theme(
           data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-
           child: ExpansionTile(
             tilePadding: EdgeInsets.zero,
             backgroundColor: AppColors.white,
@@ -69,9 +63,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
             ),
             children: widget.children,
             onExpansionChanged: (expanded) {
-              setState(() {
-                _isExpanded = expanded;
-              });
+              setState(() {});
             },
           ),
         ),

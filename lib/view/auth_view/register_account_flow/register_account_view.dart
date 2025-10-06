@@ -189,8 +189,6 @@ class _RegisterFlowViewState extends State<RegisterFlowView> {
                   fontWeight: FontWeight.w600,
                   onPressed: () {
                     // dynamic last index
-                    final lastStepIndex =
-                        vm.accountType == "Nursery Owner" ? 4 : 3;
 
                     if (vm.currentStep == 1) {
                       vm.proceedBasicInfo(context);

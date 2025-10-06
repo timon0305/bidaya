@@ -114,10 +114,12 @@ PopupMenuItem<int> popupItem0(
                   popupIcon,
                   height: 22.h,
                   width: 22.w,
-                  color:
-                      popupIcon == AppImages.delete
-                          ? AppColors.red
-                          : AppColors.blackShade,
+                  colorFilter: ColorFilter.mode(
+                    popupIcon == AppImages.delete
+                        ? AppColors.red
+                        : AppColors.blackShade,
+                    BlendMode.srcIn,
+                  ),
                 )
                 : const SizedBox.shrink(),
             horizontalSpacer(8),

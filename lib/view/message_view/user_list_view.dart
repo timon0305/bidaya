@@ -1,10 +1,21 @@
 import 'package:quizzo/export.dart';
 import 'package:quizzo/view/message_view/message_view.dart';
 
-class ChatUserListView extends StatelessWidget {
-  ChatUserListView({super.key});
+class ChatUserListView extends StatefulWidget {
+  const ChatUserListView({super.key});
 
-  TextEditingController searchController = TextEditingController();
+  @override
+  State<ChatUserListView> createState() => _ChatUserListViewState();
+}
+
+class _ChatUserListViewState extends State<ChatUserListView> {
+  final TextEditingController searchController = TextEditingController();
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +58,10 @@ class ChatUserListView extends StatelessWidget {
                 Spacer(),
                 SvgPicture.asset(
                   AppImages.profile,
-                  color: AppColors.sand,
+                  colorFilter: ColorFilter.mode(
+                    AppColors.sand,
+                    BlendMode.srcIn,
+                  ),
                   height: 32.h,
                   width: 32.w,
                   fit: BoxFit.fill,
@@ -139,7 +153,7 @@ Widget userCard({
       Get.to(() => MessageView(userName: username));
     },
     child: Container(
-      height: 64.h, // thoda adjust height for better spacing
+      height: 64.h,
       margin: EdgeInsets.only(bottom: 16.h),
       decoration: BoxDecoration(
         color: AppColors.white,
@@ -179,7 +193,6 @@ Widget userCard({
               ],
             ),
           ),
-
           Padding(
             padding: EdgeInsets.only(right: 8.w),
             child: Column(

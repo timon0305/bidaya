@@ -105,7 +105,7 @@ class _MessageViewState extends State<MessageView> {
                       children: [
                         customText(
                           textAlign: TextAlign.center,
-                          text: " " + widget.userName,
+                          text: " ${widget.userName}",
                           color: AppColors.blackShade,
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
@@ -411,7 +411,10 @@ class _MessageViewState extends State<MessageView> {
             children: [
               SvgPicture.asset(
                 AppImages.imagePlaceholder,
-                color: AppColors.placeholder,
+                colorFilter: ColorFilter.mode(
+                  AppColors.placeholder,
+                  BlendMode.srcIn,
+                ),
                 height: 24.h,
                 width: 24.w,
               ),

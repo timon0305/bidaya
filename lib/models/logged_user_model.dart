@@ -13,7 +13,7 @@ class LoggedUserModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['success'] = success;
     if (user != null) {
       data['user'] = user!.toJson();
@@ -82,7 +82,7 @@ class UUser {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['aud'] = aud;
     data['role'] = role;
@@ -117,7 +117,7 @@ class AppMetadata {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['provider'] = provider;
     data['providers'] = providers;
     return data;
@@ -163,7 +163,7 @@ class UserMetadata {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['avatar_url'] = avatarUrl;
     data['email'] = email;
     data['email_verified'] = emailVerified;
@@ -208,7 +208,7 @@ class Session {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['access_token'] = accessToken;
     data['token_type'] = tokenType;
     data['expires_in'] = expiresIn;
@@ -284,7 +284,7 @@ class User {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['aud'] = aud;
     data['role'] = role;
@@ -348,7 +348,7 @@ class Identities {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['identity_id'] = identityId;
     data['id'] = id;
     data['user_id'] = userId;
@@ -406,7 +406,7 @@ class IdentityData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['email'] = email;
     data['email_verified'] = emailVerified;
     data['phone_verified'] = phoneVerified;

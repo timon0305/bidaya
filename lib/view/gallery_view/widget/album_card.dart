@@ -71,7 +71,10 @@ Widget albumCard({
                       children: [
                         SvgPicture.asset(
                           AppImages.parent,
-                          color: AppColors.forestGrey,
+                          colorFilter: ColorFilter.mode(
+                            AppColors.forestGrey,
+                            BlendMode.srcIn,
+                          ),
                           height: 16.h,
                           width: 16.w,
                         ),
