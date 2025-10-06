@@ -17,8 +17,7 @@ jobs:
       # Use Flutter setup action instead of Dart
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.27.0'  # or use 'stable' for latest stable
-          channel: 'stable'
+          channel: 'beta'
       
       - name: Install dependencies
         run: flutter pub get
