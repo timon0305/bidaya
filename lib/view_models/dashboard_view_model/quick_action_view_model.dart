@@ -1,7 +1,6 @@
 import 'package:quizzo/export.dart';
 
-class QuickActionViewModel extends ChangeNotifier{
-
+class QuickActionViewModel extends ChangeNotifier {
   String? _selectedTitle;
 
   String? get selectedTitle => _selectedTitle;
@@ -12,7 +11,9 @@ class QuickActionViewModel extends ChangeNotifier{
   void select(String title) {
     _selectedTitle = title;
     notifyListeners();
-  } void select2(String title) {
+  }
+
+  void select2(String title) {
     _selectedTitle2 = title;
     notifyListeners();
   }

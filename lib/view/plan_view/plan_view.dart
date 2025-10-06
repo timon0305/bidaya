@@ -1,9 +1,8 @@
-
-
 import 'package:quizzo/export.dart';
 import 'package:quizzo/view/plan_view/widgets/expanded_tile.dart';
 
 import 'add_new_plan.dart';
+
 class PlanView extends StatefulWidget {
   const PlanView({super.key});
 
@@ -11,27 +10,45 @@ class PlanView extends StatefulWidget {
   State<PlanView> createState() => _PlanViewState();
 }
 
-class _PlanViewState extends State<PlanView>  {
+class _PlanViewState extends State<PlanView> {
   String? selectedGender;
   final List<CorrectedItem> correctedSheet = [
-    CorrectedItem(question: 'WEEK 1 - 🔢 Math Basics', answer: 'Flutter widgets are the basic building blocks of the UI.'),
-    CorrectedItem(question: 'WEEK 2 - 🎨 Arts & Crafts', answer: 'A StatefulWidget is a widget that has mutable state.'),
-    CorrectedItem(question: 'WEEK  3 - 📖 Literacy Skills', answer: 'Stateless widgets are immutable, while stateful widgets can rebuild with changes.'),
-    CorrectedItem(question: 'WEEK  4 - 🤸 Physical Play', answer: 'Provider is a state management library in Flutter.'),
-    CorrectedItem(question: 'WEEK 5 - 🎵 Music & Rhythm', answer: 'Provider is a state management library in Flutter.'),
+    CorrectedItem(
+      question: 'WEEK 1 - 🔢 Math Basics',
+      answer: 'Flutter widgets are the basic building blocks of the UI.',
+    ),
+    CorrectedItem(
+      question: 'WEEK 2 - 🎨 Arts & Crafts',
+      answer: 'A StatefulWidget is a widget that has mutable state.',
+    ),
+    CorrectedItem(
+      question: 'WEEK  3 - 📖 Literacy Skills',
+      answer:
+          'Stateless widgets are immutable, while stateful widgets can rebuild with changes.',
+    ),
+    CorrectedItem(
+      question: 'WEEK  4 - 🤸 Physical Play',
+      answer: 'Provider is a state management library in Flutter.',
+    ),
+    CorrectedItem(
+      question: 'WEEK 5 - 🎵 Music & Rhythm',
+      answer: 'Provider is a state management library in Flutter.',
+    ),
   ];
 
-  List<String> attendanceUserList= ["Kids", "Staff"];
+  List<String> attendanceUserList = ["Kids", "Staff"];
 
-  TextEditingController searchController=TextEditingController();
+  TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      systemNavigationBarIconBrightness: Brightness.dark,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarColor: AppColors.white,
-      systemNavigationBarColor: AppColors.white,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        systemNavigationBarIconBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: AppColors.white,
+        systemNavigationBarColor: AppColors.white,
+      ),
+    );
     return Scaffold(
       appBar: customAppBar(title: "Plans"),
       backgroundColor: AppColors.white,
@@ -42,11 +59,13 @@ class _PlanViewState extends State<PlanView>  {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             verticalSpacer(12),
-            customAddButton(title: "Add New Plan",
-                onTap: () {
-              Get.to(()=>AddNewPlan());
-                },
-                color: AppColors.purple),
+            customAddButton(
+              title: "Add New Plan",
+              onTap: () {
+                Get.to(() => AddNewPlan());
+              },
+              color: AppColors.purple,
+            ),
             verticalSpacer(12),
             customDropdownField(
               borderColor: Colors.transparent,
@@ -57,42 +76,48 @@ class _PlanViewState extends State<PlanView>  {
               hintFontSize: 16,
               iconPath: AppImages.dropArrow,
               icon: AppImages.dropArrow,
-              items: ["Senior Classes", "Junior Class","All Classes"],
-              value:  selectedGender,
+              items: ["Senior Classes", "Junior Class", "All Classes"],
+              value: selectedGender,
               onChanged: (val) {
-
-                selectedGender = val??"";
-
+                selectedGender = val ?? "";
               },
             ),
             verticalSpacer(12),
-          ReorderableListView.builder(
-            shrinkWrap: true,
-            itemCount: correctedSheet.length,
-            onReorder: (oldIndex, newIndex) {
-              setState(() {
-                if (newIndex > oldIndex) newIndex--;
-                final item = correctedSheet.removeAt(oldIndex);
-                correctedSheet.insert(newIndex, item);
-              });
-            },
-            itemBuilder: (context, index) {
-              final item = correctedSheet[index];
-              return CustomExpansionTile(
-                label:item.question ,
+            ReorderableListView.builder(
+              shrinkWrap: true,
+              itemCount: correctedSheet.length,
+              onReorder: (oldIndex, newIndex) {
+                setState(() {
+                  if (newIndex > oldIndex) newIndex--;
+                  final item = correctedSheet.removeAt(oldIndex);
+                  correctedSheet.insert(newIndex, item);
+                });
+              },
+              itemBuilder: (context, index) {
+                final item = correctedSheet[index];
+                return CustomExpansionTile(
+                  label: item.question,
                   key: ValueKey(correctedSheet[index]),
-                index: (index + 1).toString(),
-                children: [
-                  customDivider(height: 1, width: 380, color: AppColors.lightestGreyShade),
-                  Padding(
-                      padding:  EdgeInsets.all(8.0),
-                      child: customText(text: item.answer, fontWeight: FontWeight.w400, fontSize: 14, color: AppColors.blackShade)
-                  ),
-                ],
-              );
-            },
-          ),
-
+                  index: (index + 1).toString(),
+                  children: [
+                    customDivider(
+                      height: 1,
+                      width: 380,
+                      color: AppColors.lightestGreyShade,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: customText(
+                        text: item.answer,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                        color: AppColors.blackShade,
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
           ],
         ),
       ),
@@ -101,11 +126,14 @@ class _PlanViewState extends State<PlanView>  {
         child: SizedBox(
           height: 100.h,
           child: Column(
-
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               verticalSpacer(10),
-              customDivider(height: 1.5, width: 432, color: AppColors.lightestGreyShade),
+              customDivider(
+                height: 1.5,
+                width: 432,
+                color: AppColors.lightestGreyShade,
+              ),
               verticalSpacer(10),
               customButton(
                 context: context,
@@ -130,9 +158,10 @@ class _PlanViewState extends State<PlanView>  {
     );
   }
 }
-  class CorrectedItem {
+
+class CorrectedItem {
   final String question;
   final String answer;
 
   CorrectedItem({required this.question, required this.answer});
-  }
+}

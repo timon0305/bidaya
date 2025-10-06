@@ -5,6 +5,7 @@ class Validators {
     }
     return null;
   }
+
   static String? password(String? value) {
     if (value == null || value.isEmpty) {
       return "Password is required";
@@ -32,6 +33,7 @@ class Validators {
 
     return null;
   }
+
   static String? email(String? value) {
     if (value == null || value.trim().isEmpty) {
       return "이메일을 입력해주세요";
@@ -47,7 +49,7 @@ class Validators {
     if (value == null || value.trim().isEmpty) {
       return "휴대폰 번호를 입력해주세요";
     }
-   
+
     return null;
   }
 
@@ -56,7 +58,8 @@ class Validators {
       return "링크를 입력해주세요";
     }
     final urlRegex = RegExp(
-        r'^(http|https):\/\/([\w\-]+\.)+[\w\-]+(\/[\w\- ./?%&=]*)?$');
+      r'^(http|https):\/\/([\w\-]+\.)+[\w\-]+(\/[\w\- ./?%&=]*)?$',
+    );
     if (!urlRegex.hasMatch(value)) {
       return "유효한 링크를 입력해주세요";
     }

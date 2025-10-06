@@ -18,12 +18,14 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      systemNavigationBarIconBrightness: Brightness.dark,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarColor: AppColors.white,
-      systemNavigationBarColor: AppColors.white,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        systemNavigationBarIconBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: AppColors.white,
+        systemNavigationBarColor: AppColors.white,
+      ),
+    );
 
     return Scaffold(
       backgroundColor: AppColors.white,
@@ -43,10 +45,7 @@ class _SplashViewState extends State<SplashView> {
             left: 0,
             right: 0,
             child: Center(
-              child: SpinKitCircle(
-                color: AppColors.purple,
-                size: 55,
-              ),
+              child: SpinKitCircle(color: AppColors.purple, size: 55),
             ),
           ),
         ],

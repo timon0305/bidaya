@@ -1,40 +1,44 @@
-
-import  'package:quizzo/export.dart';
+import 'package:quizzo/export.dart';
 
 class SignInView extends StatelessWidget {
   const SignInView({super.key});
 
-
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: null,
       backgroundColor: AppColors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding:  EdgeInsets.symmetric(horizontal: 0.w),
+          padding: EdgeInsets.symmetric(horizontal: 0.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               verticalSpacer(90),
-              Image.asset(
-                AppImages.logo,
-                fit: BoxFit.fill,
-                height: 115.h,
-              ),
+              Image.asset(AppImages.logo, fit: BoxFit.fill, height: 115.h),
               Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 18),
+                padding: EdgeInsets.symmetric(horizontal: 18),
                 child: Consumer<AuthViewModel>(
-                    builder: (context, auth, child) {
+                  builder: (context, auth, child) {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         verticalSpacer(20),
-                        customText(text: "Hello there 👋", fontWeight: FontWeight.w700, fontSize: 32, color: AppColors.blackShade),
+                        customText(
+                          text: "Hello there 👋",
+                          fontWeight: FontWeight.w700,
+                          fontSize: 32,
+                          color: AppColors.blackShade,
+                        ),
                         verticalSpacer(20),
-                        customText(text: "Phone Number", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+                        customText(
+                          text: "Phone Number",
+                          fontWeight: FontWeight.w700,
+                          fontSize: 16,
+                          color: Colors.black,
+                        ),
                         verticalSpacer(8),
                         customTextField(
                           controller: auth.loginPhoneTextController,
@@ -50,7 +54,12 @@ class SignInView extends StatelessWidget {
                           context: context,
                         ),
                         verticalSpacer(20),
-                        customText(text: "Password", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+                        customText(
+                          text: "Password",
+                          fontWeight: FontWeight.w700,
+                          fontSize: 16,
+                          color: Colors.black,
+                        ),
                         verticalSpacer(8),
                         customTextFieldNoMultiLine(
                           controller: auth.loginPasswordTextController,
@@ -72,51 +81,67 @@ class SignInView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Checkbox(
-                              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap,
                               visualDensity: VisualDensity.compact,
                               value: auth.isRememberMe,
-                              side: BorderSide(color: AppColors.purple,width: 2.w),
+                              side: BorderSide(
+                                color: AppColors.purple,
+                                width: 2.w,
+                              ),
                               activeColor: AppColors.purple,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(4),
                               ),
                               onChanged: (value) {
-                                auth.isRememberMeValue(value??false);
-
+                                auth.isRememberMeValue(value ?? false);
                               },
                             ),
-                            customText(text: "Remember me", fontWeight: FontWeight.w600, fontSize: 18, color: Colors.black),
-
-
+                            customText(
+                              text: "Remember me",
+                              fontWeight: FontWeight.w600,
+                              fontSize: 18,
+                              color: Colors.black,
+                            ),
                           ],
                         ),
                         verticalSpacer(20),
                         Align(
                           alignment: Alignment.center,
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               Get.toNamed(AppRoutes.password);
                             },
-                            child: customText(text: "Forgot Password?",
-                                textAlign: TextAlign.center,
+                            child: customText(
+                              text: "Forgot Password?",
+                              textAlign: TextAlign.center,
 
-                                fontWeight: FontWeight.bold, fontSize: 20, color: AppColors.purple),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: AppColors.purple,
+                            ),
                           ),
                         ),
                         verticalSpacer(8),
                         Align(
-                            alignment: Alignment.center,child: GestureDetector(
-                            onTap: (){
+                          alignment: Alignment.center,
+                          child: GestureDetector(
+                            onTap: () {
                               Get.toNamed(AppRoutes.register);
                             },
-                            child: customText(text: "Create New Account", fontWeight: FontWeight.bold, fontSize: 20, color: AppColors.purple))),
-
+                            child: customText(
+                              text: "Create New Account",
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: AppColors.purple,
+                            ),
+                          ),
+                        ),
                       ],
                     );
-                  }
+                  },
                 ),
               ),
-
             ],
           ),
         ),
@@ -156,8 +181,6 @@ class SignInView extends StatelessWidget {
           );
         },
       ),
-
     );
   }
 }
-

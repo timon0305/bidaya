@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:quizzo/view_models/auth_view_model/auth_view_model.dart';
 
@@ -75,7 +74,10 @@ void main() {
       expect(authViewModel.selectedCategories.contains('Meals'), true);
 
       authViewModel.onToggleChip('Swimming Pools', false);
-      expect(authViewModel.selectedCategories.contains('Swimming Pools'), false);
+      expect(
+        authViewModel.selectedCategories.contains('Swimming Pools'),
+        false,
+      );
       expect(authViewModel.selectedCategories.length, 1);
     });
 

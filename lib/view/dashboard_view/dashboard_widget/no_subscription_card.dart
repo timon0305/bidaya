@@ -1,12 +1,11 @@
 import 'package:quizzo/export.dart';
 
-
-Widget noSubsCard(BuildContext context,{required String role}){
+Widget noSubsCard(BuildContext context, {required String role}) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
-      Image.asset(AppImages.noSub,height: 250.h,width: 250.w,),
+      Image.asset(AppImages.noSub, height: 250.h, width: 250.w),
       SizedBox(
         width: 200.w,
         child: customText(
@@ -28,22 +27,22 @@ Widget noSubsCard(BuildContext context,{required String role}){
         ),
       ),
       verticalSpacer(100),
-      role=="Admin"?
-      customButton(
-        context: context,
-        text: "Manage Subscription",
-        fontSize: 16,
-        height: 58,
-        width: 300,
-        borderColor: Colors.transparent,
-        bgColor: AppColors.blue,
-        fontColor: Colors.white,
-        borderRadius: 100,
-        isCircular: true,
-        fontWeight: FontWeight.w600,
-        onPressed: () {
-
-        },
-      ):SizedBox(),  ],
+      role == "Admin"
+          ? customButton(
+            context: context,
+            text: "Manage Subscription",
+            fontSize: 16,
+            height: 58,
+            width: 300,
+            borderColor: Colors.transparent,
+            bgColor: AppColors.blue,
+            fontColor: Colors.white,
+            borderRadius: 100,
+            isCircular: true,
+            fontWeight: FontWeight.w600,
+            onPressed: () {},
+          )
+          : SizedBox(),
+    ],
   );
 }

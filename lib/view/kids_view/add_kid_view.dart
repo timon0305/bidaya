@@ -12,7 +12,6 @@ class AddKidView extends StatefulWidget {
 
 class _AddKidViewState extends State<AddKidView>
     with SingleTickerProviderStateMixin {
-
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController dobController = TextEditingController();
@@ -24,7 +23,8 @@ class _AddKidViewState extends State<AddKidView>
   TextEditingController medicineController = TextEditingController();
   TextEditingController contactAddressController = TextEditingController();
   TextEditingController contactHomeController = TextEditingController();
-  TextEditingController emergencyRelationshipController = TextEditingController();
+  TextEditingController emergencyRelationshipController =
+      TextEditingController();
   TextEditingController medicineInfoController = TextEditingController();
   TextEditingController allergyInfoController = TextEditingController();
 
@@ -52,8 +52,8 @@ class _AddKidViewState extends State<AddKidView>
       contactAddressController.text = "Paracetamol";
       selectedGender = "";
     }
-    if(widget.isEdit==false){
-      final kvm=Provider.of<KidContactViewModel>(context, listen: false);
+    if (widget.isEdit == false) {
+      final kvm = Provider.of<KidContactViewModel>(context, listen: false);
       kvm.parentContacts.clear();
       kvm.parentContacts.add({
         "name": TextEditingController(),
@@ -63,19 +63,19 @@ class _AddKidViewState extends State<AddKidView>
         "authorized": false,
       });
       kvm.emergencyContacts.clear();
-      kvm.emergencyContacts.add( {
+      kvm.emergencyContacts.add({
         "name": TextEditingController(),
         "phone": TextEditingController(),
         "relationship": TextEditingController(),
         "authorized": false,
       });
       kvm.allergies.clear();
-      kvm.allergies.add(  {
+      kvm.allergies.add({
         "allergy": TextEditingController(),
-    "info": TextEditingController(),
-  });
+        "info": TextEditingController(),
+      });
       kvm.medicines.clear();
-      kvm.medicines.add(  {
+      kvm.medicines.add({
         "medicine": TextEditingController(),
         "info": TextEditingController(),
       });
@@ -104,12 +104,14 @@ class _AddKidViewState extends State<AddKidView>
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      systemNavigationBarIconBrightness: Brightness.dark,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarColor: Colors.white,
-      systemNavigationBarColor: Colors.white,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        systemNavigationBarIconBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: Colors.white,
+        systemNavigationBarColor: Colors.white,
+      ),
+    );
 
     return Scaffold(
       appBar: customAppBar(title: widget.isEdit ? "Edit Kid" : "Add Kid"),
@@ -127,27 +129,30 @@ class _AddKidViewState extends State<AddKidView>
                 controller: _tabController,
                 children: [
                   kidInfoCard(
-                      context: context,
-                      nameController: nameController,
-                      phoneController: phoneController,
-                      selectedGender: selectedGender ?? "",
-                      dobController: dobController),
+                    context: context,
+                    nameController: nameController,
+                    phoneController: phoneController,
+                    selectedGender: selectedGender ?? "",
+                    dobController: dobController,
+                  ),
                   kidContactCard(
-                       context,
-                   /*   nameController: contactNameController,
+                    context,
+                    /*   nameController: contactNameController,
                       addressController: contactAddressController,
                       homePhoneController: contactHomeController,
                       phoneController: contactPhoneController,
                       emergencyPhoneController: emergencyPhoneController,
                       emergencyNameController: emergencyNameController,
                       emergencyRelationshipController:
-                      emergencyRelationshipController*/),
+                      emergencyRelationshipController*/
+                  ),
                   kidMedicalCard(
-                      context: context,
-                      medicineController: medicineController,
-                      medicineInfoController: medicineInfoController,
-                      allergyController: allergyController,
-                      allergyInfoController: allergyInfoController)
+                    context: context,
+                    medicineController: medicineController,
+                    medicineInfoController: medicineInfoController,
+                    allergyController: allergyController,
+                    allergyInfoController: allergyInfoController,
+                  ),
                 ],
               ),
             ),

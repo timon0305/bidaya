@@ -1,6 +1,5 @@
 import 'package:quizzo/export.dart';
 
-
 class DashboardView extends StatelessWidget {
   const DashboardView({super.key});
 
@@ -30,19 +29,23 @@ class DashboardView extends StatelessWidget {
                     avatarSize: 70,
                   ),
                   verticalSpacer(20),
-                  Divider(height: 1.w, thickness: 1.w, color: AppColors.lightestGreyShade),
+                  Divider(
+                    height: 1.w,
+                    thickness: 1.w,
+                    color: AppColors.lightestGreyShade,
+                  ),
                   verticalSpacer(20),
-                   Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            dashboardTopSection(context, auth),
-                            verticalSpacer(16),
-                            bidiyaFeatureCards(context, auth, dashboardVM),
-                          ],
-                        ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          dashboardTopSection(context, auth),
+                          verticalSpacer(16),
+                          bidiyaFeatureCards(context, auth, dashboardVM),
+                        ],
                       ),
                     ),
+                  ),
                 ],
               );
             },
@@ -52,5 +55,3 @@ class DashboardView extends StatelessWidget {
     );
   }
 }
-
-

@@ -1,20 +1,18 @@
-
 import 'package:quizzo/export.dart';
-
-
-
-
 
 class LiveActivitiesView extends StatelessWidget {
   const LiveActivitiesView({super.key});
   @override
   Widget build(BuildContext context) {
-    TextEditingController dateController=TextEditingController(text: "01/08/2025");
+    TextEditingController dateController = TextEditingController(
+      text: "01/08/2025",
+    );
     String? selectedClass;
     final items = [
       StepperItem(
         time: "8:00 AM",
-        title: "🥞 Breakfast Time – Kids enjoyed pancakes with maple syrup 🍯🥛",
+        title:
+            "🥞 Breakfast Time – Kids enjoyed pancakes with maple syrup 🍯🥛",
         description: "They also had a glass of milk for energy.",
         imageUrl: "https://picsum.photos/200/150?random=1",
         color: AppColors.blue,
@@ -63,14 +61,15 @@ class LiveActivitiesView extends StatelessWidget {
     ];
 
     final auth = context.watch<AuthViewModel>();
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      systemNavigationBarIconBrightness: Brightness.dark,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarColor: AppColors.white,
-      systemNavigationBarColor: AppColors.white,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        systemNavigationBarIconBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: AppColors.white,
+        systemNavigationBarColor: AppColors.white,
+      ),
+    );
     return Scaffold(
-
       appBar: customAppBar(title: "Live Activities"),
       backgroundColor: AppColors.white,
       body: Padding(
@@ -78,60 +77,67 @@ class LiveActivitiesView extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              auth.userRole=="Admin"||auth.userRole=="Staff"?  Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 14.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    customTextFieldSuffixIcon(
-                      controller:dateController,
-                      readOnly: false,
-                      height: 55,
-                      width: 186,
-                      icon: AppImages.calenderSvg,
-                      isMinLine: 1,
-                      keyboardType: TextInputType.phone,
-                      borderClr: Colors.transparent,
-                      hintText: "",
-                      fillColor: AppColors.bg,
-                      hintFontSize: 16,
-                      borderRadius: 12,
-                      obscureText: false,
-                      onShow: () {
-                        selectDateBottomSheet(context,dateController);
-
-                      },
-                      context: context,
+              auth.userRole == "Admin" || auth.userRole == "Staff"
+                  ? Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 14.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        customTextFieldSuffixIcon(
+                          controller: dateController,
+                          readOnly: false,
+                          height: 55,
+                          width: 186,
+                          icon: AppImages.calenderSvg,
+                          isMinLine: 1,
+                          keyboardType: TextInputType.phone,
+                          borderClr: Colors.transparent,
+                          hintText: "",
+                          fillColor: AppColors.bg,
+                          hintFontSize: 16,
+                          borderRadius: 12,
+                          obscureText: false,
+                          onShow: () {
+                            selectDateBottomSheet(context, dateController);
+                          },
+                          context: context,
+                        ),
+                        verticalSpacer(12),
+                        customDropdownField(
+                          borderColor: Colors.transparent,
+                          context: context,
+                          hintText: "",
+                          width: 186,
+                          height: 55,
+                          borderRadius: 12,
+                          hintFontSize: 14,
+                          iconPath: AppImages.dropArrow,
+                          icon: AppImages.dropArrow,
+                          items: [
+                            "Senior Classes",
+                            "Junior Class",
+                            "All Classes",
+                          ],
+                          value: selectedClass,
+                          onChanged: (val) {
+                            selectedClass = val ?? "";
+                          },
+                        ),
+                      ],
                     ),
-                    verticalSpacer(12),
-                    customDropdownField(
-                      borderColor: Colors.transparent,
-                      context: context,
-                      hintText: "",
-                      width: 186,
-                      height: 55,
-                      borderRadius: 12,
-                      hintFontSize: 14,
-                      iconPath: AppImages.dropArrow,
-                      icon: AppImages.dropArrow,
-                      items: ["Senior Classes", "Junior Class", "All Classes"],
-                      value: selectedClass,
-                      onChanged: (val) {
-                        selectedClass = val ?? "";
-                      },
-                    ),
-                  ],
-                ),
-              ):SizedBox.shrink(),
+                  )
+                  : SizedBox.shrink(),
               verticalSpacer(18),
-              customDivider(height: 1, width: 390, color: AppColors.lightestGreyShade),
+              customDivider(
+                height: 1,
+                width: 390,
+                color: AppColors.lightestGreyShade,
+              ),
               verticalSpacer(18),
               VerticalDottedStepper(
                 items: items,
                 lineColor: AppColors.blue,
                 lineWidth: 4,
-
-
               ),
             ],
           ),

@@ -1,6 +1,6 @@
 import 'package:quizzo/export.dart';
-class KidContactViewModel extends ChangeNotifier {
 
+class KidContactViewModel extends ChangeNotifier {
   List<Map<String, dynamic>> parentContacts = [
     {
       "name": TextEditingController(text: "Aqsa"),
@@ -8,7 +8,7 @@ class KidContactViewModel extends ChangeNotifier {
       "homePhone": TextEditingController(text: "0511234567"),
       "address": TextEditingController(text: "Islamabad, Pakistan"),
       "authorized": false,
-    }
+    },
   ];
   void toggleAuthorized(int index, bool value) {
     if (index >= 0 && index < parentContacts.length) {
@@ -23,9 +23,8 @@ class KidContactViewModel extends ChangeNotifier {
       "phone": TextEditingController(text: "0345678900"),
       "relationship": TextEditingController(text: "niece"),
       "authorized": false,
-    }
+    },
   ];
-
 
   void addParent(BuildContext context) {
     if (parentContacts.length >= 2) {
@@ -39,8 +38,6 @@ class KidContactViewModel extends ChangeNotifier {
     }
 
     var last = parentContacts.last;
-
-
 
     if (last["name"]!.text.isNotEmpty && last["phone"]!.text.isNotEmpty) {
       parentContacts.add({
@@ -60,6 +57,7 @@ class KidContactViewModel extends ChangeNotifier {
       );
     }
   }
+
   void removeParent(int index) {
     if (parentContacts.length > 1) {
       parentContacts.removeAt(index);
@@ -68,7 +66,6 @@ class KidContactViewModel extends ChangeNotifier {
   }
 
   void addEmergency(BuildContext context) {
-
     if (emergencyContacts.length >= 5) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -84,7 +81,9 @@ class KidContactViewModel extends ChangeNotifier {
     if (last["name"]!.text.isEmpty || last["phone"]!.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Please fill current emergency contact before adding a new one."),
+          content: Text(
+            "Please fill current emergency contact before adding a new one.",
+          ),
           backgroundColor: AppColors.redShade,
         ),
       );
@@ -99,6 +98,7 @@ class KidContactViewModel extends ChangeNotifier {
 
     notifyListeners();
   }
+
   void removeEmergency(int index) {
     if (emergencyContacts.length > 1) {
       emergencyContacts.removeAt(index);
@@ -114,10 +114,7 @@ class KidContactViewModel extends ChangeNotifier {
   }
 
   List<Map<String, TextEditingController>> medicines = [
-    {
-      "medicine": TextEditingController(),
-      "info": TextEditingController(),
-    }
+    {"medicine": TextEditingController(), "info": TextEditingController()},
   ];
 
   void addMedicine(BuildContext context) {
@@ -126,7 +123,9 @@ class KidContactViewModel extends ChangeNotifier {
     if (last["medicine"]!.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Please fill current medicine before adding a new one."),
+          content: Text(
+            "Please fill current medicine before adding a new one.",
+          ),
           backgroundColor: AppColors.redShade,
         ),
       );
@@ -147,8 +146,8 @@ class KidContactViewModel extends ChangeNotifier {
       notifyListeners();
     }
   }
-  List<Map<String, TextEditingController>> allergies = [];
 
+  List<Map<String, TextEditingController>> allergies = [];
 
   void addAllergy(BuildContext context) {
     if (allergies.isNotEmpty) {
@@ -157,7 +156,9 @@ class KidContactViewModel extends ChangeNotifier {
       if (last["allergy"]!.text.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text("Please fill current allergy before adding a new one."),
+            content: Text(
+              "Please fill current allergy before adding a new one.",
+            ),
             backgroundColor: AppColors.redShade,
           ),
         );

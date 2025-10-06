@@ -17,9 +17,11 @@ Future<void> quickActionStaffBottomSheet(BuildContext context) {
     {
       "title": "+ Sleep",
       "icon": AppImages.quickActionSleep,
-      "onTap": () => quickActionPickTimeBottomSheet(context: context,onSave: (bedtime, wakeup) {
-
-      },),
+      "onTap":
+          () => quickActionPickTimeBottomSheet(
+            context: context,
+            onSave: (bedtime, wakeup) {},
+          ),
     },
     {
       "title": "+ Mood",
@@ -62,7 +64,10 @@ Future<void> quickActionStaffBottomSheet(BuildContext context) {
             child: Column(
               children: [
                 customDivider(
-                    height: 5, width: 40, color: AppColors.forestGrey),
+                  height: 5,
+                  width: 40,
+                  color: AppColors.forestGrey,
+                ),
                 verticalSpacer(20),
                 customText(
                   text: "Quick Action",
@@ -72,102 +77,115 @@ Future<void> quickActionStaffBottomSheet(BuildContext context) {
                 ),
                 verticalSpacer(12),
                 customDivider(
-                    height: 1, width: 400, color: AppColors.lightestGreyShade),
+                  height: 1,
+                  width: 400,
+                  color: AppColors.lightestGreyShade,
+                ),
                 verticalSpacer(12),
-            SingleChildScrollView(
-              child: Wrap(
-                spacing: 2.w,
-                runSpacing: 2.h,
-                children: [
-                  GridView.count(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
-                    padding: EdgeInsets.zero,
-                    childAspectRatio: 183.w / 120.h,
-                    children: actions
-                        .sublist(0, actions.length - 1)
-                        .map((item) => GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                        item["onTap"]();
-                      },
-                      child: Container(
+                SingleChildScrollView(
+                  child: Wrap(
+                    spacing: 2.w,
+                    runSpacing: 2.h,
+                    children: [
+                      GridView.count(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                        padding: EdgeInsets.zero,
+                        childAspectRatio: 183.w / 120.h,
+                        children:
+                            actions
+                                .sublist(0, actions.length - 1)
+                                .map(
+                                  (item) => GestureDetector(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                      item["onTap"]();
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 0.w,
+                                        vertical: 0.h,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: AppColors.quickWhiteBg,
+                                        border: Border.all(
+                                          color: AppColors.quickBg,
+                                        ),
+                                        borderRadius: BorderRadius.circular(
+                                          16.r,
+                                        ),
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(
+                                            item["icon"],
+                                            width: 48.w,
+                                            height: 48.h,
+                                            fit: BoxFit.cover,
+                                          ),
+                                          verticalSpacer(16),
+                                          customText(
+                                            text: item["title"],
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 16,
+                                            color: AppColors.blackShade,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                      ),
+                      verticalSpacer(12),
+                      Container(
+                        width: double.infinity,
+                        height: 114.h,
                         padding: EdgeInsets.symmetric(
-                            horizontal: 0.w, vertical: 0.h),
+                          horizontal: 16.w,
+                          vertical: 0.h,
+                        ),
                         decoration: BoxDecoration(
                           color: AppColors.quickWhiteBg,
                           border: Border.all(color: AppColors.quickBg),
                           borderRadius: BorderRadius.circular(16.r),
                         ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset(
-                              item["icon"],
-                              width: 48.w,
-                              height: 48.h,
-                              fit: BoxFit.cover,
-                            ),
-                            verticalSpacer(16),
-                            customText(
-                              text: item["title"],
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
-                              color: AppColors.blackShade,
-                            ),
-                          ],
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                            actions.last["onTap"]();
+                          },
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                actions.last["icon"],
+                                width: 48.w,
+                                height: 48.h,
+                                fit: BoxFit.cover,
+                              ),
+                              verticalSpacer(16),
+                              customText(
+                                text: actions.last["title"], // fixed
+                                fontWeight: FontWeight.w700,
+                                fontSize: 16,
+                                color: AppColors.blackShade,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ))
-                        .toList(),
+                      verticalSpacer(12),
+                    ],
                   ),
-                  verticalSpacer(12),
-                  Container(
-                    width: double.infinity,
-                    height: 114.h,
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 16.w, vertical: 0.h),
-                      decoration: BoxDecoration(
-                        color: AppColors.quickWhiteBg,
-                        border: Border.all(color: AppColors.quickBg),
-                        borderRadius: BorderRadius.circular(16.r),
-                      ),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                        actions.last["onTap"]();
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(
-                            actions.last["icon"],
-                            width: 48.w,
-                            height: 48.h,
-                            fit: BoxFit.cover,
-                          ),
-                          verticalSpacer(16),
-                          customText(
-                            text: actions.last["title"], // fixed
-                            fontWeight: FontWeight.w700,
-                            fontSize: 16,
-                            color: AppColors.blackShade,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  verticalSpacer(12),
-                ],
-              ),
-            ),
-
-
-            ],
+                ),
+              ],
             ),
           ),
         ),
@@ -199,9 +217,7 @@ Future<void> quickActionAdminBottomSheet(BuildContext context) {
     backgroundColor: AppColors.white,
     builder: (BuildContext context) {
       return Padding(
-        padding: EdgeInsets.only(
-          bottom: Get.mediaQuery.viewInsets.bottom,
-        ),
+        padding: EdgeInsets.only(bottom: Get.mediaQuery.viewInsets.bottom),
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
@@ -234,66 +250,60 @@ Future<void> quickActionAdminBottomSheet(BuildContext context) {
                   padding: EdgeInsets.zero,
                   childAspectRatio: 183.w / 120.h,
                   physics: const ScrollPhysics(),
-                  children: actions.map((action) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                        switch (action["title"]) {
-                          case "Send Parent Invoice":
-
-                            break;
-                          case "Notifications":
-
-                            break;
-                          case "Categories":
-
-                            break;
-                          case "Manage Nursery":
-
-                            break;
-                          case "Invoice":
-
-                            break;
-                          case "Transport":
-
-                            break;
-                        }
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 0.w,
-                       //   vertical: 18.h,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16.r),
-                          color: AppColors.quickWhiteBg,
-                          border: Border.all(color: AppColors.quickBg),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset(
-                              action["image"]!,
-                              width: 48.w,
-                              height: 48.h,
-                              fit: BoxFit.cover,
+                  children:
+                      actions.map((action) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                            switch (action["title"]) {
+                              case "Send Parent Invoice":
+                                break;
+                              case "Notifications":
+                                break;
+                              case "Categories":
+                                break;
+                              case "Manage Nursery":
+                                break;
+                              case "Invoice":
+                                break;
+                              case "Transport":
+                                break;
+                            }
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 0.w,
+                              //   vertical: 18.h,
                             ),
-                            verticalSpacer(16),
-                            customText(
-                              textAlign: TextAlign.center,
-                              text: action["title"]!,
-                              textFlow: TextOverflow.ellipsis,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
-                              color: AppColors.blackShade,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16.r),
+                              color: AppColors.quickWhiteBg,
+                              border: Border.all(color: AppColors.quickBg),
                             ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }).toList(),
-
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SvgPicture.asset(
+                                  action["image"]!,
+                                  width: 48.w,
+                                  height: 48.h,
+                                  fit: BoxFit.cover,
+                                ),
+                                verticalSpacer(16),
+                                customText(
+                                  textAlign: TextAlign.center,
+                                  text: action["title"]!,
+                                  textFlow: TextOverflow.ellipsis,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 16,
+                                  color: AppColors.blackShade,
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }).toList(),
                 ),
                 verticalSpacer(20),
               ],
@@ -304,10 +314,10 @@ Future<void> quickActionAdminBottomSheet(BuildContext context) {
     },
   );
 }
-String ?selectKid;
+
+String? selectKid;
 Future<void> quickActionFoodBottomSheet(BuildContext context) async {
   TextEditingController newController = TextEditingController();
-
 
   return showModalBottomSheet<void>(
     context: context,
@@ -330,12 +340,21 @@ Future<void> quickActionFoodBottomSheet(BuildContext context) async {
               verticalSpacer(12),
               customDivider(height: 5, width: 40, color: AppColors.forestGrey),
               verticalSpacer(12),
-              customText(text: "Quick Action", fontWeight: FontWeight.w700, fontSize: 24, color: AppColors.blackShade),
+              customText(
+                text: "Quick Action",
+                fontWeight: FontWeight.w700,
+                fontSize: 24,
+                color: AppColors.blackShade,
+              ),
               verticalSpacer(12),
-              customDivider(height: 1, width: double.infinity, color: AppColors.lightestGreyShade),
+              customDivider(
+                height: 1,
+                width: double.infinity,
+                color: AppColors.lightestGreyShade,
+              ),
               verticalSpacer(12),
               Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 28.w),
+                padding: EdgeInsets.symmetric(horizontal: 28.w),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -353,10 +372,9 @@ Future<void> quickActionFoodBottomSheet(BuildContext context) async {
                       items: ["Horaab", "Horain", "Hailen"],
                       value: selectKid?.isNotEmpty == true ? selectKid : null,
                       onChanged: (val) {
-
-                          selectKid = val ?? "";
-
-                      }, hintText: '',
+                        selectKid = val ?? "";
+                      },
+                      hintText: '',
                     ),
                     verticalSpacer(20),
                     customText(
@@ -370,9 +388,21 @@ Future<void> quickActionFoodBottomSheet(BuildContext context) async {
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                          imageWithText2(title: "Breakfast", image: AppImages.breakFast,context: context),
-                          imageWithText2(title: "Snack", image: AppImages.snack,context: context),
-                          imageWithText2(title: "Lunch", image: AppImages.reportLunchMeal,context: context),
+                          imageWithText2(
+                            title: "Breakfast",
+                            image: AppImages.breakFast,
+                            context: context,
+                          ),
+                          imageWithText2(
+                            title: "Snack",
+                            image: AppImages.snack,
+                            context: context,
+                          ),
+                          imageWithText2(
+                            title: "Lunch",
+                            image: AppImages.reportLunchMeal,
+                            context: context,
+                          ),
                         ],
                       ),
                     ),
@@ -394,9 +424,21 @@ Future<void> quickActionFoodBottomSheet(BuildContext context) async {
                     verticalSpacer(20),
                     Row(
                       children: [
-                        imageWithText(title: "All", image: AppImages.allFood,context: context),
-                        imageWithText(title: "Some", image: AppImages.someFood,context: context),
-                        imageWithText(title: "None", image: AppImages.noFood,context: context),
+                        imageWithText(
+                          title: "All",
+                          image: AppImages.allFood,
+                          context: context,
+                        ),
+                        imageWithText(
+                          title: "Some",
+                          image: AppImages.someFood,
+                          context: context,
+                        ),
+                        imageWithText(
+                          title: "None",
+                          image: AppImages.noFood,
+                          context: context,
+                        ),
                       ],
                     ),
 
@@ -425,21 +467,20 @@ Future<void> quickActionFoodBottomSheet(BuildContext context) async {
                     ),
 
                     verticalSpacer(30),
-                customButton(
-                  context: context,
-                  text: "Save",
-                  fontSize: 16,
-                  height: 58,
-                  width: double.infinity,
-                  borderColor: Colors.transparent,
-                  bgColor: AppColors.blue,
-                  fontColor: Colors.white,
-                  borderRadius: 100,
-                  isCircular: true,
-                  fontWeight: FontWeight.w600,
-                  onPressed: () {
-                  },
-                ),
+                    customButton(
+                      context: context,
+                      text: "Save",
+                      fontSize: 16,
+                      height: 58,
+                      width: double.infinity,
+                      borderColor: Colors.transparent,
+                      bgColor: AppColors.blue,
+                      fontColor: Colors.white,
+                      borderRadius: 100,
+                      isCircular: true,
+                      fontWeight: FontWeight.w600,
+                      onPressed: () {},
+                    ),
                     verticalSpacer(30),
                   ],
                 ),
@@ -451,6 +492,7 @@ Future<void> quickActionFoodBottomSheet(BuildContext context) async {
     },
   );
 }
+
 Future<void> quickActionMoodBottomSheet(BuildContext context) async {
   TextEditingController newController = TextEditingController();
 
@@ -475,9 +517,18 @@ Future<void> quickActionMoodBottomSheet(BuildContext context) async {
               verticalSpacer(12),
               customDivider(height: 5, width: 40, color: AppColors.forestGrey),
               verticalSpacer(12),
-              customText(text: "Quick Action", fontWeight: FontWeight.w700, fontSize: 24, color: AppColors.blackShade),
+              customText(
+                text: "Quick Action",
+                fontWeight: FontWeight.w700,
+                fontSize: 24,
+                color: AppColors.blackShade,
+              ),
               verticalSpacer(12),
-              customDivider(height: 1, width: double.infinity, color: AppColors.lightestGreyShade),
+              customDivider(
+                height: 1,
+                width: double.infinity,
+                color: AppColors.lightestGreyShade,
+              ),
               verticalSpacer(12),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 24.h),
@@ -498,10 +549,9 @@ Future<void> quickActionMoodBottomSheet(BuildContext context) async {
                       items: ["Horaab", "Horain", "Hailen"],
                       value: selectKid?.isNotEmpty == true ? selectKid : null,
                       onChanged: (val) {
-
                         selectKid = val ?? "";
-
-                      }, hintText: '',
+                      },
+                      hintText: '',
                     ),
                     verticalSpacer(20),
                     customText(
@@ -516,24 +566,59 @@ Future<void> quickActionMoodBottomSheet(BuildContext context) async {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
-                          imageWithText(title: "Low",image: AppImages.happy,context: context),
+                          imageWithText(
+                            title: "Low",
+                            image: AppImages.happy,
+                            context: context,
+                          ),
                           horizontalSpacer(4),
-                          imageWithText(title: "Sleepy",image: AppImages.sleepy,context: context),
+                          imageWithText(
+                            title: "Sleepy",
+                            image: AppImages.sleepy,
+                            context: context,
+                          ),
                           horizontalSpacer(4),
-                          imageWithText(title: "Sad",image: AppImages.sad,context: context),
+                          imageWithText(
+                            title: "Sad",
+                            image: AppImages.sad,
+                            context: context,
+                          ),
                           horizontalSpacer(4),
-                          imageWithText(title: "Angry",image: AppImages.angry,context: context),
+                          imageWithText(
+                            title: "Angry",
+                            image: AppImages.angry,
+                            context: context,
+                          ),
                           horizontalSpacer(4),
-                          imageWithText(title: "Excited",image: AppImages.excited,context: context),
+                          imageWithText(
+                            title: "Excited",
+                            image: AppImages.excited,
+                            context: context,
+                          ),
                           horizontalSpacer(4),
-                          imageWithText(title: "Shy",image: AppImages.shy,context: context),
+                          imageWithText(
+                            title: "Shy",
+                            image: AppImages.shy,
+                            context: context,
+                          ),
                           horizontalSpacer(4),
-                          imageWithText(title: "Calm",image: AppImages.calm,context: context),
+                          imageWithText(
+                            title: "Calm",
+                            image: AppImages.calm,
+                            context: context,
+                          ),
                           horizontalSpacer(4),
-                          imageWithText(title: "Unwell",image: AppImages.unwell,context: context),
+                          imageWithText(
+                            title: "Unwell",
+                            image: AppImages.unwell,
+                            context: context,
+                          ),
                           horizontalSpacer(4),
-                          imageWithText(title: "worried",image: AppImages.worried,context: context),
-
+                          imageWithText(
+                            title: "worried",
+                            image: AppImages.worried,
+                            context: context,
+                          ),
                         ],
                       ),
                     ),
@@ -582,8 +667,7 @@ Future<void> quickActionMoodBottomSheet(BuildContext context) async {
                       borderRadius: 100,
                       isCircular: true,
                       fontWeight: FontWeight.w600,
-                      onPressed: () {
-                      },
+                      onPressed: () {},
                     ),
                   ],
                 ),
@@ -595,6 +679,7 @@ Future<void> quickActionMoodBottomSheet(BuildContext context) async {
     },
   );
 }
+
 Future<void> quickActionToiletBottomSheet(BuildContext context) async {
   TextEditingController newController = TextEditingController();
   return showModalBottomSheet<void>(
@@ -618,9 +703,18 @@ Future<void> quickActionToiletBottomSheet(BuildContext context) async {
               verticalSpacer(12),
               customDivider(height: 5, width: 40, color: AppColors.forestGrey),
               verticalSpacer(12),
-              customText(text: "Quick Action", fontWeight: FontWeight.w700, fontSize: 24, color: AppColors.blackShade),
+              customText(
+                text: "Quick Action",
+                fontWeight: FontWeight.w700,
+                fontSize: 24,
+                color: AppColors.blackShade,
+              ),
               verticalSpacer(12),
-              customDivider(height: 1, width: double.infinity, color: AppColors.lightestGreyShade),
+              customDivider(
+                height: 1,
+                width: double.infinity,
+                color: AppColors.lightestGreyShade,
+              ),
               verticalSpacer(12),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 24.h),
@@ -628,7 +722,6 @@ Future<void> quickActionToiletBottomSheet(BuildContext context) async {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-
                     verticalSpacer(8),
                     customDropdownFieldWithPrefixIcon(
                       context: context,
@@ -642,10 +735,9 @@ Future<void> quickActionToiletBottomSheet(BuildContext context) async {
                       items: ["Horaab", "Horain", "Hailen"],
                       value: selectKid?.isNotEmpty == true ? selectKid : null,
                       onChanged: (val) {
-
                         selectKid = val ?? "";
-
-                      }, hintText: '',
+                      },
+                      hintText: '',
                     ),
                     verticalSpacer(20),
                     customText(
@@ -658,8 +750,16 @@ Future<void> quickActionToiletBottomSheet(BuildContext context) async {
 
                     Row(
                       children: [
-                        imageWithText(title: "Urine", image: AppImages.urine,context: context),
-                        imageWithText(title: "Stool", image: AppImages.stool,context: context),
+                        imageWithText(
+                          title: "Urine",
+                          image: AppImages.urine,
+                          context: context,
+                        ),
+                        imageWithText(
+                          title: "Stool",
+                          image: AppImages.stool,
+                          context: context,
+                        ),
                       ],
                     ),
                     verticalSpacer(30),
@@ -680,9 +780,21 @@ Future<void> quickActionToiletBottomSheet(BuildContext context) async {
 
                     Row(
                       children: [
-                        imageWithText2(title: "Diaper", image: AppImages.diaper,context: context),
-                        imageWithText2(title: "Clothes", image: AppImages.clothes,context: context),
-                        imageWithText2(title: "Toilet", image: AppImages.toilet,context: context),
+                        imageWithText2(
+                          title: "Diaper",
+                          image: AppImages.diaper,
+                          context: context,
+                        ),
+                        imageWithText2(
+                          title: "Clothes",
+                          image: AppImages.clothes,
+                          context: context,
+                        ),
+                        imageWithText2(
+                          title: "Toilet",
+                          image: AppImages.toilet,
+                          context: context,
+                        ),
                       ],
                     ),
 
@@ -722,8 +834,7 @@ Future<void> quickActionToiletBottomSheet(BuildContext context) async {
                       borderRadius: 100,
                       isCircular: true,
                       fontWeight: FontWeight.w600,
-                      onPressed: () {
-                      },
+                      onPressed: () {},
                     ),
                   ],
                 ),
@@ -735,6 +846,7 @@ Future<void> quickActionToiletBottomSheet(BuildContext context) async {
     },
   );
 }
+
 Future<void> quickActionPickTimeBottomSheet({
   required BuildContext context,
   required Function(TimeOfDay bedtime, TimeOfDay wakeup) onSave,
@@ -742,7 +854,11 @@ Future<void> quickActionPickTimeBottomSheet({
   TimeOfDay selectedBedTime = TimeOfDay.now();
   TimeOfDay selectedWakeTime = TimeOfDay.now();
   TextEditingController newController = TextEditingController();
-  Future<void> pickTime(BuildContext ctx, bool isBedTime, Function setState) async {
+  Future<void> pickTime(
+    BuildContext ctx,
+    bool isBedTime,
+    Function setState,
+  ) async {
     final picked = await showTimePicker(
       context: ctx,
       initialTime: TimeOfDay.now(),
@@ -757,6 +873,7 @@ Future<void> quickActionPickTimeBottomSheet({
       });
     }
   }
+
   return showModalBottomSheet<void>(
     context: context,
     isScrollControlled: true,
@@ -778,14 +895,30 @@ Future<void> quickActionPickTimeBottomSheet({
               child: Column(
                 children: [
                   verticalSpacer(12),
-                  customDivider(height: 5, width: 40, color: AppColors.forestGrey),
+                  customDivider(
+                    height: 5,
+                    width: 40,
+                    color: AppColors.forestGrey,
+                  ),
                   verticalSpacer(12),
-                  customText(text: "Quick Action", fontWeight: FontWeight.w700, fontSize: 24, color: AppColors.blackShade),
+                  customText(
+                    text: "Quick Action",
+                    fontWeight: FontWeight.w700,
+                    fontSize: 24,
+                    color: AppColors.blackShade,
+                  ),
                   verticalSpacer(12),
-                  customDivider(height: 1, width: double.infinity, color: AppColors.lightestGreyShade),
+                  customDivider(
+                    height: 1,
+                    width: double.infinity,
+                    color: AppColors.lightestGreyShade,
+                  ),
                   verticalSpacer(12),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 24.h),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20.w,
+                      vertical: 24.h,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
@@ -798,15 +931,17 @@ Future<void> quickActionPickTimeBottomSheet({
                           borderRadius: 16,
                           hintFontSize: 13,
                           borderColor: Colors.transparent,
-                          fillColor: AppColors.freshBlue.withValues(alpha: 0.06),
+                          fillColor: AppColors.freshBlue.withValues(
+                            alpha: 0.06,
+                          ),
                           prefixIconPath: AppImages.smile,
                           items: ["Horaab", "Horain", "Hailen"],
-                          value: selectKid?.isNotEmpty == true ? selectKid : null,
+                          value:
+                              selectKid?.isNotEmpty == true ? selectKid : null,
                           onChanged: (val) {
-
                             selectKid = val ?? "";
-
-                          }, hintText: '',
+                          },
+                          hintText: '',
                         ),
                         verticalSpacer(20),
                         customText(
@@ -820,7 +955,10 @@ Future<void> quickActionPickTimeBottomSheet({
                         GestureDetector(
                           onTap: () => pickTime(context, true, setState),
                           child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                            padding: EdgeInsets.symmetric(
+                              vertical: 12,
+                              horizontal: 16,
+                            ),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
                               color: Colors.grey[200],
@@ -834,7 +972,10 @@ Future<void> quickActionPickTimeBottomSheet({
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.blackShade,
                                 ),
-                                Icon(Icons.access_time_rounded, color: AppColors.blackShade),
+                                Icon(
+                                  Icons.access_time_rounded,
+                                  color: AppColors.blackShade,
+                                ),
                               ],
                             ),
                           ),
@@ -852,7 +993,10 @@ Future<void> quickActionPickTimeBottomSheet({
                         GestureDetector(
                           onTap: () => pickTime(context, false, setState),
                           child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                            padding: EdgeInsets.symmetric(
+                              vertical: 12,
+                              horizontal: 16,
+                            ),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
                               color: Colors.grey[200],
@@ -866,7 +1010,10 @@ Future<void> quickActionPickTimeBottomSheet({
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.blackShade,
                                 ),
-                                Icon(Icons.access_time_rounded, color: AppColors.blackShade),
+                                Icon(
+                                  Icons.access_time_rounded,
+                                  color: AppColors.blackShade,
+                                ),
                               ],
                             ),
                           ),
@@ -909,8 +1056,7 @@ Future<void> quickActionPickTimeBottomSheet({
                           borderRadius: 100,
                           isCircular: true,
                           fontWeight: FontWeight.w600,
-                          onPressed: () {
-                          },
+                          onPressed: () {},
                         ),
                       ],
                     ),
@@ -949,9 +1095,18 @@ Future<void> quickActionActivityBottomSheet(BuildContext context) {
               verticalSpacer(12),
               customDivider(height: 5, width: 40, color: AppColors.forestGrey),
               verticalSpacer(12),
-              customText(text: "Quick Action", fontWeight: FontWeight.w700, fontSize: 24, color: AppColors.blackShade),
+              customText(
+                text: "Quick Action",
+                fontWeight: FontWeight.w700,
+                fontSize: 24,
+                color: AppColors.blackShade,
+              ),
               verticalSpacer(12),
-              customDivider(height: 1, width: double.infinity, color: AppColors.lightestGreyShade),
+              customDivider(
+                height: 1,
+                width: double.infinity,
+                color: AppColors.lightestGreyShade,
+              ),
               verticalSpacer(12),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 24.h),
@@ -972,10 +1127,9 @@ Future<void> quickActionActivityBottomSheet(BuildContext context) {
                       items: ["Horaab", "Horain", "Hailen"],
                       value: selectKid?.isNotEmpty == true ? selectKid : null,
                       onChanged: (val) {
-
                         selectKid = val ?? "";
-
-                      }, hintText: '',
+                      },
+                      hintText: '',
                     ),
 
                     verticalSpacer(20),
@@ -988,11 +1142,23 @@ Future<void> quickActionActivityBottomSheet(BuildContext context) {
                     verticalSpacer(20),
                     Row(
                       children: [
-                        imageWithText(title: "Low", image: AppImages.low,context: context),
+                        imageWithText(
+                          title: "Low",
+                          image: AppImages.low,
+                          context: context,
+                        ),
                         horizontalSpacer(8),
-                        imageWithText(title: "Medium", image: AppImages.medium,context: context),
+                        imageWithText(
+                          title: "Medium",
+                          image: AppImages.medium,
+                          context: context,
+                        ),
                         horizontalSpacer(8),
-                        imageWithText(title: "High", image: AppImages.high,context: context),
+                        imageWithText(
+                          title: "High",
+                          image: AppImages.high,
+                          context: context,
+                        ),
                       ],
                     ),
                     verticalSpacer(30),
@@ -1039,8 +1205,7 @@ Future<void> quickActionActivityBottomSheet(BuildContext context) {
                       borderRadius: 100,
                       isCircular: true,
                       fontWeight: FontWeight.w600,
-                      onPressed: () {
-                      },
+                      onPressed: () {},
                     ),
                   ],
                 ),
@@ -1052,6 +1217,7 @@ Future<void> quickActionActivityBottomSheet(BuildContext context) {
     },
   );
 }
+
 Future<void> quickActionLiveActivityBottomSheet(BuildContext context) {
   TextEditingController newController = TextEditingController();
 
@@ -1076,9 +1242,18 @@ Future<void> quickActionLiveActivityBottomSheet(BuildContext context) {
               verticalSpacer(12),
               customDivider(height: 5, width: 40, color: AppColors.forestGrey),
               verticalSpacer(12),
-              customText(text: "Quick Action", fontWeight: FontWeight.w700, fontSize: 24, color: AppColors.blackShade),
+              customText(
+                text: "Quick Action",
+                fontWeight: FontWeight.w700,
+                fontSize: 24,
+                color: AppColors.blackShade,
+              ),
               verticalSpacer(12),
-              customDivider(height: 1, width: double.infinity, color: AppColors.lightestGreyShade),
+              customDivider(
+                height: 1,
+                width: double.infinity,
+                color: AppColors.lightestGreyShade,
+              ),
               verticalSpacer(12),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 24.h),
@@ -1099,10 +1274,9 @@ Future<void> quickActionLiveActivityBottomSheet(BuildContext context) {
                       items: ["Select Class", "Senior", "Junior"],
                       value: selectKid?.isNotEmpty == true ? selectKid : null,
                       onChanged: (val) {
-
                         selectKid = val ?? "";
-
-                      }, hintText: '',
+                      },
+                      hintText: '',
                     ),
                     verticalSpacer(12),
                     Container(
@@ -1117,21 +1291,19 @@ Future<void> quickActionLiveActivityBottomSheet(BuildContext context) {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.camera_alt,color: AppColors.purple,),
+                          Icon(Icons.camera_alt, color: AppColors.purple),
                           verticalSpacer(12),
                           customText(
-                              text: "Add a photo",
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18,
-                              color: AppColors.purple
-
-                          )
+                            text: "Add a photo",
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18,
+                            color: AppColors.purple,
+                          ),
                         ],
                       ),
                     ),
 
                     verticalSpacer(20),
-
 
                     customText(
                       text: "Notes",
@@ -1156,7 +1328,6 @@ Future<void> quickActionLiveActivityBottomSheet(BuildContext context) {
                       context: context,
                     ),
                     verticalSpacer(20),
-
                   ],
                 ),
               ),
@@ -1167,7 +1338,7 @@ Future<void> quickActionLiveActivityBottomSheet(BuildContext context) {
               ),
               verticalSpacer(40),
               Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 16.w),
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: customButton(
                   context: context,
                   text: "Send",
@@ -1180,8 +1351,7 @@ Future<void> quickActionLiveActivityBottomSheet(BuildContext context) {
                   borderRadius: 100,
                   isCircular: true,
                   fontWeight: FontWeight.w600,
-                  onPressed: () {
-                  },
+                  onPressed: () {},
                 ),
               ),
               verticalSpacer(20),
@@ -1192,6 +1362,7 @@ Future<void> quickActionLiveActivityBottomSheet(BuildContext context) {
     },
   );
 }
+
 Future<void> quickActionContactBottomSheet(BuildContext context) {
   return showModalBottomSheet<void>(
     context: context,
@@ -1214,9 +1385,18 @@ Future<void> quickActionContactBottomSheet(BuildContext context) {
               verticalSpacer(12),
               customDivider(height: 5, width: 40, color: AppColors.forestGrey),
               verticalSpacer(12),
-              customText(text: "Quick Action", fontWeight: FontWeight.w700, fontSize: 24, color: AppColors.blackShade),
+              customText(
+                text: "Quick Action",
+                fontWeight: FontWeight.w700,
+                fontSize: 24,
+                color: AppColors.blackShade,
+              ),
               verticalSpacer(12),
-              customDivider(height: 1, width: double.infinity, color: AppColors.lightestGreyShade),
+              customDivider(
+                height: 1,
+                width: double.infinity,
+                color: AppColors.lightestGreyShade,
+              ),
               verticalSpacer(12),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 24.h),
@@ -1236,15 +1416,12 @@ Future<void> quickActionContactBottomSheet(BuildContext context) {
                       items: ["Select Class", "Senior", "Junior"],
                       value: selectKid?.isNotEmpty == true ? selectKid : null,
                       onChanged: (val) {
-
                         selectKid = val ?? "";
-
-                      }, hintText: '', icon: AppImages.dropArrow,
+                      },
+                      hintText: '',
+                      icon: AppImages.dropArrow,
                     ),
                     verticalSpacer(20),
-
-
-
                   ],
                 ),
               ),
@@ -1266,8 +1443,7 @@ Future<void> quickActionContactBottomSheet(BuildContext context) {
                 borderRadius: 100,
                 isCircular: true,
                 fontWeight: FontWeight.w600,
-                onPressed: () {
-                },
+                onPressed: () {},
               ),
             ],
           ),

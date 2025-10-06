@@ -1,7 +1,11 @@
-
 import 'package:quizzo/export.dart';
-SnackbarController snackBar({required String title,required String subTitle,required Color bgColor}){
- return Get.snackbar(
+
+SnackbarController snackBar({
+  required String title,
+  required String subTitle,
+  required Color bgColor,
+}) {
+  return Get.snackbar(
     title,
     subTitle,
     snackPosition: SnackPosition.TOP,

@@ -1,33 +1,35 @@
 class AuthValidationService {
-
   static void validateIdentifier(String? identifier) {
     if (identifier == null || identifier.trim().isEmpty) {
       throw ValidationException(
-          'Either a valid email or phone number must be provided');
+        'Either a valid email or phone number must be provided',
+      );
     }
 
     final identifierTrimmed = identifier.trim();
 
-    if (!isValidEmail(identifierTrimmed) &&
-        !isValidPhone(identifierTrimmed)) {
+    if (!isValidEmail(identifierTrimmed) && !isValidPhone(identifierTrimmed)) {
       throw ValidationException(
-          'Either a valid email or phone number must be provided');
+        'Either a valid email or phone number must be provided',
+      );
     }
   }
-
 
   static void validatePassword(String? password) {
     if (password == null || password.isEmpty) {
       throw ValidationException(
-          'Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character');
+        'Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character',
+      );
     }
 
     final passwordRegExp = RegExp(
-        r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%\^&\*\(\)\-_=+\[\]\{\}\|:;,.\/\?])[A-Za-z\d!@#\$%\^&\*\(\)\-_=+\[\]\{\}\|:;,.\/\?]{8,}$');
+      r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%\^&\*\(\)\-_=+\[\]\{\}\|:;,.\/\?])[A-Za-z\d!@#\$%\^&\*\(\)\-_=+\[\]\{\}\|:;,.\/\?]{8,}$',
+    );
 
     if (!passwordRegExp.hasMatch(password)) {
       throw ValidationException(
-          'Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character');
+        'Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character',
+      );
     }
   }
 
@@ -37,26 +39,22 @@ class AuthValidationService {
     }
   }
 
-
-
   static bool isValidEmail(String email) {
-    final emailRegExp =
-    RegExp(r'^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$');
+    final emailRegExp = RegExp(
+      r'^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$',
+    );
     return emailRegExp.hasMatch(email);
   }
-
 
   static bool isValidPhone(String phoneNumber) {
     final phoneRegExp = RegExp(r'^\+?[0-9]{7,15}$');
     return phoneRegExp.hasMatch(phoneNumber);
   }
 
-
   static bool isValidRecoveryKey(String recoveryKey) {
     final recoveryKeyRegex = RegExp(r'^([a-fA-F0-9]{4}-){3}[a-fA-F0-9]{4}$');
     return recoveryKeyRegex.hasMatch(recoveryKey);
   }
-
 
   static bool isValidOtp(String otp) {
     final otpRegex = RegExp(r'^[0-9]{6}$');
@@ -68,7 +66,6 @@ class AuthValidationService {
     final phoneRegExp = RegExp(r'^\+?[0-9]*$');
     return phoneRegExp.hasMatch(phone);
   }
-
 
   static String getPasswordValidationErrors(String password) {
     final errors = <String>[];
@@ -89,19 +86,20 @@ class AuthValidationService {
       errors.add("Must contain at least one digit");
     }
 
-    if (!RegExp(r'[!@#\$%\^&\*\(\)\-_=+\[\]\{\}\|:;,.\/\?]')
-        .hasMatch(password)) {
+    if (!RegExp(
+      r'[!@#\$%\^&\*\(\)\-_=+\[\]\{\}\|:;,.\/\?]',
+    ).hasMatch(password)) {
       errors.add("Must contain at least one special character");
     }
 
-    if (!RegExp(r'^[A-Za-z\d!@#\$%\^&\*\(\)\-_=+\[\]\{\}\|:;,.\/\?]+$')
-        .hasMatch(password)) {
+    if (!RegExp(
+      r'^[A-Za-z\d!@#\$%\^&\*\(\)\-_=+\[\]\{\}\|:;,.\/\?]+$',
+    ).hasMatch(password)) {
       errors.add("Contains invalid characters");
     }
 
     return errors.join('\n');
   }
-
 
   static void validateName(String? name) {
     if (name == null || name.trim().isEmpty) {
@@ -138,9 +136,12 @@ class AuthValidationService {
 
   static void validateGender(String? gender) {
     if (gender == null || gender.isEmpty || gender == "Select") {
-      throw ValidationException("Please select a valid gender (Male or Female)");
+      throw ValidationException(
+        "Please select a valid gender (Male or Female)",
+      );
     }
   }
+
   static void validateCity(String? city) {
     if (city == null || city.isEmpty || city == "Select") {
       throw ValidationException("Please select a valid city");
@@ -153,7 +154,6 @@ class AuthValidationService {
     }
   }
 
-
   static void validateOtp(String? otp) {
     if (otp == null || otp.isEmpty) {
       throw ValidationException("Please enter OTP");
@@ -163,7 +163,6 @@ class AuthValidationService {
     }
   }
 }
-
 
 class ValidationException implements Exception {
   final String message;

@@ -1,7 +1,3 @@
-
-
-
-
 import 'package:quizzo/export.dart';
 
 Widget customText({

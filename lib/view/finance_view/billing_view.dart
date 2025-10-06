@@ -1,4 +1,5 @@
 import 'package:quizzo/export.dart';
+
 class BillingView extends StatefulWidget {
   const BillingView({super.key});
 
@@ -6,7 +7,8 @@ class BillingView extends StatefulWidget {
   State<BillingView> createState() => _BillingViewState();
 }
 
-class _BillingViewState extends State<BillingView> with SingleTickerProviderStateMixin {
+class _BillingViewState extends State<BillingView>
+    with SingleTickerProviderStateMixin {
   TabController? _tabController;
   List<String> tabList = ["Pending", "Past"];
 
@@ -18,12 +20,14 @@ class _BillingViewState extends State<BillingView> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      systemNavigationBarIconBrightness: Brightness.dark,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarColor: AppColors.white,
-      systemNavigationBarColor: AppColors.white,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        systemNavigationBarIconBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: AppColors.white,
+        systemNavigationBarColor: AppColors.white,
+      ),
+    );
     return Scaffold(
       appBar: customAppBar(title: "Billing"),
       backgroundColor: AppColors.white,
@@ -31,11 +35,7 @@ class _BillingViewState extends State<BillingView> with SingleTickerProviderStat
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
         child: Column(
           children: [
-
-            customTabBar(
-              _tabController!,
-              tabList,
-            ),
+            customTabBar(_tabController!, tabList),
             verticalSpacer(12),
             Expanded(
               child: TabBarView(
@@ -46,9 +46,9 @@ class _BillingViewState extends State<BillingView> with SingleTickerProviderStat
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       GestureDetector(
-                         onTap:(){
-                           pendingBillingInvoice(context);
-                         },
+                        onTap: () {
+                          pendingBillingInvoice(context);
+                        },
                         child: parentInvoiceCardSlip(
                           context: context,
                           name: 'Clinton Mcclure Martin',
@@ -61,7 +61,7 @@ class _BillingViewState extends State<BillingView> with SingleTickerProviderStat
                       ),
                       verticalSpacer(12),
                       GestureDetector(
-                        onTap:(){
+                        onTap: () {
                           pendingBillingInvoice(context);
                         },
                         child: billingTabInvoiceCardSlip(
@@ -75,7 +75,7 @@ class _BillingViewState extends State<BillingView> with SingleTickerProviderStat
                       ),
                       verticalSpacer(12),
                       GestureDetector(
-                        onTap:(){
+                        onTap: () {
                           pendingBillingInvoice(context);
                         },
                         child: billingTabInvoiceCardSlip(
@@ -93,9 +93,9 @@ class _BillingViewState extends State<BillingView> with SingleTickerProviderStat
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       GestureDetector(
-                        onTap:(){
+                        onTap: () {
                           pendingBillingPaid(context);
-                          },
+                        },
                         child: billingTabInvoiceCardSlip(
                           name: 'Clinton Mcclure Martin',
                           status: 'Paid',
@@ -107,7 +107,7 @@ class _BillingViewState extends State<BillingView> with SingleTickerProviderStat
                       ),
                       verticalSpacer(12),
                       GestureDetector(
-                        onTap:(){
+                        onTap: () {
                           pendingBillingPaid(context);
                         },
                         child: billingTabInvoiceCardSlip(
@@ -121,7 +121,7 @@ class _BillingViewState extends State<BillingView> with SingleTickerProviderStat
                       ),
                       verticalSpacer(12),
                       GestureDetector(
-                        onTap:(){
+                        onTap: () {
                           pendingBillingPaid(context);
                         },
                         child: billingTabInvoiceCardSlip(
@@ -133,7 +133,6 @@ class _BillingViewState extends State<BillingView> with SingleTickerProviderStat
                           amountColor: AppColors.green,
                         ),
                       ),
-
                     ],
                   ),
                 ],

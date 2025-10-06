@@ -1,5 +1,5 @@
-
 import 'package:quizzo/export.dart';
+
 class SettingNurseryInfoView extends StatefulWidget {
   const SettingNurseryInfoView({super.key});
 
@@ -8,15 +8,15 @@ class SettingNurseryInfoView extends StatefulWidget {
 }
 
 class _SettingNurseryInfoViewState extends State<SettingNurseryInfoView> {
-  TextEditingController nameController=TextEditingController();
-  TextEditingController addressController=TextEditingController();
-  TextEditingController phoneController=TextEditingController();
-  TextEditingController emailController=TextEditingController();
-  TextEditingController fcebookController=TextEditingController();
-  TextEditingController instaController=TextEditingController();
-  TextEditingController whatsappController=TextEditingController();
-  TextEditingController dobController=TextEditingController();
-  String?selectedGender;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController fcebookController = TextEditingController();
+  TextEditingController instaController = TextEditingController();
+  TextEditingController whatsappController = TextEditingController();
+  TextEditingController dobController = TextEditingController();
+  String? selectedGender;
 
   @override
   void dispose() {
@@ -26,22 +26,20 @@ class _SettingNurseryInfoViewState extends State<SettingNurseryInfoView> {
     addressController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
-
-
-
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      systemNavigationBarIconBrightness: Brightness.dark,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarColor: AppColors.white,
-      systemNavigationBarColor: AppColors.white,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        systemNavigationBarIconBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: AppColors.white,
+        systemNavigationBarColor: AppColors.white,
+      ),
+    );
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: customAppBar(
-        title: 'Nursery Info',
-      ),
+      appBar: customAppBar(title: 'Nursery Info'),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 20.h),
         child: SingleChildScrollView(
@@ -51,42 +49,48 @@ class _SettingNurseryInfoViewState extends State<SettingNurseryInfoView> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-          Center(
-          child: Stack(
-          children: [
-            CircleAvatar(
-            backgroundColor: AppColors.blue,
-            radius: 82.r,
-            child: CircleAvatar(
-              radius: 80.r,
-              backgroundImage: AssetImage(AppImages.avatarPng),
-            ),
-          ),
+              Center(
+                child: Stack(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: AppColors.blue,
+                      radius: 82.r,
+                      child: CircleAvatar(
+                        radius: 80.r,
+                        backgroundImage: AssetImage(AppImages.avatarPng),
+                      ),
+                    ),
 
-
-          Positioned(
-            bottom: 0.h,
-            right: 0.w,
-            child: GestureDetector(
-              onTap: () {
-
-              },
-              child: SvgPicture.asset(
-                AppImages.editPen,
-                height: 40.h,
-                width: 40.w,
-                fit: BoxFit.cover,
+                    Positioned(
+                      bottom: 0.h,
+                      right: 0.w,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: SvgPicture.asset(
+                          AppImages.editPen,
+                          height: 40.h,
+                          width: 40.w,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ),
-          ],
-        ),
-      ),
-        verticalSpacer(8),
+              verticalSpacer(8),
 
-              customDivider(height: 1, width: 390, color: AppColors.lightestGreyShade),
+              customDivider(
+                height: 1,
+                width: 390,
+                color: AppColors.lightestGreyShade,
+              ),
               verticalSpacer(20),
-              customText(text: "Nursery Name *", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+              customText(
+                text: "Nursery Name *",
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: Colors.black,
+              ),
               verticalSpacer(8),
               customTextField(
                 controller: nameController,
@@ -102,7 +106,12 @@ class _SettingNurseryInfoViewState extends State<SettingNurseryInfoView> {
                 context: context,
               ),
               verticalSpacer(20),
-              customText(text: "Nursery Phone Number", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+              customText(
+                text: "Nursery Phone Number",
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: Colors.black,
+              ),
               verticalSpacer(8),
               customTextField(
                 controller: phoneController,
@@ -114,31 +123,37 @@ class _SettingNurseryInfoViewState extends State<SettingNurseryInfoView> {
                 borderRadius: 12,
                 obscureText: false,
                 isShow: false,
-                onShow: () {
-
-                },
+                onShow: () {},
                 context: context,
               ),
               verticalSpacer(20),
-              customText(text: "Nursery Email", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+              customText(
+                text: "Nursery Email",
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: Colors.black,
+              ),
               verticalSpacer(8),
-          customTextField(
-            controller: emailController,
-            height: 48,
-            width: 390,
-            isMinLine: 1,
-            keyboardType: TextInputType.text,
-            hintText: "Enter your nursery email",
-            borderRadius: 12,
-            obscureText: false,
-            isShow: false,
-            onShow: () {
-
-            },
-            context: context,
-          ),
+              customTextField(
+                controller: emailController,
+                height: 48,
+                width: 390,
+                isMinLine: 1,
+                keyboardType: TextInputType.text,
+                hintText: "Enter your nursery email",
+                borderRadius: 12,
+                obscureText: false,
+                isShow: false,
+                onShow: () {},
+                context: context,
+              ),
               verticalSpacer(20),
-              customText(text: "Address *", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+              customText(
+                text: "Address *",
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: Colors.black,
+              ),
               verticalSpacer(8),
               customTextField(
                 controller: addressController,
@@ -150,13 +165,16 @@ class _SettingNurseryInfoViewState extends State<SettingNurseryInfoView> {
                 borderRadius: 12,
                 obscureText: false,
                 isShow: false,
-                onShow: () {
-
-                },
+                onShow: () {},
                 context: context,
               ),
-             verticalSpacer(20),
-              customText(text: "Facebook", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+              verticalSpacer(20),
+              customText(
+                text: "Facebook",
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: Colors.black,
+              ),
               verticalSpacer(8),
               customTextField(
                 controller: fcebookController,
@@ -168,12 +186,16 @@ class _SettingNurseryInfoViewState extends State<SettingNurseryInfoView> {
                 borderRadius: 12,
                 obscureText: false,
                 isShow: false,
-                onShow: () {
-
-                },
+                onShow: () {},
                 context: context,
-              ),verticalSpacer(20),
-              customText(text: "Instagram", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+              ),
+              verticalSpacer(20),
+              customText(
+                text: "Instagram",
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: Colors.black,
+              ),
               verticalSpacer(8),
               customTextField(
                 controller: instaController,
@@ -185,13 +207,16 @@ class _SettingNurseryInfoViewState extends State<SettingNurseryInfoView> {
                 borderRadius: 12,
                 obscureText: false,
                 isShow: false,
-                onShow: () {
-
-                },
+                onShow: () {},
                 context: context,
               ),
               verticalSpacer(20),
-              customText(text: "WhatsApp Number", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+              customText(
+                text: "WhatsApp Number",
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: Colors.black,
+              ),
               verticalSpacer(8),
               customTextField(
                 controller: whatsappController,
@@ -203,43 +228,45 @@ class _SettingNurseryInfoViewState extends State<SettingNurseryInfoView> {
                 borderRadius: 12,
                 obscureText: false,
                 isShow: false,
-                onShow: () {
-
-                },
+                onShow: () {},
                 context: context,
               ),
               verticalSpacer(20),
-              customText(text: "Nursery Features", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+              customText(
+                text: "Nursery Features",
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: Colors.black,
+              ),
               verticalSpacer(8),
 
               Consumer<AuthViewModel>(
-                  builder: (context, auth, child) {
-                    return Container(
-                      width: 390.w,
-                      padding: EdgeInsets.symmetric(horizontal: 12.w,vertical: 12.h),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(18.r),
-                          color: AppColors.white,
-                          border: Border.all(color: AppColors.forestGrey)
-                      ),
-                      child: Wrap(
-                        spacing: 4.w,
-                        runSpacing: 0.w,
-                        children: addChoiceChips(context, auth.nurseryFeatures),
-                      ),
-                    );
-                  }
+                builder: (context, auth, child) {
+                  return Container(
+                    width: 390.w,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 12.w,
+                      vertical: 12.h,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(18.r),
+                      color: AppColors.white,
+                      border: Border.all(color: AppColors.forestGrey),
+                    ),
+                    child: Wrap(
+                      spacing: 4.w,
+                      runSpacing: 0.w,
+                      children: addChoiceChips(context, auth.nurseryFeatures),
+                    ),
+                  );
+                },
               ),
-
-
-
-
             ],
           ),
         ),
       ),
       bottomNavigationBar: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 8.w,vertical: 12.h),
+        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 12.h),
         child: customButton(
           context: context,
           text: "Save Settings",
@@ -252,9 +279,7 @@ class _SettingNurseryInfoViewState extends State<SettingNurseryInfoView> {
           borderRadius: 100,
           isCircular: true,
           fontWeight: FontWeight.w600,
-          onPressed: () {
-
-          },
+          onPressed: () {},
         ),
       ),
     );

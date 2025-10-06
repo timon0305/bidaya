@@ -1,7 +1,6 @@
-
 import '../../export.dart';
 
-class SettingViewModel extends ChangeNotifier{
+class SettingViewModel extends ChangeNotifier {
   Map<String, bool> permissions = {
     "attendance": true,
     "gallery": false,

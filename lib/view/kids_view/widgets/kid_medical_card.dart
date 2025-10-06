@@ -1,16 +1,15 @@
-
 import 'package:quizzo/export.dart';
+
 Widget kidMedicalCard({
   required BuildContext context,
   required TextEditingController medicineController,
   required TextEditingController medicineInfoController,
   required TextEditingController allergyController,
-  required TextEditingController allergyInfoController
-}){
+  required TextEditingController allergyInfoController,
+}) {
   return SizedBox(
-
     child: Consumer<KidContactViewModel>(
-        builder: (context, vm, child) {
+      builder: (context, vm, child) {
         return SingleChildScrollView(
           child: Column(
             children: [
@@ -34,46 +33,62 @@ Widget kidMedicalCard({
                 );
               }),
 
-
               verticalSpacer(12),
-              customAddButton2(title: "💊 Add Medicine", onTap: (){
-                vm.addMedicine(context);
-              }, color: AppColors.purple),
-              verticalSpacer(12),
-              customDivider(height: 1, width: 390, color: AppColors.lightestGreyShade),
-            ...vm.allergies.asMap().entries.map((entry) {
-          int index = entry.key;
-          var controllers = entry.value;
-
-          return Column(
-            children: [
-              kidAllergyDetail(
-                context: context,
-                index: index + 1,
-                listLength: vm.allergies.length,
+              customAddButton2(
+                title: "💊 Add Medicine",
                 onTap: () {
-                  vm.removeAllergy(index);
+                  vm.addMedicine(context);
                 },
-                allergyController: controllers["allergy"]!,
-                infoController: controllers["info"]!,
+                color: AppColors.purple,
               ),
               verticalSpacer(12),
-            ],
-          );
-        }),
-          verticalSpacer(12),
-              customAddButton2(title: "⚠️ Add Allergy", onTap: (){
-                vm.addAllergy(context);
-              }, color: AppColors.purple),
-              customDivider(height: 1, width: 390, color: AppColors.lightestGreyShade),
+              customDivider(
+                height: 1,
+                width: 390,
+                color: AppColors.lightestGreyShade,
+              ),
+              ...vm.allergies.asMap().entries.map((entry) {
+                int index = entry.key;
+                var controllers = entry.value;
+
+                return Column(
+                  children: [
+                    kidAllergyDetail(
+                      context: context,
+                      index: index + 1,
+                      listLength: vm.allergies.length,
+                      onTap: () {
+                        vm.removeAllergy(index);
+                      },
+                      allergyController: controllers["allergy"]!,
+                      infoController: controllers["info"]!,
+                    ),
+                    verticalSpacer(12),
+                  ],
+                );
+              }),
+              verticalSpacer(12),
+              customAddButton2(
+                title: "⚠️ Add Allergy",
+                onTap: () {
+                  vm.addAllergy(context);
+                },
+                color: AppColors.purple,
+              ),
+              customDivider(
+                height: 1,
+                width: 390,
+                color: AppColors.lightestGreyShade,
+              ),
               verticalSpacer(12),
             ],
           ),
         );
-      }
+      },
     ),
   );
 }
+
 Widget kidAddMedicineCardDetail({
   required BuildContext context,
   required int listLength,
@@ -95,9 +110,10 @@ Widget kidAddMedicineCardDetail({
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
-          mainAxisAlignment: listLength > 1
-              ? MainAxisAlignment.spaceBetween
-              : MainAxisAlignment.center,
+          mainAxisAlignment:
+              listLength > 1
+                  ? MainAxisAlignment.spaceBetween
+                  : MainAxisAlignment.center,
           children: [
             const SizedBox(),
             customText(
@@ -175,9 +191,6 @@ Widget kidAddMedicineCardDetail({
   );
 }
 
-
-
-
 Widget kidAllergyDetail({
   required BuildContext context,
   required int listLength,
@@ -198,9 +211,10 @@ Widget kidAllergyDetail({
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
-          mainAxisAlignment: listLength > 1
-              ? MainAxisAlignment.spaceBetween
-              : MainAxisAlignment.center,
+          mainAxisAlignment:
+              listLength > 1
+                  ? MainAxisAlignment.spaceBetween
+                  : MainAxisAlignment.center,
           children: [
             SizedBox(),
             customText(

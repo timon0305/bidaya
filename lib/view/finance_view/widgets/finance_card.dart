@@ -22,7 +22,7 @@ Widget parentInvoiceCardSlip({
     child: Container(
       width: double.infinity,
       margin: EdgeInsets.symmetric(vertical: 8.h),
-      padding:  EdgeInsets.symmetric(horizontal: 6.w,vertical: 16.h),
+      padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 16.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -31,15 +31,34 @@ Widget parentInvoiceCardSlip({
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                customText(
+                  text: name,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 16,
+                  color: AppColors.blackShade,
+                ),
 
-                customText(text: name, fontWeight: FontWeight.w700, fontSize: 16, color: AppColors.blackShade,),
-
-                customText(text: "Status: $status", fontWeight: FontWeight.w700, fontSize: 13, color: AppColors.whiteGrey,),
-                customText(text: "Due Date: $dueDate", fontWeight: FontWeight.w700, fontSize: 13, color: AppColors.whiteGrey,),
+                customText(
+                  text: "Status: $status",
+                  fontWeight: FontWeight.w700,
+                  fontSize: 13,
+                  color: AppColors.whiteGrey,
+                ),
+                customText(
+                  text: "Due Date: $dueDate",
+                  fontWeight: FontWeight.w700,
+                  fontSize: 13,
+                  color: AppColors.whiteGrey,
+                ),
               ],
             ),
           ),
-          customText(text: amount, fontWeight: FontWeight.w700, fontSize: 18, color: amountColor,),
+          customText(
+            text: amount,
+            fontWeight: FontWeight.w700,
+            fontSize: 18,
+            color: amountColor,
+          ),
           PopupMenuButton<int>(
             color: AppColors.white,
             offset: Offset(100.w, 35.h),
@@ -49,49 +68,42 @@ Widget parentInvoiceCardSlip({
             ),
             onSelected: (int value) {
               if (value == 1) {
-               parentSlipDetails(context);
-
+                parentSlipDetails(context);
               } else if (value == 2) {
-
-              } else if (value == 4) {
-
-              }
+              } else if (value == 4) {}
             },
-            itemBuilder: (context) =>
-            [
-              popupItem0(
-                1,
-                "View Details",
-                popupIcon: "",
-                isDivider: true,
-                icon: Icons.remove_red_eye_outlined,
-                isIcon: true,
-              ),
-              popupItem0(
-                2,
-                "Edit",
-                popupIcon: AppImages.edit,
-                isDivider: true,
-              ),
-              popupItem0(
-                4,
-                "Delete",
-                popupIcon: AppImages.delete,
-                isDivider: false,
-                isIcon: true,
-              ),
-            ],
-            child: Icon(
-              Icons.more_vert,
-              color: AppColors.purple,
-              size: 18,
-            ),
+            itemBuilder:
+                (context) => [
+                  popupItem0(
+                    1,
+                    "View Details",
+                    popupIcon: "",
+                    isDivider: true,
+                    icon: Icons.remove_red_eye_outlined,
+                    isIcon: true,
+                  ),
+                  popupItem0(
+                    2,
+                    "Edit",
+                    popupIcon: AppImages.edit,
+                    isDivider: true,
+                  ),
+                  popupItem0(
+                    4,
+                    "Delete",
+                    popupIcon: AppImages.delete,
+                    isDivider: false,
+                    isIcon: true,
+                  ),
+                ],
+            child: Icon(Icons.more_vert, color: AppColors.purple, size: 18),
           ),
         ],
       ),
     ),
   );
 }
+
 Widget billingTabInvoiceCardSlip({
   required String name,
   required String status,
@@ -111,7 +123,7 @@ Widget billingTabInvoiceCardSlip({
     child: Container(
       width: double.infinity,
       margin: EdgeInsets.symmetric(vertical: 8.h),
-      padding:  EdgeInsets.symmetric(horizontal: 6.w,vertical: 16.h),
+      padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 16.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -120,15 +132,34 @@ Widget billingTabInvoiceCardSlip({
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                customText(
+                  text: name,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 16,
+                  color: AppColors.blackShade,
+                ),
 
-                customText(text: name, fontWeight: FontWeight.w700, fontSize: 16, color: AppColors.blackShade,),
-
-                customText(text: "Status: $status", fontWeight: FontWeight.w700, fontSize: 13, color: AppColors.whiteGrey,),
-                customText(text: "Due Date: $dueDate", fontWeight: FontWeight.w700, fontSize: 13, color: AppColors.whiteGrey,),
+                customText(
+                  text: "Status: $status",
+                  fontWeight: FontWeight.w700,
+                  fontSize: 13,
+                  color: AppColors.whiteGrey,
+                ),
+                customText(
+                  text: "Due Date: $dueDate",
+                  fontWeight: FontWeight.w700,
+                  fontSize: 13,
+                  color: AppColors.whiteGrey,
+                ),
               ],
             ),
           ),
-          customText(text: amount, fontWeight: FontWeight.w700, fontSize: 18, color: amountColor,),
+          customText(
+            text: amount,
+            fontWeight: FontWeight.w700,
+            fontSize: 18,
+            color: amountColor,
+          ),
         ],
       ),
     ),
@@ -195,49 +226,40 @@ Widget salariesSlip({
             onSelected: (int value) {
               if (value == 1) {
                 salarySlipDetails(context);
-
               } else if (value == 2) {
-
-              } else if (value == 4) {
-
-              }
+              } else if (value == 4) {}
             },
-            itemBuilder: (context) =>
-            [
-              popupItem0(
-                1,
-                "View Details",
-                popupIcon: "",
-                isDivider: true,
-                icon: Icons.remove_red_eye_outlined,
-                isIcon: true,
-              ),
-              popupItem0(
-                2,
-                "Edit",
-                popupIcon: AppImages.edit,
-                isDivider: true,
-              ),
-              popupItem0(
-                4,
-                "Delete",
-                popupIcon: AppImages.delete,
-                isDivider: false,
-                isIcon: true,
-              ),
-            ],
-            child: Icon(
-              Icons.more_vert,
-              color: AppColors.purple,
-              size: 18,
-            ),
+            itemBuilder:
+                (context) => [
+                  popupItem0(
+                    1,
+                    "View Details",
+                    popupIcon: "",
+                    isDivider: true,
+                    icon: Icons.remove_red_eye_outlined,
+                    isIcon: true,
+                  ),
+                  popupItem0(
+                    2,
+                    "Edit",
+                    popupIcon: AppImages.edit,
+                    isDivider: true,
+                  ),
+                  popupItem0(
+                    4,
+                    "Delete",
+                    popupIcon: AppImages.delete,
+                    isDivider: false,
+                    isIcon: true,
+                  ),
+                ],
+            child: Icon(Icons.more_vert, color: AppColors.purple, size: 18),
           ),
         ],
       ),
     ),
   );
 }
-
 
 Widget statusCard({
   required String icon,
@@ -246,7 +268,7 @@ Widget statusCard({
   required Color color,
 }) {
   return Container(
-    padding: EdgeInsets.symmetric(horizontal: 12.w,vertical: 6.h),
+    padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(12.r),
@@ -261,7 +283,6 @@ Widget statusCard({
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             customText(
               text: title,
               fontSize: 12,
@@ -269,7 +290,7 @@ Widget statusCard({
               fontWeight: FontWeight.w700,
             ),
             customText(
-              text:amount,
+              text: amount,
               fontSize: 18,
               color: AppColors.purple,
               fontWeight: FontWeight.bold,

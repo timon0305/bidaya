@@ -11,18 +11,26 @@ class AddNewPlan extends StatefulWidget {
 class _AddNewPlanState extends State<AddNewPlan> {
   String? selectedClass = "Senior Class";
   List<SectionItem> sections = [
-    SectionItem(title: "Math Basic", description: "Lorem ipsum dolor sit amet..."),
-    SectionItem(title: "Science Advanced", description: "Physics and Chemistry basics."),
+    SectionItem(
+      title: "Math Basic",
+      description: "Lorem ipsum dolor sit amet...",
+    ),
+    SectionItem(
+      title: "Science Advanced",
+      description: "Physics and Chemistry basics.",
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      systemNavigationBarIconBrightness: Brightness.dark,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarColor: AppColors.white,
-      systemNavigationBarColor: AppColors.white,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        systemNavigationBarIconBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: AppColors.white,
+        systemNavigationBarColor: AppColors.white,
+      ),
+    );
 
     return Scaffold(
       appBar: customAppBar(title: "Plans"),
@@ -54,9 +62,7 @@ class _AddNewPlanState extends State<AddNewPlan> {
                 final section = sections[index];
 
                 return CustomExpansionTile(
-                  label: section.title.isNotEmpty
-                      ? section.title
-                      : "",
+                  label: section.title.isNotEmpty ? section.title : "",
                   index: (index + 1).toString(),
                   children: [
                     Padding(
@@ -65,12 +71,13 @@ class _AddNewPlanState extends State<AddNewPlan> {
                         children: [
                           customTextField(
                             context: context,
-                            controller:
-                            TextEditingController(text: section.title),
+                            controller: TextEditingController(
+                              text: section.title,
+                            ),
                             hintText: "Section Title",
                             width: 390,
-                            onChanged: (val) =>
-                                setState(() => section.title = val),
+                            onChanged:
+                                (val) => setState(() => section.title = val),
                             borderRadius: 0,
                             obscureText: false,
                             isShow: false,
@@ -80,11 +87,13 @@ class _AddNewPlanState extends State<AddNewPlan> {
                           customTextField(
                             context: context,
                             controller: TextEditingController(
-                                text: section.description),
+                              text: section.description,
+                            ),
                             hintText: "Description",
                             width: 390,
-                            onChanged: (val) =>
-                                setState(() => section.description = val),
+                            onChanged:
+                                (val) =>
+                                    setState(() => section.description = val),
                             borderRadius: 0,
                             obscureText: false,
                             isShow: false,
@@ -94,8 +103,11 @@ class _AddNewPlanState extends State<AddNewPlan> {
                           Align(
                             alignment: Alignment.centerRight,
                             child: IconButton(
-                              icon: Icon(Icons.delete,
-                                  color: AppColors.red, size: 22),
+                              icon: Icon(
+                                Icons.delete,
+                                color: AppColors.red,
+                                size: 22,
+                              ),
                               onPressed: () {
                                 setState(() => sections.removeAt(index));
                               },
@@ -132,7 +144,10 @@ class _AddNewPlanState extends State<AddNewPlan> {
             children: [
               verticalSpacer(10),
               customDivider(
-                  height: 1.5, width: 432, color: AppColors.lightestGreyShade),
+                height: 1.5,
+                width: 432,
+                color: AppColors.lightestGreyShade,
+              ),
               verticalSpacer(10),
               customButton(
                 context: context,
@@ -148,7 +163,8 @@ class _AddNewPlanState extends State<AddNewPlan> {
                 fontWeight: FontWeight.w600,
                 onPressed: () {
                   debugPrint(
-                      "Saved Sections: ${sections.map((e) => e.toJson()).toList()}");
+                    "Saved Sections: ${sections.map((e) => e.toJson()).toList()}",
+                  );
                 },
               ),
             ],
@@ -166,8 +182,5 @@ class SectionItem {
 
   SectionItem({required this.title, required this.description});
 
-  Map<String, String> toJson() => {
-    "title": title,
-    "description": description,
-  };
+  Map<String, String> toJson() => {"title": title, "description": description};
 }

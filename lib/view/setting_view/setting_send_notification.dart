@@ -4,7 +4,8 @@ class SettingSendNotification extends StatefulWidget {
   const SettingSendNotification({super.key});
 
   @override
-  State<SettingSendNotification> createState() => _SettingSendNotificationState();
+  State<SettingSendNotification> createState() =>
+      _SettingSendNotificationState();
 }
 
 class _SettingSendNotificationState extends State<SettingSendNotification> {
@@ -16,7 +17,10 @@ class _SettingSendNotificationState extends State<SettingSendNotification> {
   void initState() {
     super.initState();
     titleController = TextEditingController(text: "Lorem ipsum dolor sit amet");
-    messageController = TextEditingController(text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip");
+    messageController = TextEditingController(
+      text:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip",
+    );
     selectedGender = "Recipient";
   }
 
@@ -29,12 +33,14 @@ class _SettingSendNotificationState extends State<SettingSendNotification> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      systemNavigationBarIconBrightness: Brightness.dark,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarColor: AppColors.white,
-      systemNavigationBarColor: AppColors.white,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        systemNavigationBarIconBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: AppColors.white,
+        systemNavigationBarColor: AppColors.white,
+      ),
+    );
 
     return Scaffold(
       backgroundColor: AppColors.white,
@@ -50,18 +56,35 @@ class _SettingSendNotificationState extends State<SettingSendNotification> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(16.r),
                 child: Container(
-                    height:100.h,
-                    width: 382.w,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.r),
+                  height: 100.h,
+                  width: 382.w,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: Center(
+                    child: Image.asset(
+                      AppImages.notificationBanner,
+                      height: 100.h,
+                      width: 382.w,
+                      fit: BoxFit.cover,
                     ),
-                    child: Center(child: Image.asset(AppImages.notificationBanner,height: 100.h,width: 382.w,fit: BoxFit.cover,))),
+                  ),
+                ),
               ),
-              customDivider(height: 1, width: 390, color: AppColors.lightestGreyShade),
+              customDivider(
+                height: 1,
+                width: 390,
+                color: AppColors.lightestGreyShade,
+              ),
               verticalSpacer(20),
-              customText(text: "Recipients", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+              customText(
+                text: "Recipients",
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: Colors.black,
+              ),
               verticalSpacer(8),
-                customDropdownField(
+              customDropdownField(
                 context: context,
                 hintText: "Select recipient",
                 width: 390,
@@ -78,14 +101,19 @@ class _SettingSendNotificationState extends State<SettingSendNotification> {
                 },
               ),
               verticalSpacer(20),
-              customText(text: "Title", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+              customText(
+                text: "Title",
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: Colors.black,
+              ),
               verticalSpacer(8),
               customTextField(
                 hintText: "",
                 controller: titleController,
                 height: 48,
                 width: 390,
-                onShow: (){},
+                onShow: () {},
                 isMinLine: 1,
                 keyboardType: TextInputType.text,
                 borderRadius: 12,
@@ -94,14 +122,19 @@ class _SettingSendNotificationState extends State<SettingSendNotification> {
                 context: context,
               ),
               verticalSpacer(20),
-              customText(text: "Message", fontWeight: FontWeight.w700, fontSize: 16, color: Colors.black),
+              customText(
+                text: "Message",
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: Colors.black,
+              ),
               verticalSpacer(8),
               SizedBox(
                 width: 430.w,
                 child: customTextField(
                   controller: messageController,
                   width: 430,
-                  onShow: (){},
+                  onShow: () {},
                   hintText: "",
                   isMinLine: 1,
                   maxLines: 6,

@@ -1,15 +1,14 @@
 import 'package:quizzo/export.dart';
 
-
-Widget noNotificationCard(){
+Widget noNotificationCard() {
   return Padding(
-    padding:  EdgeInsets.symmetric(horizontal: 38.w),
+    padding: EdgeInsets.symmetric(horizontal: 38.w),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         verticalSpacer(150),
-        SvgPicture.asset(AppImages.noNotification,height: 80.h,width: 80.w,),
+        SvgPicture.asset(AppImages.noNotification, height: 80.h, width: 80.w),
         customText(
           fontWeight: FontWeight.w700,
           fontSize: 18,
@@ -22,7 +21,8 @@ Widget noNotificationCard(){
           fontSize: 14,
           color: AppColors.placeholder,
           textAlign: TextAlign.center,
-          text: "We’ll let you know when there will be something to update you.",
+          text:
+              "We’ll let you know when there will be something to update you.",
         ),
       ],
     ),

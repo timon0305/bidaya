@@ -5,12 +5,14 @@ class TeacherPermissionsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      systemNavigationBarIconBrightness: Brightness.dark,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarColor: AppColors.white,
-      systemNavigationBarColor: AppColors.white,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        systemNavigationBarIconBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarColor: AppColors.white,
+        systemNavigationBarColor: AppColors.white,
+      ),
+    );
     return Scaffold(
       appBar: customAppBar(title: "Teacher Permissions"),
       backgroundColor: AppColors.white,
@@ -18,9 +20,14 @@ class TeacherPermissionsScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ClipRRect(
-              borderRadius: BorderRadius.circular(16.r),
-              child: Image.asset(AppImages.permissionPlaceholder, height: 100.h,width: 390.w, fit: BoxFit.cover,),
+            borderRadius: BorderRadius.circular(16.r),
+            child: Image.asset(
+              AppImages.permissionPlaceholder,
+              height: 100.h,
+              width: 390.w,
+              fit: BoxFit.cover,
             ),
+          ),
           verticalSpacer(24),
           permissionRow(context, "Take Attendance", "attendance"),
           permissionRow(context, "Manage Gallery", "gallery"),
@@ -28,7 +35,7 @@ class TeacherPermissionsScreen extends StatelessWidget {
           permissionRow(context, "Manage Inventory", "inventory"),
         ],
       ),
-      bottomNavigationBar:  Padding(
+      bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(horizontal: 28.w, vertical: 20.h),
         child: customButton(
           context: context,
@@ -52,20 +59,22 @@ class TeacherPermissionsScreen extends StatelessWidget {
 
   Widget permissionRow(BuildContext context, String title, String key) {
     return Padding(
-      padding:  EdgeInsets.symmetric(vertical: 12.h,horizontal: 24.w),
+      padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 24.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          customText(text: title, fontWeight: FontWeight.w600, fontSize: 18, color: AppColors.blackShade),
+          customText(
+            text: title,
+            fontWeight: FontWeight.w600,
+            fontSize: 18,
+            color: AppColors.blackShade,
+          ),
           toggleButton(context, key),
         ],
       ),
     );
   }
-
-
 }
-
 
 Widget toggleButton(BuildContext context, String key) {
   final ghost = context.watch<SettingViewModel>().permissions[key] ?? false;

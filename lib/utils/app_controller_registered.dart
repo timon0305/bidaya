@@ -1,14 +1,8 @@
-
 import 'package:get/get.dart';
-
-
 
 class AppBindings extends Bindings {
   @override
   void dependencies() {
-
- /*   Get.put(BasicInfoController(), permanent: true);*/
-
-
+    /*   Get.put(BasicInfoController(), permanent: true);*/
   }
 }

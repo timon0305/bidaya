@@ -1,4 +1,5 @@
 import 'dart:ui';
+
 class AppColors {
   static const purple = Color(0xFF6949FF);
   static const blue = Color(0xFF543ACC);
